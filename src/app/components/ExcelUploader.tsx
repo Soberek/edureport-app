@@ -1,10 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import * as XLSX from "xlsx";
-// import moment from "moment";
+import moment from "moment";
+import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 
 interface ExcelRow {
   [key: string]: string | number;
-
 }
 
 // interface Data {
@@ -24,8 +24,6 @@ interface ProgramsData {
 }
 
 const ExcelUploader: React.FC = () => {
-  const [monthInput, setMonthInput] = useState<number | null>(null);
-  const [, setMonths] = useState<number[]>([]);
   const [agregated_data, setAgregatedData] = useState<ProgramsData>({});
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +49,6 @@ const ExcelUploader: React.FC = () => {
         const ws = wb.Sheets[wsname];
         const data = XLSX.utils.sheet_to_json(ws, { raw: false }) as ExcelRow[];
 
-        console.log(data);
         agregateData(data);
       }
     };
@@ -59,29 +56,7 @@ const ExcelUploader: React.FC = () => {
     reader.readAsArrayBuffer(blob_xlsx_file);
   };
 
-  function handleMonthsChange(event: React.ChangeEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (monthInput)
-      setMonths((prevMonths) => {
-        const find = prevMonths.find((el) => el === monthInput);
-        if (find) return prevMonths;
-        return [...prevMonths, monthInput];
-      });
-  }
-
-  function handleMonthsInput(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = Number(event.target.value);
-
-    if (!isNaN(value)) {
-      setMonthInput(value);
-    }
-  }
-
-  function agregateData(
-    data: ExcelRow[]
-  ) {
-
+  const agregateData = (data: ExcelRow[]) => {
     const programs_data: ProgramsData = {};
 
     data.forEach((row) => {
@@ -90,19 +65,10 @@ const ExcelUploader: React.FC = () => {
       const program_action = row["Działanie"];
       const people_count = Number(row["Liczba ludzi"]);
       const action_count = Number(row["Liczba działań"]);
+      const date = moment(row["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
+      const month = date.month() + 1; // moment months are 0-indexed
 
-      // const date = moment(row["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
-      // const month = date.month() + 1; // moment months are 0-indexed
-
-      console.log(program_action);
-
-      /*
-      {
-      PROGRAMOWE:
-        TF:
-          Koordynacja
-      }
-      */
+      console.log(month);
 
       //   tworzy typy programów
       if (!programs_data[program_type]) {
@@ -113,8 +79,6 @@ const ExcelUploader: React.FC = () => {
         programs_data[program_type][program_name] = {};
       }
 
-      console.log(programs_data);
-
       // tworzy nazwy typów akcji
       if (!programs_data[program_type][program_name][program_action]) {
         programs_data[program_type][program_name][program_action] = {
@@ -124,43 +88,18 @@ const ExcelUploader: React.FC = () => {
       }
 
       if (!isNaN(people_count) && !isNaN(action_count)) {
-        programs_data[program_type][program_name][program_action].people +=
-          people_count;
-        programs_data[program_type][program_name][
-          program_action
-        ].action_number += action_count;
+        programs_data[program_type][program_name][program_action].people += people_count;
+        programs_data[program_type][program_name][program_action].action_number += action_count;
       }
     });
 
-    console.log(programs_data);
-    // return;
     setAgregatedData(programs_data);
-  }
-
+  };
   return (
     <div className="p-4">
       <h1 className="mb-4 text-xl">Miernik budżetowy</h1>
-      <div className="mb-4 flex flex-col gap-4 border">
-        <form onSubmit={handleMonthsChange} className="flex flex-row gap-4">
-          <label className="px-2 py-1 font-bold">Miesiące</label>
-          <input
-            type="number"
-            className="w-52 px-2 py-1 text-black"
-            placeholder="Podaj miesiąc"
-            onChange={handleMonthsInput}
-            value={monthInput || 0}
-            max={12}
-            min={1}
-            required
-          />
-          <button
-            type="submit"
-            className="rounded-full bg-red-600 px-4 py-1 font-bold transition-all hover:-translate-y-1 hover:bg-red-400"
-          >
-            Dodaj
-          </button>
-        </form>
-      </div>
+
+      <ExcelUploaderMonths />
 
       <div className="mb-4 border">
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
@@ -168,52 +107,41 @@ const ExcelUploader: React.FC = () => {
 
       <pre className="mb-4 border">
         {agregated_data &&
-          Object.keys(agregated_data).map(
-            (program_type, program_type_index) => (
-              <div key={program_type_index} className="mb-4">
-                <h1 className="mb-3 border-b-2 text-lg">
-                  {++program_type_index}. {program_type}
-                </h1>
+          Object.keys(agregated_data).map((program_type, program_type_index) => (
+            <div key={program_type_index} className="mb-4">
+              <h1 className="mb-3 border-b-2 text-lg">
+                {++program_type_index}. {program_type}
+              </h1>
 
-                <div>
-                  {Object.keys(agregated_data[program_type]).map(
-                    (program_name, program_name_index) => (
-                      <div key={program_name} className="mb-2">
-                        <h1 className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</h1>
-                        {Object.keys(
-                          agregated_data[program_type][program_name]
-                        ).map((program_action, program_action_idx) => (
-                          <div key={program_action_idx} className="">
-                            <>
-                              <span>
-                                {program_name_index}.{++program_action_idx}.
-                                {"\t"}
-                              </span>
-                              <span>{program_action}</span>
+              <div>
+                {Object.keys(agregated_data[program_type]).map((program_name, program_name_index) => (
+                  <div key={program_name} className="mb-2">
+                    <h1 className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</h1>
+                    {Object.keys(agregated_data[program_type][program_name]).map((program_action, program_action_idx) => (
+                      <div key={program_action_idx} className="">
+                        <>
+                          <span>
+                            {program_name_index}.{++program_action_idx}.{"\t"}
+                          </span>
+                          <span>{program_action}</span>
 
-                              {"\t"}
-                            </>
-                            {Object.values(
-                              agregated_data[program_type][program_name][
-                                program_action
-                              ]
-                            ).map((counter) => (
-                              <>
-                                <span className="ml-4">
-                                  {`\t`}
-                                  {counter}
-                                </span>
-                              </>
-                            ))}
-                          </div>
+                          {"\t"}
+                        </>
+                        {Object.values(agregated_data[program_type][program_name][program_action]).map((counter) => (
+                          <>
+                            <span className="ml-4">
+                              {`\t`}
+                              {counter}
+                            </span>
+                          </>
                         ))}
                       </div>
-                    )
-                  )}
-                </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-            )
-          )}
+            </div>
+          ))}
       </pre>
     </div>
   );
