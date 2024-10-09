@@ -4,18 +4,29 @@ import * as XLSX from "xlsx";
 
 interface ExcelRow {
   [key: string]: string | number;
+
+}
+
+// interface Data {
+//   [key: string]: {
+//     [key: string]: {
+//       [key: string]: { people: number; action_number: number };
+//     };
+//   };
+// }
+
+interface ProgramsData {
+  [key: string]: {
+    [key: string]: {
+      [key: string]: { people: number; action_number: number };
+    };
+  };
 }
 
 const ExcelUploader: React.FC = () => {
   const [monthInput, setMonthInput] = useState<number | null>(null);
   const [, setMonths] = useState<number[]>([]);
-  const [agregated_data, setAgregatedData] = useState<{
-    [key: string]: {
-      [key: string]: {
-        [key: string]: { people: number; action_number: number };
-      };
-    };
-  }>({});
+  const [agregated_data, setAgregatedData] = useState<ProgramsData>({});
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const blob_xlsx_file = e.target.files?.[0];
@@ -68,20 +79,10 @@ const ExcelUploader: React.FC = () => {
   }
 
   function agregateData(
-    data: {
-      [key: string]: string | number;
-      ["Typ działania"]: string;
-      ["Liczba ludzi"]: number;
-      ["Liczba działań"]: number;
-    }[]
+    data: ExcelRow[]
   ) {
-    const programs_data: {
-      [key: string]: {
-        [key: string]: {
-          [key: string]: { people: number; action_number: number };
-        };
-      };
-    } = {};
+
+    const programs_data: ProgramsData = {};
 
     data.forEach((row) => {
       const program_type = row["Typ programu"];
