@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import * as XLSX from "XLSX";
+import * as XLSX from "xlsx";
 // import moment from "moment";
 
 interface ExcelRow {
