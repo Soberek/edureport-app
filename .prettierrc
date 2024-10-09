@@ -4,5 +4,6 @@
   "printWidth": 80,
   "semi": true,
   "trailingComma": "none",
-  "singleQuote": false
+  "singleQuote": false,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

@@ -140,12 +140,12 @@ const ExcelUploader: React.FC = () => {
   return (
     <div className="p-4">
       <h1 className="mb-4 text-xl">Miernik budżetowy</h1>
-      <div className="flex flex-col gap-4">
+      <div className="mb-4 flex flex-col gap-4 border">
         <form onSubmit={handleMonthsChange} className="flex flex-row gap-4">
-          <label className="font-bold py-1 px-2">Miesiące</label>
+          <label className="px-2 py-1 font-bold">Miesiące</label>
           <input
             type="number"
-            className="w-52 py-1 px-2 text-black"
+            className="w-52 px-2 py-1 text-black"
             placeholder="Podaj miesiąc"
             onChange={handleMonthsInput}
             value={monthInput || 0}
@@ -155,20 +155,23 @@ const ExcelUploader: React.FC = () => {
           />
           <button
             type="submit"
-            className="px-4 py-1 rounded-full bg-red-600 font-bold hover:bg-red-400 hover:-translate-y-1 transition-all"
+            className="rounded-full bg-red-600 px-4 py-1 font-bold transition-all hover:-translate-y-1 hover:bg-red-400"
           >
             Dodaj
           </button>
         </form>
+      </div>
+
+      <div className="mb-4 border">
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
       </div>
 
-      <pre>
+      <pre className="mb-4 border">
         {agregated_data &&
           Object.keys(agregated_data).map(
             (program_type, program_type_index) => (
               <div key={program_type_index} className="mb-4">
-                <h1 className="border-b-2 mb-3 text-lg">
+                <h1 className="mb-3 border-b-2 text-lg">
                   {++program_type_index}. {program_type}
                 </h1>
 
