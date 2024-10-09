@@ -136,17 +136,15 @@ const ExcelUploader: React.FC = () => {
 
               <div>
                 {Object.keys(agregated_data[program_type]).map((program_name, program_name_index) => (
-                  <div key={program_name} className="mb-2">
+                  <div key={program_name} className="">
                     <h1 className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</h1>
                     {Object.keys(agregated_data[program_type][program_name]).map((program_action, program_action_idx) => (
                       <div key={program_action_idx} className="">
                         <>
-                          <span>
+                          <span className="">
                             {program_name_index}.{++program_action_idx}.{"\t"}
                           </span>
                           <span>{program_action}</span>
-
-                          {"\t"}
                         </>
                         {Object.values(agregated_data[program_type][program_name][program_action]).map((counter, counter_index) => (
                           <span key={counter_index} className="ml-4">
