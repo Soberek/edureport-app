@@ -19,9 +19,18 @@ const ExcelUploader: React.FC = () => {
   const [agregated_data, setAgregatedData] = useState<ProgramsData>({});
   const [raw_data, setRawData] = useState<ExcelRow[]>([]);
   const [selected_months, setSelectedMonths] = useState<number[]>([]);
+  const [file_name, setFileName] = useState("");
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const blob_xlsx_file = e.target.files?.[0];
+
+    const file_name = e.target.files?.[0].name;
+
+    if (typeof file_name === "string") {
+      setFileName(file_name);
+    }
+
+    console.log(file_name);
     if (!blob_xlsx_file) return;
 
     const reader = new FileReader();
@@ -124,6 +133,16 @@ const ExcelUploader: React.FC = () => {
 
       <div className="mb-4 border">
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+      <div className="mb-4 flex items-center gap-2">
+        <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+        <label
+          htmlFor="file-input"
+          className="bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
+        >
+          Wgraj plik
+        </label>
+        {file_name ?? <div className="ml-2">{file_name}</div>}
+      </div>
       </div>
 
       <pre className="mb-4 border p-2">
