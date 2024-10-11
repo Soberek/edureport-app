@@ -156,9 +156,9 @@ const ExcelUploader: React.FC = () => {
         </div>
       </div>
 
-      <div className="mb-4">
-        <div>{miernik_summary.people && <h1>Ogólna liczba ludzi: {miernik_summary.people}</h1>}</div>
-        <div>{miernik_summary.actions && <h1>Ogólna liczba działań: {miernik_summary.actions}</h1>}</div>
+      <div className="mb-4 flex flex-col">
+        <span>Ogólna liczba ludzi: {miernik_summary.people}</span>
+        <span>Ogólna liczba działań: {miernik_summary.actions}</span>
       </div>
 
       <pre className="mb-4 border p-2">
