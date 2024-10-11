@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "./Button";
 
 interface Month {
   month_num: number;
@@ -41,15 +42,7 @@ export const ExcelUploaderMonths = ({ getSelectedMonths }: { getSelectedMonths: 
     <div className="justify-left mb-4 flex flex-row flex-wrap gap-4">
       {months.length > 0 &&
         months.map(({ month_num, selected }, index) => (
-          <button
-            key={index}
-            className={`px-4 py-2 font-bold transition-all hover:-translate-y-1 hover:cursor-pointer ${
-              selected ? "bg-green-500 text-white hover:bg-white hover:text-red-600" : "bg-red-600"
-            } hover:bg-white hover:text-red-600`}
-            onClick={() => handleMonthSelect(month_num)}
-          >
-            {month_num}
-          </button>
+          <Button key={index} selected={selected} label={month_num} onClick={() => handleMonthSelect(month_num)} />
         ))}
     </div>
   );

@@ -4,6 +4,7 @@ import moment from "moment";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import Button from "./Button";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
+import { SiMicrosoftexcel } from "react-icons/si";
 
 interface ExcelRow {
   [key: string]: string | number;
@@ -22,6 +23,10 @@ const ExcelUploader: React.FC = () => {
   const [raw_data, setRawData] = useState<ExcelRow[]>([]);
   const [selected_months, setSelectedMonths] = useState<number[]>([]);
   const [file_name, setFileName] = useState("");
+  const [miernik_summary, setMiernikSummary] = useState({
+    actions: 0,
+    people: 0
+  });
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const blob_xlsx_file = e.target.files?.[0];
@@ -73,51 +78,49 @@ const ExcelUploader: React.FC = () => {
   };
 
   const agregateData = (data: ExcelRow[]) => {
-    const programs_data: ProgramsData = {};
-
     let all_people = 0;
     let all_actions = 0;
 
-    data.forEach((row) => {
-      const program_type = row["Typ programu"];
-      const program_name = row["Nazwa programu"];
-      const program_action = row["Działanie"];
-      const people_count = Number(row["Liczba ludzi"]);
-      const action_count = Number(row["Liczba działań"]);
-      const date = moment(row["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
+    const result = data.reduce((acc, item) => {
+      const program_type = item["Typ programu"];
+      const program_name = item["Nazwa programu"];
+      const program_action = item["Działanie"];
+      const people_count = Number(item["Liczba ludzi"]);
+      const action_count = Number(item["Liczba działań"]);
+      const date = moment(item["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
       const month = date.month() + 1; // moment months are 0-indexed
 
-      all_people = all_people + people_count;
-      all_actions = all_actions + action_count;
-
       if (selected_months.length > 0 && !selected_months.includes(month)) {
-        return;
+        return acc;
       }
 
-      if (!programs_data[program_type]) {
-        //   tworzy typy programów
-        programs_data[program_type] = {};
-      }
-      //   tworzy nazwy programów
-      if (!programs_data[program_type][program_name]) {
-        programs_data[program_type][program_name] = {};
+      if (!acc[program_type]) {
+        acc[program_type] = {};
       }
 
-      // tworzy nazwy typów akcji
-      if (!programs_data[program_type][program_name][program_action]) {
-        programs_data[program_type][program_name][program_action] = {
-          people: 0,
-          action_number: 0
-        };
+      if (!acc[program_type][program_name]) {
+        acc[program_type][program_name] = {};
       }
 
-      if (!isNaN(people_count) && !isNaN(action_count)) {
-        programs_data[program_type][program_name][program_action].people += people_count;
-        programs_data[program_type][program_name][program_action].action_number += action_count;
+      if (!acc[program_type][program_name][program_action]) {
+        acc[program_type][program_name][program_action] = { people: 0, action_number: 0 };
       }
+
+      acc[program_type][program_name][program_action].action_number += people_count;
+      acc[program_type][program_name][program_action].people += action_count;
+
+      all_people += people_count;
+      all_actions += action_count;
+
+      return acc;
+    }, {} as ProgramsData);
+
+    setMiernikSummary({
+      people: all_people,
+      actions: all_actions
     });
 
-    setAgregatedData(programs_data);
+    setAgregatedData(result);
   };
 
   useEffect(() => {
@@ -129,18 +132,33 @@ const ExcelUploader: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h1 className="mb-4 text-xl">Miernik budżetowy</h1>
+      <h1 className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
+        <SiMicrosoftexcel />
+        Miernik budżetowy
+      </h1>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
+      <div className="flex gap-2">
+        <div className="mb-4 flex items-center gap-2">
+          <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
 
-        <label
-          htmlFor="file-input"
-          className="bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
-        >
-          Wgraj plik
-        </label>
-        {file_name ?? <div className="ml-2">{file_name}</div>}
+          <label
+            htmlFor="file-input"
+            className="flex items-center gap-2 bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
+          >
+            <MdOutlineUpload size={23} />
+            Wgraj plik
+          </label>
+          {file_name ?? <div className="ml-2">{file_name}</div>}
+        </div>
+        <div className="mb-4">
+          <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
+        </div>
       </div>
+
+      <div className="mb-4">
+        <div>{miernik_summary.people && <h1>Ogólna liczba ludzi: {miernik_summary.people}</h1>}</div>
+        <div>{miernik_summary.actions && <h1>Ogólna liczba działań: {miernik_summary.actions}</h1>}</div>
       </div>
 
       <pre className="mb-4 border p-2">
