@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import * as XLSX from "xlsx";
 import moment from "moment";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
+import Button from "./Button";
+import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 
 interface ExcelRow {
   [key: string]: string | number;
@@ -131,10 +133,6 @@ const ExcelUploader: React.FC = () => {
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
 
-      <div className="mb-4 border">
-        <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-      <div className="mb-4 flex items-center gap-2">
-        <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
         <label
           htmlFor="file-input"
           className="bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
