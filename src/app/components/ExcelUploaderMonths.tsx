@@ -39,11 +39,14 @@ export const ExcelUploaderMonths = ({ getSelectedMonths }: { getSelectedMonths: 
   };
 
   return (
-    <div className="justify-left mb-4 flex flex-row flex-wrap gap-4">
-      {months.length > 0 &&
-        months.map(({ month_num, selected }, index) => (
-          <Button key={index} selected={selected} label={month_num} onClick={() => handleMonthSelect(month_num)} />
-        ))}
+    <div className="flex flex-col">
+      <h1 className="mb-2">Miesiące:</h1>
+      <div className="justify-left mb-4 flex flex-row flex-wrap gap-4">
+        {months.length > 0 &&
+          months.map(({ month_num, selected }, index) => (
+            <Button key={index} selected={selected} label={month_num} onClick={() => handleMonthSelect(month_num)} />
+          ))}
+      </div>
     </div>
   );
 };

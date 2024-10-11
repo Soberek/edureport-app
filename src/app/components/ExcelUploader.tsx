@@ -164,7 +164,7 @@ const ExcelUploader: React.FC = () => {
       <pre className="mb-4 border p-2">
         {agregated_data &&
           Object.keys(agregated_data).map((program_type, program_type_index) => (
-            <div key={program_type_index} className="mb-2">
+            <div key={program_type_index} className="mb-2 border p-2">
               <h1 className="mb-3 border-b-2 text-lg">
                 {++program_type_index}. {program_type}
               </h1>
@@ -172,15 +172,11 @@ const ExcelUploader: React.FC = () => {
               <div>
                 {Object.keys(agregated_data[program_type]).map((program_name, program_name_index) => (
                   <div key={program_name} className="">
-                    <h1 className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</h1>
+                    <span className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</span>
                     {Object.keys(agregated_data[program_type][program_name]).map((program_action, program_action_idx) => (
-                      <div key={program_action_idx} className="">
-                        <>
-                          <span className="">
-                            {program_name_index}.{++program_action_idx}.{"\t"}
-                          </span>
-                          <span>{program_action}</span>
-                        </>
+                      <div key={program_action_idx} className="flex [&>*]:flex-1">
+                        {program_name_index}.{++program_action_idx}.{"\t"}
+                        <span>{program_action}</span>
                         {Object.values(agregated_data[program_type][program_name][program_action]).map((counter, counter_index) => (
                           <span key={counter_index} className="ml-4">
                             {`\t`}
