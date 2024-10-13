@@ -1,17 +1,18 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import * as XLSX from "xlsx";
 import moment from "moment";
-import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import Button from "../Button";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 import { SiMicrosoftexcel } from "react-icons/si";
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
+import ExcelUploaderTable from "./ExcelUploaderTable";
 
 interface ExcelRow {
   [key: string]: string | number;
 }
 
-interface ProgramsData {
+export interface ProgramsData {
   [key: string]: {
     [key: string]: {
       [key: string]: { people: number; action_number: number };
@@ -32,13 +33,17 @@ const ExcelUploader: React.FC = () => {
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const blob_xlsx_file = e.target.files?.[0];
 
+    const isXlsx = blob_xlsx_file?.name.endsWith(".xlsx");
+    const isXls = blob_xlsx_file?.name.endsWith(".xls");
+
+    if (!isXls && !isXlsx) return;
+
     const file_name = e.target.files?.[0].name;
 
     if (typeof file_name === "string") {
       setFileName(file_name);
     }
 
-    console.log(file_name);
     if (!blob_xlsx_file) return;
 
     const reader = new FileReader();
@@ -131,7 +136,6 @@ const ExcelUploader: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [raw_data, selected_months]);
 
-  console.log(Object.entries(agregated_data).map(([type, action]) => typeof action));
   return (
     <Box padding={4}>
       <h1 className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
@@ -140,7 +144,7 @@ const ExcelUploader: React.FC = () => {
       </h1>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
-      <Box display={"flex"} flexWrap={"wrap"} gap={2}>
+      <Box display={"flex"} flexWrap={"wrap"} gap={2} marginBottom={2}>
         <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
 
         <label
@@ -160,76 +164,7 @@ const ExcelUploader: React.FC = () => {
         <span>Ogólna liczba działań: {miernik_summary.actions}</span>
       </div>
 
-      {agregated_data &&
-        Object.entries(agregated_data).map(([program_type, program_names], index) => (
-          <Box key={index} marginBottom={3}>
-            <Text fontSize={"1.3rem"} sx={{ fontWeight: "600" }}>
-              {program_type}
-            </Text>
-
-            <Box display={"flex"} textAlign={`center`} alignItems={`center`} className="[&>div]:flex-1 [&>div]:text-xl [&>div]:font-bold" marginBottom={2}>
-              <Box>Działanie</Box>
-              <Box>Liczba działań</Box>
-              <Box>Liczba odbiorców</Box>
-            </Box>
-            {Object.entries(program_names).map(([program_name, action], action_index) => (
-              <Box
-                key={action_index}
-                borderBottom={"2px"}
-                borderColor={"gray.400"}
-                display={"flex"}
-                flexDirection={`column`}
-                textAlign={`start`}
-                alignItems={`center`}
-                className="[&>div]:flex-1"
-                marginBottom={2}
-              >
-                <Text>{program_name}</Text>
-
-                <Box display={`flex`} flexDir={`column`} w={"full"} p={2}>
-                  {Object.entries(action).map(([action_name, action_counters], action_index) => (
-                    <Box key={action_index} display={`flex`} p={2} className="[&>div]:flex-1 [&>div]:p-1">
-                      <Box>{action_name}</Box>
-                      <Box>{1}</Box>
-                      <Box>{1}</Box>
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-            ))}
-          </Box>
-        ))}
-
-      <pre className="mb-4 border p-2">
-        {agregated_data &&
-          Object.keys(agregated_data).map((program_type, program_type_index) => (
-            <div key={program_type_index} className="mb-2 border p-2">
-              <h1 className="mb-3 border-b-2 text-lg">
-                {++program_type_index}. {program_type}
-              </h1>
-
-              <div>
-                {Object.keys(agregated_data[program_type]).map((program_name, program_name_index) => (
-                  <div key={program_name} className="">
-                    <span className="font-bold">{`${++program_name_index}.\t${program_name}\n`}</span>
-                    {Object.keys(agregated_data[program_type][program_name]).map((program_action, program_action_idx) => (
-                      <div key={program_action_idx} className="flex [&>*]:flex-1">
-                        {program_name_index}.{++program_action_idx}.{"\t"}
-                        <span>{program_action}</span>
-                        {Object.values(agregated_data[program_type][program_name][program_action]).map((counter, counter_index) => (
-                          <span key={counter_index} className="ml-4">
-                            {`\t`}
-                            {counter}
-                          </span>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-      </pre>
+      {Object.keys(agregated_data).length > 0 && <ExcelUploaderTable {...agregated_data} />}
     </Box>
   );
 };
