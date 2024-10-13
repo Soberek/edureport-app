@@ -1,27 +1,41 @@
 import React from "react";
 import { IconType } from "react-icons";
+import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
 
-interface ButtonI {
+interface ButtonI extends ChakraButtonProps {
   key?: string | number;
   selected?: boolean; // Optional: default to false for simple usage
-  label: string | number; // Optional: button label
+  label: string | number; // Button label
   onClick?: () => void; // Optional: default no-op function
-  Icon?: IconType;
+  Icon?: IconType; // Icon component from react-icons
 }
 
-const Button = ({ key, selected = false, label = "", onClick = () => {}, Icon }: ButtonI) => {
-  const base_style = "flex items-center gap-2 px-4 py-2 font-bold transition-all hover:-translate-y-1 hover:cursor-pointer";
-
-  // Conditional styles based on the selected state
-  const button_style = selected
-    ? `${base_style} bg-green-500 text-white hover:bg-white hover:text-red-600`
-    : `${base_style} bg-red-600 text-white hover:bg-white hover:text-red-600`;
+const Button = ({ key, selected = false, label = "", onClick = () => {}, Icon, ...rest }: ButtonI) => {
+  // Conditional styles based on the `selected` state
+  const bgColor = selected ? "green.500" : "red.600";
+  const hoverBgColor = "white";
+  const textColor = selected ? "white" : "white";
+  const hoverTextColor = "red.600";
 
   return (
-    <button key={key} className={button_style} onClick={onClick}>
-      {Icon && <Icon size={23} />}
+    <ChakraButton
+      leftIcon={Icon && <Icon size={23} />}
+      key={key}
+      bg={bgColor}
+      color={textColor}
+      _hover={{ bg: hoverBgColor, border: 2, color: hoverTextColor, transform: "translateY(-2px)" }}
+      px={4}
+      py={2}
+      fontWeight="bold"
+      onClick={onClick}
+      transition="all 0.3s ease"
+      display="flex"
+      alignItems="center"
+      gap={2}
+      {...rest} // Pass down any additional Chakra Button props
+    >
       {label}
-    </button>
+    </ChakraButton>
   );
 };
 

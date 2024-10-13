@@ -5,6 +5,7 @@ import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import Button from "../Button";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 import { SiMicrosoftexcel } from "react-icons/si";
+import { Box, Text } from "@chakra-ui/react";
 
 interface ExcelRow {
   [key: string]: string | number;
@@ -130,36 +131,74 @@ const ExcelUploader: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [raw_data, selected_months]);
 
+  console.log(Object.entries(agregated_data).map(([type, action]) => typeof action));
   return (
-    <div className="p-4">
+    <Box padding={4}>
       <h1 className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
         <SiMicrosoftexcel />
         Miernik budżetowy
       </h1>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
-      <div className="flex gap-2">
-        <div className="mb-4 flex items-center gap-2">
-          <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
+      <Box display={"flex"} flexWrap={"wrap"} gap={2}>
+        <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
 
-          <label
-            htmlFor="file-input"
-            className="flex items-center gap-2 bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
-          >
-            <MdOutlineUpload size={23} />
-            Wgraj plik
-          </label>
-          {file_name ?? <div className="ml-2">{file_name}</div>}
-        </div>
-        <div className="mb-4">
-          <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
-        </div>
-      </div>
+        <label
+          htmlFor="file-input"
+          className="flex items-center gap-2 bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
+        >
+          <MdOutlineUpload size={23} />
+          Wgraj plik
+        </label>
+        {file_name ?? <div className="ml-2">{file_name}</div>}
+
+        <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
+      </Box>
 
       <div className="mb-4 flex flex-col">
-        <span>Ogólna liczba ludzi: {miernik_summary.people}</span>
+        <span>Ogólna liczba odbiorców: {miernik_summary.people}</span>
         <span>Ogólna liczba działań: {miernik_summary.actions}</span>
       </div>
+
+      {agregated_data &&
+        Object.entries(agregated_data).map(([program_type, program_names], index) => (
+          <Box key={index} marginBottom={3}>
+            <Text fontSize={"1.3rem"} sx={{ fontWeight: "600" }}>
+              {program_type}
+            </Text>
+
+            <Box display={"flex"} textAlign={`center`} alignItems={`center`} className="[&>div]:flex-1 [&>div]:text-xl [&>div]:font-bold" marginBottom={2}>
+              <Box>Działanie</Box>
+              <Box>Liczba działań</Box>
+              <Box>Liczba odbiorców</Box>
+            </Box>
+            {Object.entries(program_names).map(([program_name, action], action_index) => (
+              <Box
+                key={action_index}
+                borderBottom={"2px"}
+                borderColor={"gray.400"}
+                display={"flex"}
+                flexDirection={`column`}
+                textAlign={`start`}
+                alignItems={`center`}
+                className="[&>div]:flex-1"
+                marginBottom={2}
+              >
+                <Text>{program_name}</Text>
+
+                <Box display={`flex`} flexDir={`column`} w={"full"} p={2}>
+                  {Object.entries(action).map(([action_name, action_counters], action_index) => (
+                    <Box key={action_index} display={`flex`} p={2} className="[&>div]:flex-1 [&>div]:p-1">
+                      <Box>{action_name}</Box>
+                      <Box>{1}</Box>
+                      <Box>{1}</Box>
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        ))}
 
       <pre className="mb-4 border p-2">
         {agregated_data &&
@@ -191,7 +230,7 @@ const ExcelUploader: React.FC = () => {
             </div>
           ))}
       </pre>
-    </div>
+    </Box>
   );
 };
 
