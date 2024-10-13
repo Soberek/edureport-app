@@ -13,7 +13,13 @@ const ExcelUploaderTable = (data: ProgramsData) => {
               {program_type}
             </Text>
 
-            <Box display={"flex"} textAlign={`start`} alignItems={`center`} className="[&>div]:flex-1 [&>div]:text-xl [&>div]:font-bold" marginBottom={2}>
+            <Box
+              display={"flex"}
+              textAlign={`start`}
+              alignItems={`center`}
+              className="[&>div]:flex-1 [&>div]:text-center [&>div]:text-xl [&>div]:font-bold"
+              marginBottom={2}
+            >
               <Box>Działanie</Box>
               <Box>Liczba działań</Box>
               <Box>Liczba odbiorców</Box>
@@ -26,17 +32,36 @@ const ExcelUploaderTable = (data: ProgramsData) => {
                 display={"flex"}
                 flexDirection={`column`}
                 textAlign={`start`}
-                className="[&>div]:flex-1"
+                sx={{
+                  "&>div": {
+                    flex: 1
+                  }
+                }}
+                marginBottom={2}
               >
-                <Text>{program_name}</Text>
+                <Box paddingLeft={1} fontWeight={`bold`}>
+                  {program_name}
+                </Box>
 
-                <Box display={`flex`} flexDir={`column`} w={"full"} p={2}>
+                <Box display={`flex`} flexDir={`column`} w={"full"}>
                   {Object.entries(action).map(([action_name, action_counters], action_index) => (
-                    <Box key={action_index} display={`flex`} className="[&>div]:flex-1">
+                    <Box
+                      key={action_index}
+                      display={`flex`}
+                      className="[&>div]:flex-1"
+                      sx={{
+                        "&:nth-of-type(2n)": {
+                          bg: "gray.400" // Apply background color to every 2nd child
+                        }
+                      }}
+                      paddingLeft={1}
+                    >
                       <Box>{action_name}</Box>
 
                       {Object.entries(action_counters).map(([, counter], counter_index) => (
-                        <Box key={counter_index}>{counter}</Box>
+                        <Box key={counter_index} textAlign={`center`}>
+                          {counter}
+                        </Box>
                       ))}
                     </Box>
                   ))}
