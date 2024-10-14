@@ -42,8 +42,8 @@ export const ExcelUploaderMonths = ({ getSelectedMonths }: { getSelectedMonths: 
 
   return (
     <>
-      <Text marginBottom={2} fontWeight={700}>
-        Miesiące:
+      <Text marginBottom={2} fontWeight={700} fontSize={20}>
+        🦄 Miesiące:
       </Text>
       <Box className="justify-left mb-4 flex flex-row flex-wrap gap-4">
         {months.length > 0 &&

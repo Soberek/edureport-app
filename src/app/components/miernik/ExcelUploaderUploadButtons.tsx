@@ -1,4 +1,4 @@
-import { Box, FormLabel, Input } from "@chakra-ui/react";
+import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
 import Button from "../Button";
 import React from "react";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
@@ -10,10 +10,10 @@ interface ExcelUploaderUploadButtonsI {
 
 const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUploaderUploadButtonsI) => {
   return (
-    <>
-      <Box display={"flex"} alignItems={`center`} flexWrap={"wrap"} columnGap={2}>
+    <Box display={`flex`} flexWrap={`wrap`} gap={4} marginBottom={4}>
+      {/* Wgraj plik */}
+      <Box>
         <Input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-
         <FormLabel
           htmlFor="file-input"
           className="bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
@@ -22,13 +22,18 @@ const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUpload
           rounded={5}
         >
           <MdOutlineUpload size={23} />
-          Wgraj plik
+          Wgraj miernik
         </FormLabel>
-        {file_name ?? <Box marginLeft={2}>{file_name}</Box>}
+      </Box>
+      {/* File name */}
+      <Box display={`flex`} alignItems={`center`}>
+        {file_name ?? <Text>{file_name}</Text>}
+      </Box>
 
+      <Box>
         <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
       </Box>
-    </>
+    </Box>
   );
 };
 

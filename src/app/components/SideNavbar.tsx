@@ -12,7 +12,17 @@ export default function NavLinks() {
   ];
 
   return (
-    <Box as="nav" position="fixed" minHeight="100vh" w="185px" borderRight="2px" borderColor="gray.300" p={4} boxShadow="sm">
+    <Box
+      as="nav"
+      display={{ base: "none", md: "block" }}
+      position="fixed"
+      minHeight="100vh"
+      w={{ base: "0", md: "185px" }}
+      borderRight="2px"
+      borderColor="gray.300"
+      p={4}
+      boxShadow="sm"
+    >
       <VStack spacing={2} align="stretch">
         {links.map((link, idx) => (
           <StyledLink key={idx} path={link.path} pathname={pathname} name={link.name} />

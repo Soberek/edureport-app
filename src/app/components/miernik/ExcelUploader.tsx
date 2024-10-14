@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import * as XLSX from "xlsx";
 import moment from "moment";
-import { SiMicrosoftexcel } from "react-icons/si";
 import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
@@ -137,23 +136,19 @@ const ExcelUploader: React.FC = () => {
 
   return (
     <Box padding={4}>
-      <Text className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
-        <SiMicrosoftexcel />
-        Miernik budżetowy
-      </Text>
+      <Text className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">🗃️ Miernik budżetowy</Text>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
-
       <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} />
 
-      <Box display={`flex`} gap={2} marginBottom={2}>
-        <Stat>
+      <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={2}>
+        <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
           <StatLabel>Ogólna liczba działań:</StatLabel>
-          <StatNumber>{miernik_summary.actions || 0}</StatNumber>
+          <StatNumber>👩‍🏫{miernik_summary.actions || 0}</StatNumber>
         </Stat>
-        <Stat>
+        <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
           <StatLabel>Ogólna liczba odbiorców:</StatLabel>
-          <StatNumber>{miernik_summary.people || 0}</StatNumber>
+          <StatNumber>👨‍👩‍👧‍👦 {miernik_summary.people || 0}</StatNumber>
         </Stat>
       </Box>
 

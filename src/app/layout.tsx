@@ -21,7 +21,7 @@ export default function RootLayout({
         <Container as={"body"} maxWidth="100vw" bg="gray.300">
           <Box display="flex">
             <NavLinks />
-            <Box marginLeft={"185px"} flex={1} overflow={`hidden`}>
+            <Box marginLeft={{ base: "0", md: "185px" }} flex={1} overflow={`hidden`}>
               {children}
             </Box>
           </Box>
