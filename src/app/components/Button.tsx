@@ -10,7 +10,7 @@ interface ButtonI extends ChakraButtonProps {
   Icon?: IconType; // Icon component from react-icons
 }
 
-const Button = ({ key, selected = false, label = "", onClick = () => {}, Icon, ...rest }: ButtonI) => {
+const Button = ({ selected = false, label = "", onClick = () => {}, Icon, ...rest }: ButtonI) => {
   // Conditional styles based on the `selected` state
   const bgColor = selected ? "green.500" : "red.600";
   const hoverBgColor = "white";
@@ -20,7 +20,6 @@ const Button = ({ key, selected = false, label = "", onClick = () => {}, Icon, .
   return (
     <ChakraButton
       leftIcon={Icon && <Icon size={23} />}
-      key={key}
       bg={bgColor}
       color={textColor}
       _hover={{ bg: hoverBgColor, border: 2, color: hoverTextColor, transform: "translateY(-2px)" }}
