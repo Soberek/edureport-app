@@ -144,7 +144,7 @@ const ExcelUploader: React.FC = () => {
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={2}>
         <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
           <StatLabel>Ogólna liczba działań:</StatLabel>
-          <StatNumber>👩‍🏫{miernik_summary.actions || 0}</StatNumber>
+          <StatNumber>👩‍🏫 {miernik_summary.actions || 0}</StatNumber>
         </Stat>
         <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
           <StatLabel>Ogólna liczba odbiorców:</StatLabel>
