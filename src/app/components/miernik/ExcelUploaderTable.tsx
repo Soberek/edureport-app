@@ -8,7 +8,7 @@ const ExcelUploaderTable = (data: ProgramsData) => {
     <>
       {data &&
         Object.entries(data).map(([program_type, program_names], index) => (
-          <Box key={index} marginBottom={3}>
+          <Box key={index}>
             <Text fontSize={"1.3rem"} sx={{ fontWeight: "600" }}>
               {program_type}
             </Text>
@@ -24,9 +24,9 @@ const ExcelUploaderTable = (data: ProgramsData) => {
               <Box>Liczba działań</Box>
               <Box>Liczba odbiorców</Box>
             </Box>
-            {Object.entries(program_names).map(([program_name, action], action_index) => (
+            {Object.entries(program_names).map(([program_name, action], program_index) => (
               <Box
-                key={action_index}
+                key={program_index}
                 border={"2px"}
                 borderColor={"gray.400"}
                 display={"flex"}
@@ -40,7 +40,7 @@ const ExcelUploaderTable = (data: ProgramsData) => {
                 marginBottom={2}
               >
                 <Box paddingLeft={1} fontWeight={`bold`}>
-                  {program_name}
+                  {++program_index}. {program_name}
                 </Box>
 
                 <Box display={`flex`} flexDir={`column`} w={"full"}>
@@ -56,7 +56,9 @@ const ExcelUploaderTable = (data: ProgramsData) => {
                       }}
                       paddingLeft={1}
                     >
-                      <Box>{action_name}</Box>
+                      <Box>
+                        {program_index}.{++action_index}. {action_name}
+                      </Box>
 
                       {Object.entries(action_counters).map(([, counter], counter_index) => (
                         <Box key={counter_index} textAlign={`center`}>
