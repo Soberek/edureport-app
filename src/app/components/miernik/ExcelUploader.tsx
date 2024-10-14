@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
-import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
+import { ExcelUploaderMonths, Month } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
 import useFileReader, { ExcelRow } from "@/app/hooks/useFileReader";
@@ -17,18 +17,24 @@ export interface ProgramsData {
 
 const ExcelUploader: React.FC = () => {
   const [agregated_data, setAgregatedData] = useState<ProgramsData>({});
-  const [selected_months, setSelectedMonths] = useState<number[]>([]);
   const [miernik_summary, setMiernikSummary] = useState({
     actions: 0,
     people: 0
+  });
+
+  const [months, setMonths] = useState<Month[]>((): Month[] => {
+    return new Array(12).fill(0).map((_, index) => ({
+      month_num: index + 1,
+      selected: false
+    }));
   });
 
   const { saveToExcelFile } = useFileSaver(agregated_data);
 
   const { raw_data, file_name, handleFileUpload } = useFileReader();
 
-  const getSelectedMonths = (selected_months: number[]) => {
-    setSelectedMonths(selected_months);
+  const handleMonthSelect = (selected_month: number) => {
+    setMonths((prev_months) => prev_months.map((month) => (month.month_num === selected_month ? { ...month, selected: !month.selected } : month)));
   };
 
   const agregateData = (data: ExcelRow[]) => {
@@ -43,6 +49,7 @@ const ExcelUploader: React.FC = () => {
       const action_count = Number(item["Liczba działań"]);
       const date = moment(item["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
       const month = date.month() + 1; // moment months are 0-indexed
+      const selected_months = months.filter((month) => month.selected === true).map((month) => month.month_num);
 
       if (selected_months.length > 0 && !selected_months.includes(month)) {
         return acc;
@@ -82,7 +89,7 @@ const ExcelUploader: React.FC = () => {
       agregateData(raw_data);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [raw_data, selected_months]);
+  }, [raw_data, months]);
 
   return (
     <Box padding={4}>
@@ -90,7 +97,7 @@ const ExcelUploader: React.FC = () => {
         🧮 Miernik budżetowy
       </Text>
 
-      <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
+      <ExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
       <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
