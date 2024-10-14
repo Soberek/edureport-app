@@ -5,6 +5,7 @@ import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
 import useFileReader, { ExcelRow } from "@/app/hooks/useFileReader";
+import useFileSaver from "@/app/hooks/useFileSaver";
 
 export interface ProgramsData {
   [key: string]: {
@@ -21,6 +22,8 @@ const ExcelUploader: React.FC = () => {
     actions: 0,
     people: 0
   });
+
+  const { saveToExcelFile } = useFileSaver(agregated_data);
 
   const { raw_data, file_name, handleFileUpload } = useFileReader();
 
@@ -88,7 +91,7 @@ const ExcelUploader: React.FC = () => {
       </Text>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
-      <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} />
+      <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
         <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>

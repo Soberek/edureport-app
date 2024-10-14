@@ -6,9 +6,10 @@ import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 interface ExcelUploaderUploadButtonsI {
   file_name: string;
   handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  saveToExcelFile: () => void;
 }
 
-const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUploaderUploadButtonsI) => {
+const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload, saveToExcelFile }: ExcelUploaderUploadButtonsI) => {
   return (
     <Box display={`flex`} flexWrap={`wrap`} marginBottom={4}>
       {/* Wgraj plik */}
@@ -36,7 +37,7 @@ const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUpload
       </Box>
 
       <Box>
-        <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
+        <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} onClick={saveToExcelFile} />
       </Box>
     </Box>
   );
