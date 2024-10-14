@@ -1,14 +1,10 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
-import * as XLSX from "xlsx";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
-
-interface ExcelRow {
-  [key: string]: string | number;
-}
+import useFileReader, { ExcelRow } from "@/app/hooks/useFileReader";
 
 export interface ProgramsData {
   [key: string]: {
@@ -20,62 +16,13 @@ export interface ProgramsData {
 
 const ExcelUploader: React.FC = () => {
   const [agregated_data, setAgregatedData] = useState<ProgramsData>({});
-  const [raw_data, setRawData] = useState<ExcelRow[]>([]);
   const [selected_months, setSelectedMonths] = useState<number[]>([]);
-  const [file_name, setFileName] = useState("");
   const [miernik_summary, setMiernikSummary] = useState({
     actions: 0,
     people: 0
   });
 
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const blob_xlsx_file = e.target.files?.[0];
-
-    const isXlsx = blob_xlsx_file?.name.endsWith(".xlsx");
-    const isXls = blob_xlsx_file?.name.endsWith(".xls");
-
-    if (!isXls && !isXlsx) return;
-
-    const file_name = e.target.files?.[0].name;
-
-    if (typeof file_name === "string") {
-      setFileName(file_name);
-    }
-
-    if (!blob_xlsx_file) return;
-
-    const reader = new FileReader();
-
-    reader.onloadstart = () => {
-      console.log("Loading file start....");
-    };
-
-    reader.onloadend = () => {
-      console.log("Loading file end...");
-    };
-
-    reader.onload = (evt: ProgressEvent<FileReader>) => {
-      const array_buffer = evt.target?.result;
-
-      if (!array_buffer) {
-        console.error("Failed to load the file. The file data is missing.");
-        return;
-      }
-
-      try {
-        const wb = XLSX.read(array_buffer, { type: "array" });
-        const wsname = wb.SheetNames[0];
-        const ws = wb.Sheets[wsname];
-        const data = XLSX.utils.sheet_to_json(ws, { raw: false }) as ExcelRow[];
-
-        setRawData(data);
-      } catch (error) {
-        console.error("Error reading XLSX file:", error);
-      }
-    };
-
-    reader.readAsArrayBuffer(blob_xlsx_file);
-  };
+  const { raw_data, file_name, handleFileUpload } = useFileReader();
 
   const getSelectedMonths = (selected_months: number[]) => {
     setSelectedMonths(selected_months);
