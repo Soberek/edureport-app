@@ -10,13 +10,18 @@ interface ExcelUploaderUploadButtonsI {
 
 const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUploaderUploadButtonsI) => {
   return (
-    <Box display={`flex`} flexWrap={`wrap`} gap={4} marginBottom={4}>
+    <Box display={`flex`} flexWrap={`wrap`} marginBottom={4}>
       {/* Wgraj plik */}
-      <Box>
+      <Box display={`flex`}>
         <Input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
         <FormLabel
           htmlFor="file-input"
-          className="bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
+          px={4}
+          py={2}
+          fontWeight={`bold`}
+          bgColor={`ternary.100`}
+          textColor={`white`}
+          className="transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
           display={`flex`}
           alignItems={`center`}
           rounded={5}
@@ -26,7 +31,7 @@ const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload }: ExcelUpload
         </FormLabel>
       </Box>
       {/* File name */}
-      <Box display={`flex`} alignItems={`center`}>
+      <Box display={`flex`} paddingX={4} marginRight={4} alignItems={`center`} bgColor={`white`} textColor={`black`}>
         {file_name ?? <Text>{file_name}</Text>}
       </Box>
 

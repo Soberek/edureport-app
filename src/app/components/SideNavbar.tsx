@@ -34,9 +34,9 @@ export default function NavLinks() {
 
 const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; name: string }) => {
   const isActive = pathname === path;
-  const activeBg = useColorModeValue("gray.500", "red.200");
+  const activeBg = useColorModeValue("", "red.200");
   const activeColor = useColorModeValue("white", "gray.800");
-  const inactiveBg = useColorModeValue("white", "gray.700");
+  const inactiveBg = useColorModeValue("", "");
   const inactiveColor = useColorModeValue("gray.900", "white");
   const hoverBg = useColorModeValue("gray.100", "gray.600");
   const hoverColor = useColorModeValue("blue.700", "blue.200");
@@ -46,10 +46,9 @@ const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; 
       <ChakraLink
         px={4}
         py={2}
-        borderWidth="1px"
-        borderColor="gray.200"
         bg={isActive ? activeBg : inactiveBg}
         color={isActive ? activeColor : inactiveColor}
+        textColor={isActive ? `fourth.100` : `primary.100`}
         fontSize="sm"
         fontWeight="medium"
         _hover={{

@@ -83,12 +83,14 @@ const ExcelUploader: React.FC = () => {
 
   return (
     <Box padding={4}>
-      <Text className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">🗃️ Miernik budżetowy</Text>
+      <Text marginBottom={4} display={`flex`} alignItems={`center`} gap={4} borderBottom={`2px`} pb={2} fontSize={`1.5rem`} lineHeight={`2rem`}>
+        🧮 Miernik budżetowy
+      </Text>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
       <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} />
 
-      <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={2}>
+      <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
         <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
           <StatLabel>Ogólna liczba działań:</StatLabel>
           <StatNumber>👩‍🏫 {miernik_summary.actions || 0}</StatNumber>

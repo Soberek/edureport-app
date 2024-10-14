@@ -45,17 +45,7 @@ const ExcelUploaderTable = (data: ProgramsData) => {
 
                 <Box display={`flex`} flexDir={`column`} w={"full"}>
                   {Object.entries(action).map(([action_name, action_counters], action_index) => (
-                    <Box
-                      key={action_index}
-                      display={`flex`}
-                      className="[&>div]:flex-1"
-                      sx={{
-                        "&:nth-of-type(2n)": {
-                          bg: "gray.400" // Apply background color to every 2nd child
-                        }
-                      }}
-                      paddingLeft={1}
-                    >
+                    <Box key={action_index} display={`flex`} className="[&>div]:flex-1" paddingLeft={1}>
                       <Box>
                         {program_index}.{++action_index}. {action_name}
                       </Box>
