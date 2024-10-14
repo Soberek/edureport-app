@@ -8,13 +8,11 @@ interface Month {
   selected: boolean;
 }
 
-type Months = Month[];
-
 export const ExcelUploaderMonths = ({ getSelectedMonths }: { getSelectedMonths: (selected_months: number[]) => void }) => {
-  const [months, setMonths] = useState<Months>([]);
+  const [months, setMonths] = useState<Month[]>([]);
 
   useEffect(() => {
-    const fillMonths = (): Months => {
+    const fillMonths = (): Month[] => {
       return new Array(12).fill(0).map((_, index) => ({
         month_num: index + 1,
         selected: false
