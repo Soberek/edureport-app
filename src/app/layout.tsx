@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import NavLinks from "./components/nav-links";
+import NavLinks from "./components/SideNavbar";
 import { ChakraProvider, Container, Box } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
