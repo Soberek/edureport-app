@@ -5,6 +5,7 @@ import { SiMicrosoftexcel } from "react-icons/si";
 import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
+import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
 
 interface ExcelRow {
   [key: string]: string | number;
@@ -136,18 +137,25 @@ const ExcelUploader: React.FC = () => {
 
   return (
     <Box padding={4}>
-      <h1 className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
+      <Text className="mb-4 flex items-center gap-4 border-b-2 pb-2 text-2xl">
         <SiMicrosoftexcel />
         Miernik budżetowy
-      </h1>
+      </Text>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
 
-      <div className="mb-4 flex flex-col">
-        <span>Ogólna liczba odbiorców: {miernik_summary.people}</span>
-        <span>Ogólna liczba działań: {miernik_summary.actions}</span>
-      </div>
       <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} />
+
+      <Box display={`flex`} gap={2} marginBottom={2}>
+        <Stat>
+          <StatLabel>Ogólna liczba działań:</StatLabel>
+          <StatNumber>{miernik_summary.actions || 0}</StatNumber>
+        </Stat>
+        <Stat>
+          <StatLabel>Ogólna liczba odbiorców:</StatLabel>
+          <StatNumber>{miernik_summary.people || 0}</StatNumber>
+        </Stat>
+      </Box>
 
       {Object.keys(agregated_data).length > 0 && <ExcelUploaderTable {...agregated_data} />}
     </Box>

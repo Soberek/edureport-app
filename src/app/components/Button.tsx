@@ -26,6 +26,7 @@ const Button = ({ key, selected = false, label = "", onClick = () => {}, Icon, .
       _hover={{ bg: hoverBgColor, border: 2, color: hoverTextColor, transform: "translateY(-2px)" }}
       px={4}
       py={2}
+      rounded={5}
       fontWeight="bold"
       onClick={onClick}
       transition="all 0.3s ease"
