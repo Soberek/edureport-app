@@ -1,10 +1,8 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import * as XLSX from "xlsx";
 import moment from "moment";
-import Button from "../Button";
-import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 import { SiMicrosoftexcel } from "react-icons/si";
-import { Box } from "@chakra-ui/react";
+import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths } from "./ExcelUploaderMonths";
 import ExcelUploaderTable from "./ExcelUploaderTable";
 
@@ -144,25 +142,12 @@ const ExcelUploader: React.FC = () => {
       </h1>
 
       <ExcelUploaderMonths getSelectedMonths={getSelectedMonths} />
-      <Box display={"flex"} flexWrap={"wrap"} gap={2} marginBottom={2}>
-        <input className="hidden" id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-
-        <label
-          htmlFor="file-input"
-          className="flex items-center gap-2 bg-red-600 px-4 py-2 font-bold text-white transition-all hover:-translate-y-1 hover:cursor-pointer hover:bg-white hover:text-red-600"
-        >
-          <MdOutlineUpload size={23} />
-          Wgraj plik
-        </label>
-        {file_name ?? <div className="ml-2">{file_name}</div>}
-
-        <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} />
-      </Box>
 
       <div className="mb-4 flex flex-col">
         <span>Ogólna liczba odbiorców: {miernik_summary.people}</span>
         <span>Ogólna liczba działań: {miernik_summary.actions}</span>
       </div>
+      <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} />
 
       {Object.keys(agregated_data).length > 0 && <ExcelUploaderTable {...agregated_data} />}
     </Box>

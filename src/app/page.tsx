@@ -4,10 +4,7 @@ export default function Home() {
       <section className="flex flex-row">
         <div className="flex-1 p-4">
           <h1>Home</h1>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-          laborum cumque autem nobis ullam aperiam, enim, alias provident
-          distinctio fuga maiores dignissimos mollitia quam blanditiis! Soluta
-          aut deleniti at similique?
+          Someday there will be something worth looking at....
         </div>
       </section>
     </div>
