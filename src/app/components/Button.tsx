@@ -12,7 +12,8 @@ interface ButtonI extends ChakraButtonProps {
 
 const Button = ({ selected = false, label = "", onClick = () => {}, Icon, ...rest }: ButtonI) => {
   // Conditional styles based on the `selected` state
-  const bgColor = `ternary.100`;
+
+  const bgColor = selected ? `primary.100` : `ternary.100`;
   const hoverBgColor = "white";
   const textColor = selected ? "white" : "white";
   const hoverTextColor = "black";
