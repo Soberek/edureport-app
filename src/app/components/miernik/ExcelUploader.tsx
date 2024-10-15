@@ -34,10 +34,9 @@ const ExcelUploader: React.FC = () => {
       }));
     }, [])
   );
+  const { raw_data, file_name, handleFileUpload } = useFileReader();
 
   const { saveToExcelFile } = useFileSaver(agregated_data);
-
-  const { raw_data, file_name, handleFileUpload } = useFileReader();
 
   const handleMonthSelect = useCallback((selected_month: number) => {
     setMonths((prev_months) => prev_months.map((month) => (month.month_num === selected_month ? { ...month, selected: !month.selected } : month)));
