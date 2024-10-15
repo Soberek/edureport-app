@@ -14,16 +14,14 @@ const Button = ({ selected = false, label = "", onClick = () => {}, Icon, ...res
   // Conditional styles based on the `selected` state
 
   const bgColor = selected ? `primary.100` : `ternary.100`;
-  const hoverBgColor = "white";
   const textColor = selected ? "white" : "white";
-  const hoverTextColor = "black";
 
   return (
     <ChakraButton
       leftIcon={Icon && <Icon size={23} />}
       bg={bgColor}
       color={textColor}
-      _hover={{ bg: hoverBgColor, border: 2, color: hoverTextColor, transform: "translateY(-2px)" }}
+      _hover={{ border: 2, transform: "translateY(-4  px)" }}
       px={4}
       py={2}
       rounded={5}

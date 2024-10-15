@@ -32,9 +32,11 @@ const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload, saveToExcelFi
         </FormLabel>
       </Box>
       {/* File name */}
-      <Box display={`flex`} paddingX={4} marginRight={4} alignItems={`center`} bgColor={`white`} textColor={`black`}>
-        {file_name ?? <Text>{file_name}</Text>}
-      </Box>
+      {file_name && (
+        <Box display={`flex`} paddingX={4} marginRight={4} alignItems={`center`} bgColor={`white`} textColor={`black`}>
+          <Text>{file_name}</Text>
+        </Box>
+      )}
 
       <Box>
         <Button label="Zapisz miernik budżetowy" selected Icon={MdOutlineDownload} onClick={saveToExcelFile} />
