@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
 import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths, Month } from "./ExcelUploaderMonths";
@@ -6,6 +6,10 @@ import ExcelUploaderTable from "./ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
 import useFileReader, { ExcelRow } from "@/app/hooks/useFileReader";
 import useFileSaver from "@/app/hooks/useFileSaver";
+
+const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
+const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);
+const MemoizedExcelUploaderTable = React.memo(ExcelUploaderTable);
 
 export interface ProgramsData {
   [key: string]: {
@@ -22,22 +26,30 @@ const ExcelUploader: React.FC = () => {
     people: 0
   });
 
-  const [months, setMonths] = useState<Month[]>((): Month[] => {
-    return new Array(12).fill(0).map((_, index) => ({
-      month_num: index + 1,
-      selected: false
-    }));
-  });
+  const [months, setMonths] = useState<Month[]>(
+    useCallback((): Month[] => {
+      return new Array(12).fill(0).map((_, index) => ({
+        month_num: index + 1,
+        selected: false
+      }));
+    }, [])
+  );
 
   const { saveToExcelFile } = useFileSaver(agregated_data);
 
   const { raw_data, file_name, handleFileUpload } = useFileReader();
 
-  const handleMonthSelect = (selected_month: number) => {
+  const handleMonthSelect = useCallback((selected_month: number) => {
     setMonths((prev_months) => prev_months.map((month) => (month.month_num === selected_month ? { ...month, selected: !month.selected } : month)));
-  };
+  }, []);
 
-  const agregateData = (data: ExcelRow[]) => {
+  useEffect(() => {
+    if (raw_data.length > 0) {
+      agregateData(raw_data, months);
+    }
+  }, [raw_data, months]);
+
+  const agregateData = (data: ExcelRow[], months: Month[]) => {
     let all_people = 0;
     let all_actions = 0;
 
@@ -84,21 +96,14 @@ const ExcelUploader: React.FC = () => {
     setAgregatedData(result);
   };
 
-  useEffect(() => {
-    if (raw_data.length > 0) {
-      agregateData(raw_data);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [raw_data, months]);
-
   return (
     <Box padding={4}>
       <Text marginBottom={4} display={`flex`} alignItems={`center`} gap={4} borderBottom={`2px`} pb={2} fontSize={`1.5rem`} lineHeight={`2rem`}>
         🧮 Miernik budżetowy
       </Text>
 
-      <ExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
-      <ExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
+      <MemoizedExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
+      <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
         <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
@@ -111,7 +116,7 @@ const ExcelUploader: React.FC = () => {
         </Stat>
       </Box>
 
-      {Object.keys(agregated_data).length > 0 && <ExcelUploaderTable {...agregated_data} />}
+      {Object.keys(agregated_data).length > 0 && <MemoizedExcelUploaderTable {...agregated_data} />}
     </Box>
   );
 };

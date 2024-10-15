@@ -1,8 +1,9 @@
 import * as XLSX from "xlsx";
 import { ProgramsData } from "../components/miernik/ExcelUploader";
+import { useCallback } from "react";
 
 const useFileSaver = (data: ProgramsData) => {
-  const saveToExcelFile = () => {
+  const saveToExcelFile = useCallback(() => {
     if (!Object.keys(data).length) return;
     const flatten_data: [string, string, string | number, string | number][] = [];
 
@@ -27,7 +28,7 @@ const useFileSaver = (data: ProgramsData) => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Miernik");
 
     XLSX.writeFile(workbook, "miernik.xlsx");
-  };
+  }, [data]);
 
   return { saveToExcelFile };
 };
