@@ -11,6 +11,13 @@ const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
 const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);
 const MemoizedExcelUploaderTable = React.memo(ExcelUploaderTable);
 
+const Stats = ({ label, value }: {label: string, value: number}) => (
+  <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
+    <StatLabel>{label}:</StatLabel>
+    <StatNumber>{value || 0}</StatNumber>
+  </Stat>
+);
+
 export interface ProgramsData {
   [key: string]: {
     [key: string]: {
@@ -105,14 +112,8 @@ const ExcelUploader: React.FC = () => {
       <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
-        <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
-          <StatLabel>Ogólna liczba działań:</StatLabel>
-          <StatNumber>👩‍🏫 {miernik_summary.actions || 0}</StatNumber>
-        </Stat>
-        <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
-          <StatLabel>Ogólna liczba odbiorców:</StatLabel>
-          <StatNumber>👨‍👩‍👧‍👦 {miernik_summary.people || 0}</StatNumber>
-        </Stat>
+      <Stats label="Ogólna liczba działań" value={miernik_summary.actions} />
+      <Stats label="Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
 
       {Object.keys(agregated_data).length > 0 && <MemoizedExcelUploaderTable {...agregated_data} />}
