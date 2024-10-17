@@ -1,10 +1,12 @@
 import mongoose, { Document, Schema } from "mongoose";
 
+export type MiernikProgramTypeValue = "PROGRAMOWE" | "NIEPROGRAMOWE";
+
 export interface MiernikProgramType extends Document {
-  name: string;
+  name: MiernikProgramTypeValue;
 }
 
-const MiernikProgramTypeSchema: Schema = new Schema({
+const MiernikProgramTypeSchema: Schema = new Schema<MiernikProgramType>({
   name: { type: String, enum: ["PROGRAMOWE", "NIEPROGRAMOWE"], required: true }
 });
 

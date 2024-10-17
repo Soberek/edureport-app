@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectToDatabase from "@/app/lib/mongodb";
-import MiernikTypeModel, { MiernikType } from "@/app/models/MiernikType";
+import MiernikTypeModel, { MiernikProgramType } from "@/app/models/MiernikType";
 
 export async function GET() {
   await connectToDatabase();
@@ -11,7 +11,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   await connectToDatabase();
 
-  const new_item: MiernikType = await req.json();
+  const new_item: MiernikProgramType = await req.json();
   const created_item = await MiernikTypeModel.create(new_item);
   return NextResponse.json(created_item, { status: 201 });
 }
