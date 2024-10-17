@@ -8,7 +8,7 @@ export default function NavLinks() {
 
   const links: { path: string; name: string }[] = [
     { path: "/", name: "Strona główna" },
-    { path: "/miernik", name: "Miernik budżetowy" }
+    { path: "/miernik", name: "Miernik budżetowy (excel)" }
   ];
 
   return (
@@ -34,8 +34,8 @@ export default function NavLinks() {
 
 const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; name: string }) => {
   const isActive = pathname === path;
-  const activeBg = useColorModeValue("", "red.200");
-  const activeColor = useColorModeValue("white", "gray.800");
+  const activeBg = useColorModeValue("", "");
+  const activeColor = useColorModeValue("white", "primary.100");
   const inactiveBg = useColorModeValue("", "");
   const inactiveColor = useColorModeValue("gray.900", "white");
   const hoverBg = useColorModeValue("gray.100", "gray.600");
@@ -48,7 +48,7 @@ const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; 
         py={2}
         bg={isActive ? activeBg : inactiveBg}
         color={isActive ? activeColor : inactiveColor}
-        textColor={isActive ? `fourth.100` : `primary.100`}
+        textColor={isActive ? `primary.100` : `fourth.100`}
         fontSize="sm"
         fontWeight="medium"
         _hover={{
