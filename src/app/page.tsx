@@ -1,7 +1,7 @@
 // pages/index.js
 "use client";
 import Head from "next/head";
-import { Box, Heading, Text, Container, Flex } from "@chakra-ui/react";
+import { Box, VStack, Heading, Text, Container, Flex } from "@chakra-ui/react";
 import Button from "./components/Button";
 
 export default function Home() {
@@ -21,13 +21,15 @@ export default function Home() {
 
       <Flex as="main" flex="1" alignItems="center" justifyContent="center">
         <Container textAlign="center">
-          <Heading as="h2" size="2xl">
-            Twórz profesjonalne sprawozdania w mgnieniu oka
-          </Heading>
-          <Text fontSize="xl">
-            Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej i Promocji Zdrowia.
-          </Text>
-          <Button label={"Rozpocznij Teraz"} />
+          <VStack spacing={8}>
+            <Heading as="h2" size="2xl">
+              Twórz profesjonalne sprawozdania w mgnieniu oka
+            </Heading>
+            <Text fontSize="xl">
+              Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej i Promocji Zdrowia.
+            </Text>
+            <Button label={"Rozpocznij Teraz"} />
+          </VStack>
         </Container>
       </Flex>
 
