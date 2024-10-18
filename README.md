@@ -19,7 +19,7 @@ I hate my current job so i automated it.
 
 ## Previews:
 
-imgur
+![preview-1](https://imgur.com/vGHl80h)
 
 ## License
 
