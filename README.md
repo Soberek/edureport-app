@@ -19,7 +19,8 @@ I hate my current job so i automated it.
 
 ## Previews:
 
-![preview-1](https://imgur.com/vGHl80h)
+<img src="https://i.imgur.com/vGHl80h.png" alt="preview">
+<img src="https://imgur.com/Jg0oFqU.png" alt="preview">
 
 ## License
 
