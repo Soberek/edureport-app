@@ -4,6 +4,8 @@
 import { Box, VStack, Heading, Text, Container, Flex } from "@chakra-ui/react";
 import Button from "../Button";
 
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
     <Box minHeight="100vh" display="flex" flexDirection="column">
@@ -28,7 +30,9 @@ export default function Home() {
             <Text fontSize="xl">
               Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej i Promocji Zdrowia.
             </Text>
-            <Button label={"Rozpocznij Teraz"} />
+            <Link to="miernik-excel">
+              <Button label={"Rozpocznij Teraz"} />
+            </Link>
           </VStack>
         </Container>
       </Flex>
