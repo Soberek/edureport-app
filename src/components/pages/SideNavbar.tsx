@@ -33,9 +33,7 @@ export default function SideNavbar() {
 
 const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; name: string }) => {
   const isActive = pathname === path;
-  const activeBg = useColorModeValue("blue.500", "blue.200");
   const activeColor = useColorModeValue("white", "primary.100");
-  const inactiveBg = useColorModeValue("", "");
   const inactiveColor = useColorModeValue("gray.900", "white");
   const hoverBg = useColorModeValue("gray.100", "gray.600");
   const hoverColor = useColorModeValue("blue.700", "blue.200");
@@ -46,7 +44,6 @@ const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; 
       to={path}
       px={4}
       py={2}
-      bg={isActive ? activeBg : inactiveBg}
       color={isActive ? activeColor : inactiveColor}
       textColor={isActive ? `primary.100` : `fourth.100`}
       fontSize="sm"
