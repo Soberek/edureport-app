@@ -4,8 +4,8 @@ I hate my current job so i automated it.
 
 ## Technologies
 
-- [Next.js](https://nextjs.org/)
 - [React](https://reactjs.org/)
+- [ReactRouter](https://reactrouter.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [ChakraUI](https://v2.chakra-ui.com/)
 - [MongoDB](https://www.mongodb.com/)
@@ -18,7 +18,9 @@ I hate my current job so i automated it.
 - Feature 3
 
 ## Previews:
+
 imgur
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
