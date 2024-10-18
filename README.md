@@ -5,7 +5,7 @@ I hate my current job so i automated it.
 ## Technologies
 
 - [React](https://reactjs.org/)
-- [ReactRouter](https://reactrouter.com/)
+- [ReactRouter-v6.4+](https://reactrouter.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [ChakraUI](https://v2.chakra-ui.com/)
 - [MongoDB](https://www.mongodb.com/)
@@ -13,9 +13,9 @@ I hate my current job so i automated it.
 
 ## Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Ability to load data from Excel
+- Preview of the generated report within the application
+- Option to save the report to an Excel file
 
 ## Previews:
 
