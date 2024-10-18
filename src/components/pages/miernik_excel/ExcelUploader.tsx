@@ -120,9 +120,9 @@ const ExcelUploader: React.FC = () => {
         actions: all_actions
       });
     } catch (error) {
-      console.error(error.message); // Log the error message
+      const errorMessage = (error as Error).message;
       // You can also set an error state to display the error in the UI
-      setError(error.message);
+      setError(errorMessage);
     }
   };
 
