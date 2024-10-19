@@ -1,0 +1,42 @@
+.site-background {
+  background: linear-gradient(270deg, #124e66, #d3d9d4);
+  background-size: 400% 400%;
+
+  -webkit-animation: site_bg 30s ease infinite;
+  -moz-animation: site_bg 30s ease infinite;
+  animation: site_bg 30s ease infinite;
+}
+
+@-webkit-keyframes site_bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes site_bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes site_bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
