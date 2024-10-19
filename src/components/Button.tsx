@@ -19,8 +19,9 @@ const Button = ({ selected = false, label = "", onClick = () => {}, Icon, ...res
     <ChakraButton
       leftIcon={Icon && <Icon size={23} />}
       bg={bgColor}
+      boxShadow={`1px 1px 20px gray`}
       color={textColor}
-      _hover={{ border: 2, transform: "translateY(-4  px)" }}
+      _hover={{ border: 2, transform: "translateY(-4  px)", bg: "primary.100" }}
       px={4}
       py={2}
       rounded={5}
