@@ -2,10 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import AppLayout from "./App.tsx";
 import ErrorPage from "./components/pages/ErrorPage.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import ExcelUploader from "./components/pages/miernik_excel/ExcelUploader.tsx";
 import Home from "./components/pages/Home.tsx";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { Box, ChakraProvider, extendTheme, Text } from "@chakra-ui/react";
+import Button from "./components/Button.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,14 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <div>Nie ma takiej strony 😿</div>
+        element: (
+          <Box p={4}>
+            <Text mb={2}>Nie ma takiej strony 😿</Text>
+            <Link to="..">
+              <Button label={`Wróć`} />
+            </Link>
+          </Box>
+        )
       }
     ],
     errorElement: <ErrorPage />
