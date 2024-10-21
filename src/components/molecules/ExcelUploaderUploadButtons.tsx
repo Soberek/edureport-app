@@ -1,5 +1,5 @@
 import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
-import Button from "../../Button";
+import Button from "../atoms/Button";
 import React from "react";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 

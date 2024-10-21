@@ -3,14 +3,14 @@ import { createRoot } from "react-dom/client";
 import AppLayout from "./App.tsx";
 import ErrorPage from "./components/pages/ErrorPage.tsx";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
-import ExcelUploader from "./components/pages/miernik_excel/ExcelUploader.tsx";
+import ExcelUploader from "./components/pages/ExcelUploader.tsx";
 import Home from "./components/pages/Home.tsx";
 import { Box, ChakraProvider, extendTheme, Text } from "@chakra-ui/react";
-import Button from "./components/Button.tsx";
-import { Login } from "./components/Login.tsx";
+import Button from "./components/atoms/Button.tsx";
+import { Login } from "./components/pages/Login.tsx";
 import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
 import { AuthProvider } from "./services/Auth.tsx";
-import MiernikApp from "./components/pages/miernik_app/MiernikApp.tsx";
+import MiernikApp from "./components/pages/MiernikApp.tsx";
 
 const router = createBrowserRouter([
   {

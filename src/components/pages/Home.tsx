@@ -2,7 +2,7 @@
 "use client";
 
 import { Box, VStack, Heading, Text, Container, Flex } from "@chakra-ui/react";
-import Button from "../Button";
+import Button from "../atoms/Button";
 
 import { Link } from "react-router-dom";
 

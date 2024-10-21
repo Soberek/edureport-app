@@ -1,6 +1,6 @@
 // Layout.tsx
 import { Outlet } from "react-router-dom";
-import SideNavbar from "./components/pages/SideNavbar";
+import SideNavbar from "./components/organism/SideNavbar";
 import { Box, Container } from "@chakra-ui/react";
 import "./index.css";
 

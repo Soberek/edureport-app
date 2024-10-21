@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import { ProgramsData } from "./ExcelUploader";
+import { ProgramsData } from "../ExcelUploader";
 
 const ExcelUploaderTable = (data: ProgramsData) => {
   return (

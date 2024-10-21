@@ -1,23 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
-import { Box, Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
-import { ExcelUploaderMonths, Month } from "./ExcelUploaderMonths";
-import ExcelUploaderTable from "./ExcelUploaderTable";
-import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
+import { Box, Text } from "@chakra-ui/react";
+import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
+import ExcelUploaderTable from "./miernik_excel/ExcelUploaderTable";
+import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
+import { Stats } from "../atoms/Stats";
 
-import useFileReader, { ExcelRow } from "../../../hooks/useFileReader";
-import useFileSaver from "../../../hooks/useFileSaver";
+import useFileReader, { ExcelRow } from "../../hooks/useFileReader";
+import useFileSaver from "../../hooks/useFileSaver";
 
 const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
 const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);
 const MemoizedExcelUploaderTable = React.memo(ExcelUploaderTable);
-
-const Stats = ({ label, value }: { label: string; value: number }) => (
-  <Stat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
-    <StatLabel>{label}:</StatLabel>
-    <StatNumber>{value || 0}</StatNumber>
-  </Stat>
-);
 
 export interface ProgramsData {
   [key: string]: {
