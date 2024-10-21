@@ -10,6 +10,7 @@ import Button from "./components/Button.tsx";
 import { Login } from "./components/Login.tsx";
 import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
 import { AuthProvider } from "./services/Auth.tsx";
+import MiernikApp from "./components/pages/miernik_app/MiernikApp.tsx";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
           {
             path: "miernik-excel", // Specific route
             element: <ExcelUploader />
+          },
+          {
+            path: "miernik-app",
+            element: <MiernikApp />
           },
           {
             path: "*", // Catch-all route for 404
