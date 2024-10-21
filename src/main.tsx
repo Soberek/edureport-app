@@ -7,33 +7,63 @@ import ExcelUploader from "./components/pages/miernik_excel/ExcelUploader.tsx";
 import Home from "./components/pages/Home.tsx";
 import { Box, ChakraProvider, extendTheme, Text } from "@chakra-ui/react";
 import Button from "./components/Button.tsx";
+import { Login } from "./components/Login.tsx";
+import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
+import { AuthProvider } from "./services/Auth.tsx";
 
 const router = createBrowserRouter([
   {
+    path: "/login",
+    element: <Login />,
+    errorElement: <ErrorPage />
+  },
+  {
     path: "/",
-    element: <AppLayout />,
+    element: <Home />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "*",
+    element: (
+      <Box p={4}>
+        <Text mb={2}>Nie ma takiej strony 😿</Text>
+        <Link to="/">
+          <Button label={"Wróć"} />
+        </Link>
+      </Box>
+    ),
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "",
+    element: <ProtectedRoutesHOC />, // Wrap the whole route with protected HOC
     children: [
       {
-        path: "/",
-        element: <Home />
-      },
-      {
-        path: "/miernik-excel",
-        element: <ExcelUploader />
+        path: "/", // Main route
+        element: <AppLayout />,
+        children: [
+          {
+            path: "miernik-excel", // Specific route
+            element: <ExcelUploader />
+          },
+          {
+            path: "*", // Catch-all route for 404
+            element: (
+              <Box p={4}>
+                <Text mb={2}>Nie ma takiej strony 😿</Text>
+                <Link to="/">
+                  <Button label={"Wróć"} />
+                </Link>
+              </Box>
+            )
+          }
+        ]
       },
       {
         path: "*",
-        element: (
-          <Box p={4}>
-            <Text mb={2}>Nie ma takiej strony 😿</Text>
-            <Link to="..">
-              <Button label={`Wróć`} />
-            </Link>
-          </Box>
-        )
+        element: <ErrorPage />
       }
-    ],
-    errorElement: <ErrorPage />
+    ]
   }
 ]);
 
@@ -68,7 +98,9 @@ const theme = extendTheme({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ChakraProvider>
   </StrictMode>
 );
