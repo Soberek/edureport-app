@@ -38,7 +38,7 @@ export default function Home() {
       </Flex>
 
       <Box as="footer" bg="gray.100" p={4} textAlign="center">
-        <Text>&copy; 2024 Generator Sprawozdań. Wszelkie prawa zastrzeżone.</Text>
+        <Text>&copy; 2024 Generator Sprawozdań - Krzysztof Palpuchowski - Wszelkie prawa zastrzeżone.</Text>
       </Box>
     </Box>
   );
