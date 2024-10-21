@@ -1,6 +1,22 @@
 import { Box, Text } from "@chakra-ui/react";
 
-import { ProgramsData } from "../ExcelUploader";
+import { ProgramsData } from "../pages/ExcelUploader";
+
+const TableHeader = () => {
+  return (
+    <Box
+      display={"flex"}
+      textAlign={`start`}
+      alignItems={`center`}
+      sx={{ "&>div": { flex: 1, textAlign: "center", fontSize: "1.2rem", fontWeight: "bold" } }}
+      marginBottom={2}
+    >
+      <Box>Działanie</Box>
+      <Box>Liczba działań</Box>
+      <Box>Liczba odbiorców</Box>
+    </Box>
+  );
+};
 
 const ExcelUploaderTable = (data: ProgramsData) => {
   return (
@@ -11,18 +27,7 @@ const ExcelUploaderTable = (data: ProgramsData) => {
             <Text fontSize={"1.3rem"} sx={{ fontWeight: "600" }}>
               {program_type}
             </Text>
-
-            <Box
-              display={"flex"}
-              textAlign={`start`}
-              alignItems={`center`}
-              sx={{ "&>div": { flex: 1, textAlign: "center", fontSize: "1.2rem", fontWeight: "bold" } }}
-              marginBottom={2}
-            >
-              <Box>Działanie</Box>
-              <Box>Liczba działań</Box>
-              <Box>Liczba odbiorców</Box>
-            </Box>
+            <TableHeader />
             {Object.entries(program_names).map(([program_name, action], program_index) => (
               <Box
                 key={program_index}

@@ -9,7 +9,7 @@ import { Box, ChakraProvider, extendTheme, Text } from "@chakra-ui/react";
 import Button from "./components/atoms/Button.tsx";
 import { Login } from "./components/pages/Login.tsx";
 import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
-import { AuthProvider } from "./services/Auth.tsx";
+import { AuthProvider } from "./context/Auth.tsx";
 import MiernikApp from "./components/pages/MiernikApp.tsx";
 
 const router = createBrowserRouter([

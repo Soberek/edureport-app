@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
 import { Box, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
-import ExcelUploaderTable from "./miernik_excel/ExcelUploaderTable";
+import ExcelUploaderTable from "../organism/ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
 import { Stat } from "../atoms/Stats";
 

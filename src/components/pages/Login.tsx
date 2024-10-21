@@ -1,7 +1,7 @@
 import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
 import Button from "../atoms/Button";
 import { Form, Navigate } from "react-router-dom";
-import { AuthContext } from "../../services/Auth";
+import { AuthContext } from "../../context/Auth";
 import { useContext, useState } from "react";
 
 export const Login = () => {
