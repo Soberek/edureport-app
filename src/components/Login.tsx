@@ -31,7 +31,7 @@ export const Login = () => {
       auth.setUser({ user: true });
     }
 
-    setError("Nazwa użytkownika lub hasło jest błędne.");
+    setError("Nazwa użytkownika lub hasło jest błędne. 😿");
   };
 
   return (

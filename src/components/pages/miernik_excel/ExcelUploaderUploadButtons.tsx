@@ -11,7 +11,7 @@ interface ExcelUploaderUploadButtonsI {
 
 const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload, saveToExcelFile }: ExcelUploaderUploadButtonsI) => {
   return (
-    <Box display={`flex`} flexWrap={`wrap`} marginBottom={4}>
+    <Box display={`flex`} flexWrap={`wrap`} marginBottom={4} gap={2}>
       {/* Wgraj plik */}
       <Box display={`flex`}>
         <Input sx={{ display: `none` }} id="file-input" type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
@@ -35,13 +35,15 @@ const ExcelUploaderUploadButtons = ({ file_name, handleFileUpload, saveToExcelFi
           alignItems={`center`}
           rounded={5}
         >
-          <MdOutlineUpload size={23} />
+          <Box as="span" marginRight={4}>
+            <MdOutlineUpload size={23} />
+          </Box>
           Wgraj miernik
         </FormLabel>
       </Box>
       {/* File name */}
       {file_name && (
-        <Box display={`flex`} paddingX={4} marginRight={4} alignItems={`center`} bgColor={`white`} textColor={`black`}>
+        <Box display={`flex`} paddingX={2} marginRight={2} alignItems={`center`} bgColor={`white`} textColor={`black`}>
           <Text>{file_name}</Text>
         </Box>
       )}
