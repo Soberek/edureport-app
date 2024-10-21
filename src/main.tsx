@@ -27,7 +27,7 @@ const router = createBrowserRouter([
     element: (
       <Box p={4}>
         <Text mb={2}>Nie ma takiej strony 😿</Text>
-        <Link to="/">
+        <Link to="..">
           <Button label={"Wróć"} />
         </Link>
       </Box>
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             element: (
               <Box p={4}>
                 <Text mb={2}>Nie ma takiej strony 😿</Text>
-                <Link to="/">
+                <Link to="..">
                   <Button label={"Wróć"} />
                 </Link>
               </Box>
