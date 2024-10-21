@@ -4,7 +4,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
 import ExcelUploaderTable from "./miernik_excel/ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
-import { Stats } from "../atoms/Stats";
+import { Stat } from "../atoms/Stats";
 
 import useFileReader, { ExcelRow } from "../../hooks/useFileReader";
 import useFileSaver from "../../hooks/useFileSaver";
@@ -130,8 +130,8 @@ const ExcelUploader: React.FC = () => {
       <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
       <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
-        <Stats label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
-        <Stats label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
+        <Stat label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
+        <Stat label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
 
       {Object.keys(agregated_data).length > 0 && !error ? <MemoizedExcelUploaderTable {...agregated_data} /> : <Text>{error}</Text>}
