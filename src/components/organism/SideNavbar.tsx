@@ -9,7 +9,6 @@ export default function SideNavbar() {
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
     { path: "/miernik-app", name: "Miernik budżetowy" }
   ];
-  console.log(pathname);
   return (
     <Box
       as="nav"
