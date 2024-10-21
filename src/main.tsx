@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "",
-    element: <ProtectedRoutesHOC />, // Wrap the whole route with protected HOC
+    element: <ProtectedRoutesHOC />,
     children: [
       {
         path: "/", // Main route
