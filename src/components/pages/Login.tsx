@@ -1,18 +1,47 @@
 import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
 import Button from "../atoms/Button";
-import { Form, Navigate } from "react-router-dom";
+import { Form, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth";
 import { useContext, useState } from "react";
+import axios from "axios";
 
 export const Login = () => {
-  const auth = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
 
-  if (auth.user) return <Navigate to="/miernik-excel" replace />;
+  const navigate = useNavigate();
+
+  if (user) {
+    return <Navigate to="/miernik-excel" replace />;
+  }
+
+  const fetchUser = async ({ username, password }: { username: string; password: string }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/login",
+        { username, password },
+        {
+          withCredentials: true
+        }
+      );
+      console.log(response);
+
+      if (response.status === 200) {
+        localStorage.setItem("auth", response.data.userId);
+        setUser({ user: true });
+        navigate("/miernik-excel", { replace: true });
+      } else {
+        setError("Niewłaściwa nazwa użytkownika lub hasło 😢");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Niewłaściwa nazwa użytkownika lub hasło 😢");
+    }
+  };
 
   const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -27,11 +56,7 @@ export const Login = () => {
   };
 
   const handleUserLogin = () => {
-    if (username === "12345" && password === "12345") {
-      auth.setUser({ user: true });
-    }
-
-    setError("Nazwa użytkownika lub hasło jest błędne. 😿");
+    fetchUser({ username, password });
   };
 
   return (
@@ -39,7 +64,7 @@ export const Login = () => {
       <Text textAlign={`center`} fontWeight={`bold`}>
         Witaj 😃
       </Text>
-      <Form>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <Box display={`flex`} flexDir={`column`} gap={4}>
           <Box>
             <FormLabel htmlFor="username">Nazwa użytkownika</FormLabel>
@@ -50,8 +75,8 @@ export const Login = () => {
             <Input value={password} onChange={handlePassword} type="password" id="password" />
           </Box>
         </Box>
+        <Button label={`Zaloguj się`} onClick={() => handleUserLogin()} />
       </Form>
-      <Button label={`Zaloguj się`} onClick={() => handleUserLogin()} />
 
       {error && (
         <Box p={4} bgColor={`red.200`}>

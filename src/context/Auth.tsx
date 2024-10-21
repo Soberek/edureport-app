@@ -9,13 +9,15 @@ interface AuthContextI {
   >;
 }
 
-const default_auth_context: AuthContextI = { user: false, setUser: () => {} };
+const user_id: string | null = localStorage.getItem("auth");
+
+const default_auth_context: AuthContextI = { user: typeof user_id === "string" ? true : false, setUser: () => {} };
 
 const AuthContext = createContext(default_auth_context);
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [user, setUser] = useState({ user: default_auth_context.user });
-
+  console.log(user_id);
   return <AuthContext.Provider value={{ user: user.user, setUser }}>{children}</AuthContext.Provider>;
 };
 
