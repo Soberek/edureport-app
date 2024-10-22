@@ -22,16 +22,15 @@ export const Login = () => {
   const fetchUser = async ({ username, password }: { username: string; password: string }) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/login",
+        "http://localhost:3000/api/login",
         { username, password },
         {
           withCredentials: true
         }
       );
-      console.log(response);
 
       if (response.status === 200) {
-        localStorage.setItem("auth", response.data.userId);
+        localStorage.setItem("user", response.data.userId);
         setUser({ user: true });
         navigate("/miernik-excel", { replace: true });
       } else {

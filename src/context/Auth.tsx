@@ -9,10 +9,10 @@ interface AuthContextI {
   >;
 }
 
-const user_id: string | null = localStorage.getItem("auth");
+const user_id: string | null = localStorage.getItem("user");
 
 // for now always logged
-const default_auth_context: AuthContextI = { user: typeof user_id === "string" ? true : true, setUser: () => {} };
+const default_auth_context: AuthContextI = { user: user_id ? true : false, setUser: () => {} };
 
 const AuthContext = createContext(default_auth_context);
 
