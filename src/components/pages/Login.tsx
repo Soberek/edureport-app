@@ -65,7 +65,7 @@ export const Login = () => {
         Witaj 😃
       </Text>
       <Form onSubmit={(e) => e.preventDefault()}>
-        <Box display={`flex`} flexDir={`column`} gap={4}>
+        <Box display={`flex`} flexDir={`column`} gap={4} mb={4}>
           <Box>
             <FormLabel htmlFor="username">Nazwa użytkownika</FormLabel>
             <Input value={username} onChange={handleUsername} type="text" id="username" />
