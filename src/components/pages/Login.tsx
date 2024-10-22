@@ -63,7 +63,7 @@ export const Login = () => {
       <Text textAlign={`center`} fontWeight={`bold`}>
         Witaj 😃
       </Text>
-      <Form onSubmit={(e) => e.preventDefault()}>
+      <Form onSubmit={handleUserLogin}>
         <Box display={`flex`} flexDir={`column`} gap={4} mb={4}>
           <Box>
             <FormLabel htmlFor="username">Nazwa użytkownika</FormLabel>
@@ -74,7 +74,7 @@ export const Login = () => {
             <Input value={password} onChange={handlePassword} type="password" id="password" />
           </Box>
         </Box>
-        <Button label={`Zaloguj się`} onClick={() => handleUserLogin()} />
+        <Button label={`Zaloguj się`} type="submit" />
       </Form>
 
       {error && (
