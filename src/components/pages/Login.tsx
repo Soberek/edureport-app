@@ -22,7 +22,7 @@ export const Login = () => {
   const fetchUser = async ({ username, password }: { username: string; password: string }) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/login",
+        "https://i-hate-my-job-backend-1.onrender.com/api/login",
         { username, password },
         {
           withCredentials: true
