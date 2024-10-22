@@ -11,7 +11,8 @@ interface AuthContextI {
 
 const user_id: string | null = localStorage.getItem("auth");
 
-const default_auth_context: AuthContextI = { user: typeof user_id === "string" ? true : false, setUser: () => {} };
+// for now always logged
+const default_auth_context: AuthContextI = { user: typeof user_id === "string" ? true : true, setUser: () => {} };
 
 const AuthContext = createContext(default_auth_context);
 
