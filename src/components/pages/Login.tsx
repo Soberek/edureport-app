@@ -1,4 +1,5 @@
-import { Box, FormLabel, Input, Typography, Button, Alert } from "@mui/material";
+import { Box, FormLabel, Input, Typography, Button, Alert, TextField } from "@mui/material";
+import { red } from "@mui/material/colors";
 import { Form, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth";
 import { useContext, useState } from "react";
@@ -61,24 +62,16 @@ export const Login = () => {
       <Typography textAlign="center" fontWeight="bold">
         Witaj 😃
       </Typography>
-      <Form onSubmit={handleUserLogin}>
-        <Box display="flex" flexDirection="column" gap={2} marginBottom={4}>
-          <Box>
-            <FormLabel htmlFor="username">Nazwa użytkownika</FormLabel>
-            <Input value={username} onChange={handleUsername} type="text" id="username" />
-          </Box>
-          <Box>
-            <FormLabel htmlFor="password">Hasło</FormLabel>
-            <Input value={password} onChange={handlePassword} type="password" id="password" />
-          </Box>
-        </Box>
-        <Button variant="contained" color="primary" type="submit">
+      <Box component={Form} onSubmit={handleUserLogin} sx={{ display: "flex", flexDirection: "column", rowGap: 2, alignItems: "center" }}>
+        <TextField id="username" label="Nazwa użytkownika" variant="outlined" onChange={handleUsername} value={username} sx={{ minWidth: "100%" }} />
+        <TextField type="password" id="password" label="Hasło" variant="outlined" onChange={handlePassword} value={password} sx={{ minWidth: "100%" }} />
+        <Button variant="contained" sx={{ paddingY: 1 }} color="primary" type="submit">
           Zaloguj się
         </Button>
-      </Form>
+      </Box>
 
       {error && (
-        <Alert severity="error" sx={{ marginTop: 2 }}>
+        <Alert severity="error" sx={{ marginTop: 2, backgroundColor: red[100] }}>
           {error}
         </Alert>
       )}
