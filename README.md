@@ -33,8 +33,9 @@ This frontend application communicates with a dedicated backend service built wi
 - Real-time report preview
 - Export reports to Excel format
 - RESTful API integration
-- Data persistence using MongoDB (todo)
+- Data persistence using MongoDB
 - Secure data handling
+- Login system
 
 
 ## Previews:
