@@ -120,7 +120,7 @@ const ExcelUploader: React.FC = () => {
   };
 
   return (
-    <Box paddingX={{ xs: 1, md: 4 }} sx={{ paddingY: 2 }}>
+    <Box paddingX={{ xs: 1, md: 2 }} sx={{ paddingY: 2 }}>
       <Typography variant="h5" marginBottom={2} display="flex" alignItems="center" gap={4} borderBottom="2px solid" pb={2} fontWeight="2xl">
         🧮 Miernik budżetowy
       </Typography>
