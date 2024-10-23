@@ -11,7 +11,7 @@ interface ButtonI extends ButtonProps {
 
 const Button: React.FC<ButtonI> = ({ selected = false, label = "", onClick = () => {}, Icon, ...rest }) => {
   // Conditional styles based on the `selected` state
-  const bgColor = selected ? "primary.main" : "ternary.main"; // Use Material-UI colors
+  const bgColor = selected ? "secondary.main" : "primary.main"; // Use Material-UI colors
   const textColor = selected ? "white" : "white"; // This can be customized further
 
   return (
@@ -20,18 +20,15 @@ const Button: React.FC<ButtonI> = ({ selected = false, label = "", onClick = () 
       sx={{
         backgroundColor: bgColor,
         color: textColor,
-        boxShadow: "1px 1px 20px gray",
-        borderRadius: 5,
+        boxShadow: "1px 1px 10px ",
+        // borderRadius: 5,
         transition: "all 0.3s ease",
         "&:hover": {
-          border: "2px solid",
           transform: "translateY(-4px)",
-          backgroundColor: "primary.main" // Change background on hover
+          backgroundColor: "secondary.main" // Change background on hover
         },
         display: "flex",
-        alignItems: "center",
-        gap: 2,
-        padding: "8px 16px" // MUI padding, can be adjusted as necessary
+        alignItems: "center"
       }}
       startIcon={Icon ? <Icon size={23} /> : null} // Add icon if provided
       onClick={onClick}
