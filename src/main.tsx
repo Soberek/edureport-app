@@ -85,19 +85,15 @@ import { ThemeOptions } from "@mui/material/styles";
 
 export const themeOptions: ThemeOptions = {
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
       main: "#124E66" // Primary color
     },
     secondary: {
       main: "#2E3944" // Secondary color
     },
-    background: {
-      default: "#212A31", // Background color
-      paper: "#2E3944" // Paper color (like card backgrounds)
-    },
     text: {
-      primary: "#D3D9D4", // Primary text color
+      primary: "#124E66", // Primary text color
       secondary: "#748D92" // Secondary text color
     }
   }
