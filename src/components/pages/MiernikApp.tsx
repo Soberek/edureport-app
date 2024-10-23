@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
-import { Box, Button as MUIButton, FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
+import { Box, Button as MUIButton, Select, MenuItem, TextField } from "@mui/material";
 import moment from "moment";
 
 interface ProgramNameI {
@@ -14,7 +14,7 @@ const MiernikApp = () => {
     name: string;
     date: string;
     program_type: "PROGRAMOWE" | "NIEPROGRAMOWE" | "";
-    program_names: ProgramNameI[];
+    program_name: string;
     people_count: number;
     action_count: number;
     owner: string;
@@ -22,11 +22,14 @@ const MiernikApp = () => {
     name: "",
     date: "",
     program_type: "",
-    program_names: [],
+    program_name: "",
     people_count: 0,
     action_count: 0,
     owner: ""
   });
+
+  const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
+  const [selectedProgram, setSelectedProgram] = useState("");
 
   const fetchProgramNames = async () => {
     try {
@@ -39,9 +42,7 @@ const MiernikApp = () => {
       if (response.status === 200) {
         const { data } = response.data as { data: ProgramNameI[] };
 
-        setFormData((prevFormData) => {
-          return { ...prevFormData, program_names: data };
-        });
+        setProgramNames(data);
       }
     } catch (err) {
       console.log(err);
@@ -54,20 +55,21 @@ const MiernikApp = () => {
 
   const SelectProgramNames = () => {
     return (
-      <FormControl fullWidth>
-        <InputLabel id="program-name-label">Wybierz program</InputLabel>
-        <Select
-          labelId="program-name-label"
-          value={formData.program_names.length > 0 ? formData.program_names[0].name : ""}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        >
-          {formData.program_names.map((program_name) => (
-            <MenuItem key={program_name._id} value={program_name.name}>
-              {program_name.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Select
+        label="Nazwa programu"
+        value={selectedProgram}
+        onChange={(e) => {
+          setFormData({ ...formData, program_name: e.target.value });
+          setSelectedProgram(e.target.value);
+        }}
+        variant="filled"
+      >
+        {program_names.map((program_name) => (
+          <MenuItem key={program_name._id} value={program_name.name}>
+            {program_name.name}
+          </MenuItem>
+        ))}
+      </Select>
     );
   };
 
@@ -87,25 +89,25 @@ const MiernikApp = () => {
         <Box
           sx={{
             backGroundColor: "white",
-            padding: 4,
+            padding: 2,
             boxShadow: 2,
             maxWidth: `400px`,
-            rowGap: 4,
+            rowGap: 2,
             flexDirection: `column`,
             display: `flex`,
             borderRadius: `10px`
           }}
         >
-          <FormControl fullWidth>
-            <InputLabel htmlFor="program_name">Nazwa programu</InputLabel>
-            <TextField variant="outlined" id="program_name" name="name" value={formData.name} onChange={handleChange} />
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="program_date">Data</InputLabel>
-            <TextField variant="outlined" id="program_date" type="date" name="date" value={formData.date} onChange={handleDateChange} />
-          </FormControl>
+          <TextField label="Nazwa programu" variant="filled" name="name" value={formData.name} onChange={handleChange} />
+
+          <TextField variant="filled" type="date" name="date" value={formData.date} onChange={handleDateChange} />
 
           <SelectProgramNames />
+
+          <TextField label="Liczba działań" variant="filled" type="number" name="action_count" value={formData.action_count} onChange={handleChange} />
+
+          <TextField label="Liczba osób" variant="filled" type="number" name="people_count" value={formData.people_count} onChange={handleChange} />
+
           <MUIButton variant="contained" color="primary" onClick={() => console.log(formData)}>
             Dodaj
           </MUIButton>
