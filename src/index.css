@@ -2,9 +2,13 @@
   background: linear-gradient(270deg, #124e66, #d3d9d4);
   background-size: 400% 400%;
 
-  -webkit-animation: site_bg 30s ease infinite;
+  /* -webkit-animation: site_bg 30s ease infinite;
   -moz-animation: site_bg 30s ease infinite;
-  animation: site_bg 30s ease infinite;
+  animation: site_bg 30s ease infinite; */
+}
+
+body {
+  margin: 0;
 }
 
 @-webkit-keyframes site_bg {
