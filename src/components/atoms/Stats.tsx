@@ -1,8 +1,27 @@
-import { Stat as ChakraStat, StatLabel, StatNumber } from "@chakra-ui/react";
+import React from "react";
+import { Box, Typography } from "@mui/material";
 
-export const Stat = ({ label, value }: { label: string; value: number }) => (
-  <ChakraStat minWidth={`200px`} maxWidth={{ base: `100%`, md: `25%` }}>
-    <StatLabel>{label}:</StatLabel>
-    <StatNumber>{value || 0}</StatNumber>
-  </ChakraStat>
+interface StatProps {
+  label: string;
+  value: number;
+}
+
+export const Stat: React.FC<StatProps> = ({ label, value }) => (
+  <Box
+    minWidth="200px"
+    maxWidth={{ xs: "100%", md: "25%" }} // Adjusts based on screen size
+    bgcolor="background.paper" // Optional: can set background color
+    borderRadius={2} // Rounded corners
+    boxShadow={1} // Optional: add a shadow
+    p={2} // Padding
+    display="flex"
+    flexDirection="column"
+  >
+    <Typography variant="subtitle1" fontWeight="bold">
+      {label}:
+    </Typography>
+    <Typography variant="h6" fontWeight="bold">
+      {value || 0}
+    </Typography>
+  </Box>
 );
