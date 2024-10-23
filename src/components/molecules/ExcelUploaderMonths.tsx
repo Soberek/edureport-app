@@ -24,12 +24,13 @@ export const ExcelUploaderMonths: React.FC<ExcelUploaderMonthsProps> = ({ months
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
-        gap={2} // Adjust gap to your preference
+        gap={1} // Adjust gap to your preference
       >
         {months.length > 0 &&
           months.map(({ month_num, selected }, index) => (
             <Button
               key={index}
+              sx={{ p: 0 }}
               selected={selected}
               label={month_num.toString()} // Convert number to string for label
               onClick={() => handleMonthSelect(month_num)}
