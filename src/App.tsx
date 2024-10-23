@@ -1,15 +1,19 @@
 // Layout.tsx
 import { Outlet } from "react-router-dom";
 import SideNavbar from "./components/organism/SideNavbar";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container } from "@mui/material";
 import "./index.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
 export default function AppLayout() {
   return (
-    <Container maxWidth="100vw" textColor={`primary.100`} minHeight={`100vh`} className="site-background" margin={0} padding={0}>
+    <Container sx={{ maxWidth: `100vw`, color: "primary.main", minHeight: "100vh", padding: 0 }} className="site-background">
       <Box display="flex">
         <SideNavbar />
-        <Box marginLeft={{ base: "0", md: "185px" }} flex={1} overflow={`hidden`}>
+        <Box sx={{ marginLeft: { xs: 0, md: "185px" }, flex: 1, overflow: "hidden" }}>
           <Outlet />
         </Box>
       </Box>
