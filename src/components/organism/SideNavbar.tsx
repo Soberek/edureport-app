@@ -1,25 +1,15 @@
-import { Box, Button, List, ListItem, ListItemText, useTheme } from "@mui/material";
-import { Link as ReactRouterLink, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/Auth";
+import { Box, List, ListItem, ListItemText, useTheme } from "@mui/material";
+import { Link as ReactRouterLink, useLocation } from "react-router-dom";
 
 export default function SideNavbar() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+
   const theme = useTheme();
 
   const links: { path: string; name: string }[] = [
-    { path: "/", name: "Strona główna" },
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
     { path: "/miernik-app", name: "Miernik budżetowy" }
   ];
-
-  const handleLogout = async () => {
-    localStorage.removeItem("user");
-    setUser({ user: false });
-    navigate("/login", { replace: true });
-  };
 
   return (
     <Box
@@ -30,6 +20,7 @@ export default function SideNavbar() {
       width={{ xs: "0", md: "185px" }}
       borderRight={2}
       borderColor="gray.300"
+      marginTop="50px"
       p={2}
       boxShadow={theme.shadows[1]}
     >
@@ -38,9 +29,6 @@ export default function SideNavbar() {
           <StyledLink key={idx} path={link.path} pathname={pathname} name={link.name} />
         ))}
       </List>
-      <Button variant="contained" color="primary" fullWidth onClick={handleLogout}>
-        Wyloguj
-      </Button>
     </Box>
   );
 }
@@ -53,12 +41,13 @@ const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; 
       component={ReactRouterLink}
       to={path}
       sx={{
+        p: 0,
         textDecoration: isActive ? "underline" : "none",
-        fontWeight: isActive ? "bold" : "normal",
-        color: isActive ? "primary.main" : "text.secondary",
+        color: isActive ? "primary.900" : "primary.600",
         "&:hover": {
           backgroundColor: "rgba(0, 0, 0, 0.08)", // Light hover effect
-          color: "primary.main"
+          color: "primary.main",
+          fontWeight: "bold"
         }
       }}
     >
