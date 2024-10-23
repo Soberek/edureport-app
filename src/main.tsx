@@ -11,7 +11,7 @@ import { Login } from "./components/pages/Login.tsx";
 import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
 import { AuthProvider } from "./context/Auth.tsx";
 import MiernikApp from "./components/pages/MiernikApp.tsx";
-import { Box, TextField } from "@mui/material";
+import { Box, createTheme, TextField, ThemeProvider } from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -81,10 +81,36 @@ const router = createBrowserRouter([
 #D3D9D4
 */
 
+import { ThemeOptions } from "@mui/material/styles";
+
+export const themeOptions: ThemeOptions = {
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#124E66" // Primary color
+    },
+    secondary: {
+      main: "#2E3944" // Secondary color
+    },
+    background: {
+      default: "#212A31", // Background color
+      paper: "#2E3944" // Paper color (like card backgrounds)
+    },
+    text: {
+      primary: "#D3D9D4", // Primary text color
+      secondary: "#748D92" // Secondary text color
+    }
+  }
+};
+
+const theme = createTheme(themeOptions);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
   </StrictMode>
 );

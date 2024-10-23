@@ -98,21 +98,11 @@ const MiernikApp = () => {
         >
           <FormControl fullWidth>
             <InputLabel htmlFor="program_name">Nazwa programu</InputLabel>
-            <TextField variant="outlined" id="program_name" name="name" value={formData.name} onChange={handleChange} placeholder="Nazwa programu" />
+            <TextField variant="outlined" id="program_name" name="name" value={formData.name} onChange={handleChange} />
           </FormControl>
           <FormControl fullWidth>
             <InputLabel htmlFor="program_date">Data</InputLabel>
-            <TextField
-              variant="outlined"
-              id="program_date"
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleDateChange}
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
+            <TextField variant="outlined" id="program_date" type="date" name="date" value={formData.date} onChange={handleDateChange} />
           </FormControl>
 
           <SelectProgramNames />
