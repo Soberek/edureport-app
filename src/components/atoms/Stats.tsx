@@ -8,8 +8,7 @@ interface StatProps {
 
 export const Stat: React.FC<StatProps> = ({ label, value }) => (
   <Box
-    minWidth="200px"
-    maxWidth={{ xs: "100%", md: "25%" }} // Adjusts based on screen size
+    maxWidth={{ xs: "100%", md: "50%" }} // Adjusts based on screen size
     bgcolor="background.paper" // Optional: can set background color
     borderRadius={2} // Rounded corners
     boxShadow={1} // Optional: add a shadow
