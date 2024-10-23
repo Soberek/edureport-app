@@ -1,6 +1,5 @@
-import { Box, VStack, Link as ChakraLink, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, List, ListItem, ListItemText, useTheme } from "@mui/material";
 import { Link as ReactRouterLink, useLocation, useNavigate } from "react-router-dom";
-import Button from "../atoms/Button";
 import { useContext } from "react";
 import { AuthContext } from "../../context/Auth";
 
@@ -8,6 +7,7 @@ export default function SideNavbar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
+  const theme = useTheme();
 
   const links: { path: string; name: string }[] = [
     { path: "/", name: "Strona główna" },
@@ -17,29 +17,30 @@ export default function SideNavbar() {
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
-
     setUser({ user: false });
     navigate("/login", { replace: true });
   };
+
   return (
     <Box
-      as="nav"
-      display={{ base: "none", md: "block" }}
+      component="nav"
+      display={{ xs: "none", md: "block" }}
       position="fixed"
       minHeight="100vh"
-      w={{ base: "0", md: "185px" }}
-      borderRight="2px"
+      width={{ xs: "0", md: "185px" }}
+      borderRight={2}
       borderColor="gray.300"
-      p={4}
-      boxShadow="sm"
+      p={2}
+      boxShadow={theme.shadows[1]}
     >
-      <VStack spacing={2} align="stretch">
+      <List>
         {links.map((link, idx) => (
           <StyledLink key={idx} path={link.path} pathname={pathname} name={link.name} />
         ))}
-
-        <Button marginTop={2} label="Wyloguj" onClick={handleLogout} />
-      </VStack>
+      </List>
+      <Button variant="contained" color="primary" fullWidth onClick={handleLogout}>
+        Wyloguj
+      </Button>
     </Box>
   );
 }
@@ -47,33 +48,21 @@ export default function SideNavbar() {
 const StyledLink = ({ path, pathname, name }: { path: string; pathname: string; name: string }) => {
   const isActive = pathname === path;
 
-  const hoverBg = useColorModeValue("gray.100", "gray.600");
-  const hoverColor = useColorModeValue("blue.700", "blue.200");
-
   return (
-    <ChakraLink
-      as={ReactRouterLink}
+    <ListItem
+      component={ReactRouterLink}
       to={path}
-      px={4}
-      py={2}
-      textColor={isActive ? `primary.100` : `ternary.100`}
-      fontSize="sm"
-      textDecoration={isActive ? `underline` : ""}
-      fontWeight="extrabold"
-      _hover={{
-        bg: hoverBg,
-        color: hoverColor,
-        textDecoration: "none"
+      sx={{
+        textDecoration: isActive ? "underline" : "none",
+        fontWeight: isActive ? "bold" : "normal",
+        color: isActive ? "primary.main" : "text.secondary",
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.08)", // Light hover effect
+          color: "primary.main"
+        }
       }}
-      _focus={{
-        zIndex: 1,
-        color: hoverColor,
-        boxShadow: "outline"
-      }}
-      display="flex"
-      alignItems="center"
     >
-      {name}
-    </ChakraLink>
+      <ListItemText primary={name} />
+    </ListItem>
   );
 };
