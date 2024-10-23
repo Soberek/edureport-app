@@ -9,7 +9,7 @@ I hate my current job so i automated it.
 - [React](https://reactjs.org/)
 - [ReactRouter-v6.4+](https://reactrouter.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [ChakraUI](https://v2.chakra-ui.com/)
+- [MaterialUI](https://mui.com/) 
 - [Netlify](https://netlify.com/) (deployment)
 
 ### Backend - (private for now)
