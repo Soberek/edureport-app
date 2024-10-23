@@ -40,7 +40,7 @@ This frontend application communicates with a dedicated backend service built wi
 ## Previews:
 
 <img src="https://imgur.com/GkKiN2s.png" alt="preview">
-<img src="https://imgur.com/dHM2BMz.png" alt="preview">
+<img src="https://imgur.com/kve88Wn.png" alt="preview">
 <img src="https://imgur.com/3BaJoBt.png" alt="preview">
 
 ## License
