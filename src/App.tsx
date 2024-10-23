@@ -10,7 +10,7 @@ import "@fontsource/roboto/700.css";
 
 export default function AppLayout() {
   return (
-    <Container sx={{ maxWidth: `100vw`, color: "primary.main", minHeight: "100vh", padding: 0 }} className="site-background">
+    <Container sx={{ margin: 0, maxWidth: `100vw`, color: "primary.main", minHeight: "100vh", padding: 0 }} className="site-background">
       <Box display="flex">
         <SideNavbar />
         <Box sx={{ marginLeft: { xs: 0, md: "185px" }, flex: 1, overflow: "hidden" }}>
