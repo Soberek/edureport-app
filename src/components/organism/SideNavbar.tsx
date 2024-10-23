@@ -1,4 +1,4 @@
-import { Box, VStack, Link as ChakraLink, useColorModeValue, Text } from "@chakra-ui/react";
+import { Box, VStack, Link as ChakraLink, useColorModeValue } from "@chakra-ui/react";
 import { Link as ReactRouterLink, useLocation, useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import { useContext } from "react";
@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/Auth";
 export default function SideNavbar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   const links: { path: string; name: string }[] = [
     { path: "/", name: "Strona główna" },
