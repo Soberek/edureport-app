@@ -1,9 +1,4 @@
-// pages/index.js
-"use client";
-
-import { Box, VStack, Heading, Text, Container, Flex } from "@chakra-ui/react";
-import Button from "../atoms/Button";
-
+import { Box, Typography, Container, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -15,30 +10,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </header>
 
-      <Box as="header" bg="ternary.100" color="white" p={4}>
-        <Heading as="h1" size="lg">
-          Generator Sprawozdań
-        </Heading>
+      <Box component="header" sx={{ backgroundColor: "ternary.main", color: "white", padding: 2 }}>
+        <Typography variant="h5">Generator Sprawozdań</Typography>
       </Box>
 
-      <Flex as="main" flex="1" alignItems="center" justifyContent="center">
-        <Container textAlign="center">
-          <VStack spacing={8}>
-            <Heading as="h2" size="lg">
-              Twórz profesjonalne sprawozdania w mgnieniu oka
-            </Heading>
-            <Text fontSize="xl">
+      <Box component="main" flex="1" display="flex" alignItems="center" justifyContent="center">
+        <Container>
+          <Stack spacing={4} textAlign="center">
+            <Typography variant="h4">Twórz profesjonalne sprawozdania w mgnieniu oka</Typography>
+            <Typography variant="h6">
               Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej i Promocji Zdrowia.
-            </Text>
-            <Link to="miernik-excel">
-              <Button label={"Rozpocznij Teraz"} />
+            </Typography>
+            <Link to="miernik-excel" style={{ textDecoration: "none" }}>
+              <Button variant="contained" color="primary">
+                Rozpocznij Teraz
+              </Button>
             </Link>
-          </VStack>
+          </Stack>
         </Container>
-      </Flex>
+      </Box>
 
-      <Box as="footer" bg="gray.100" p={4} textAlign="center">
-        <Text>&copy; 2024 Generator Sprawozdań - Krzysztof Palpuchowski - Wszelkie prawa zastrzeżone.</Text>
+      <Box component="footer" sx={{ backgroundColor: "grey.300", padding: 2, textAlign: "center" }}>
+        <Typography variant="body2">&copy; 2024 Generator Sprawozdań - Krzysztof Palpuchowski - Wszelkie prawa zastrzeżone.</Typography>
       </Box>
     </Box>
   );
