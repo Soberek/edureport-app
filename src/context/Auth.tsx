@@ -18,7 +18,6 @@ const AuthContext = createContext(default_auth_context);
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [user, setUser] = useState({ user: default_auth_context.user });
-  console.log(user_id);
   return <AuthContext.Provider value={{ user: user.user, setUser }}>{children}</AuthContext.Provider>;
 };
 
