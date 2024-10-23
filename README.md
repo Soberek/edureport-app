@@ -17,6 +17,7 @@ I hate my current job so i automated it.
 - [Node.js](https://nodejs.org/en/docs/)
 - [Express.js](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/docs/)
+- [Render](https://render.com/) (deployment)
 
 ## API Integration
 
@@ -24,6 +25,7 @@ This frontend application communicates with a dedicated backend service built wi
 
 - Data processing
 - Database operations
+- Login system
 
 ## Features
 
