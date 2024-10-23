@@ -87,7 +87,16 @@ export const themeOptions: ThemeOptions = {
   palette: {
     mode: "light",
     primary: {
-      main: "#124E66" // Primary color
+      main: "#124E66",
+      "100": "#E6EEF2", // Lightest shade
+      "200": "#C2D5DE",
+      "300": "#9EBDCA",
+      "400": "#7AA4B7",
+      "500": "#568BA3",
+      "600": "#124E66", // Base color
+      "700": "#0E3E52",
+      "800": "#0B2F3D",
+      "900": "#071F29" // Darkest shade
     },
     secondary: {
       main: "#2E3944" // Secondary color
