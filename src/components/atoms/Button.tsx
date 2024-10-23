@@ -1,40 +1,44 @@
+import React from "react";
 import { IconType } from "react-icons";
-import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
+import { Button as MUIButton, ButtonProps } from "@mui/material";
 
-interface ButtonI extends ChakraButtonProps {
-  key?: string | number;
+interface ButtonI extends ButtonProps {
   selected?: boolean; // Optional: default to false for simple usage
   label: string | number; // Button label
   onClick?: () => void; // Optional: default no-op function
   Icon?: IconType; // Icon component from react-icons
 }
 
-const Button = ({ selected = false, label = "", onClick = () => {}, Icon, ...rest }: ButtonI) => {
+const Button: React.FC<ButtonI> = ({ selected = false, label = "", onClick = () => {}, Icon, ...rest }) => {
   // Conditional styles based on the `selected` state
-
-  const bgColor = selected ? `primary.100` : `ternary.100`;
-  const textColor = selected ? "white" : "white";
+  const bgColor = selected ? "primary.main" : "ternary.main"; // Use Material-UI colors
+  const textColor = selected ? "white" : "white"; // This can be customized further
 
   return (
-    <ChakraButton
-      leftIcon={Icon && <Icon size={23} />}
-      bg={bgColor}
-      boxShadow={`1px 1px 20px gray`}
-      color={textColor}
-      _hover={{ border: 2, transform: "translateY(-4  px)", bg: "primary.100" }}
-      px={4}
-      py={2}
-      rounded={5}
-      fontWeight="bold"
+    <MUIButton
+      variant={selected ? "contained" : "outlined"} // Change variant based on selection
+      sx={{
+        backgroundColor: bgColor,
+        color: textColor,
+        boxShadow: "1px 1px 20px gray",
+        borderRadius: 5,
+        transition: "all 0.3s ease",
+        "&:hover": {
+          border: "2px solid",
+          transform: "translateY(-4px)",
+          backgroundColor: "primary.main" // Change background on hover
+        },
+        display: "flex",
+        alignItems: "center",
+        gap: 2,
+        padding: "8px 16px" // MUI padding, can be adjusted as necessary
+      }}
+      startIcon={Icon ? <Icon size={23} /> : null} // Add icon if provided
       onClick={onClick}
-      transition="all 0.3s ease"
-      display="flex"
-      alignItems="center"
-      gap={2}
-      {...rest} // Pass down any additional Chakra Button props
+      {...rest} // Pass down any additional MUI Button props
     >
       {label}
-    </ChakraButton>
+    </MUIButton>
   );
 };
 
