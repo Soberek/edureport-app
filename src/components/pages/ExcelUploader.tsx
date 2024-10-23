@@ -2,16 +2,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
 import { Box, Typography } from "@mui/material";
 import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
-import ExcelUploaderTable from "../organism/ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
 import { Stat } from "../atoms/Stats";
 
 import useFileReader, { ExcelRow } from "../../hooks/useFileReader";
 import useFileSaver from "../../hooks/useFileSaver";
+import ExcelTable from "../organism/ExcelTable";
 
 const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
 const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);
-const MemoizedExcelUploaderTable = React.memo(ExcelUploaderTable);
+const MemoizedExcelUploaderTable = React.memo(ExcelTable);
 
 export interface ProgramsData {
   [key: string]: {
