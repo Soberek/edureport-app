@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </header>
 
-      <Box component="header" sx={{ backgroundColor: "ternary.main", color: "white", padding: 2 }}>
+      <Box sx={{ backgroundColor: "primary.main", color: "white", padding: 2 }}>
         <Typography variant="h5">Generator Sprawozdań</Typography>
       </Box>
 
