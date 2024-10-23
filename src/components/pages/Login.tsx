@@ -1,5 +1,4 @@
-import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
-import Button from "../atoms/Button";
+import { Box, FormLabel, Input, Typography, Button, Alert } from "@mui/material";
 import { Form, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Auth";
 import { useContext, useState } from "react";
@@ -44,27 +43,26 @@ export const Login = () => {
 
   const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     setUsername(value);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     setPassword(value);
   };
 
-  const handleUserLogin = () => {
+  const handleUserLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     fetchUser({ username, password });
   };
 
   return (
-    <Box p={4} display={`flex`} flexDirection={`column`} maxW={`400px`} mx={`auto`} gap={4}>
-      <Text textAlign={`center`} fontWeight={`bold`}>
+    <Box padding={4} display="flex" flexDirection="column" maxWidth="400px" marginX="auto" gap={4}>
+      <Typography textAlign="center" fontWeight="bold">
         Witaj 😃
-      </Text>
+      </Typography>
       <Form onSubmit={handleUserLogin}>
-        <Box display={`flex`} flexDir={`column`} gap={4} mb={4}>
+        <Box display="flex" flexDirection="column" gap={2} marginBottom={4}>
           <Box>
             <FormLabel htmlFor="username">Nazwa użytkownika</FormLabel>
             <Input value={username} onChange={handleUsername} type="text" id="username" />
@@ -74,13 +72,15 @@ export const Login = () => {
             <Input value={password} onChange={handlePassword} type="password" id="password" />
           </Box>
         </Box>
-        <Button label={`Zaloguj się`} type="submit" />
+        <Button variant="contained" color="primary" type="submit">
+          Zaloguj się
+        </Button>
       </Form>
 
       {error && (
-        <Box p={4} bgColor={`red.200`}>
+        <Alert severity="error" sx={{ marginTop: 2 }}>
           {error}
-        </Box>
+        </Alert>
       )}
     </Box>
   );
