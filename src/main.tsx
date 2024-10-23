@@ -5,12 +5,13 @@ import ErrorPage from "./components/pages/ErrorPage.tsx";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
 import ExcelUploader from "./components/pages/ExcelUploader.tsx";
 import Home from "./components/pages/Home.tsx";
-import { Box, ChakraProvider, extendTheme, Text } from "@chakra-ui/react";
+
 import Button from "./components/atoms/Button.tsx";
 import { Login } from "./components/pages/Login.tsx";
 import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
 import { AuthProvider } from "./context/Auth.tsx";
 import MiernikApp from "./components/pages/MiernikApp.tsx";
+import { Box, TextField } from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     path: "*",
     element: (
       <Box p={4}>
-        <Text mb={2}>Nie ma takiej strony 😿</Text>
+        <TextField sx={{ marginBottm: 2 }}>Nie ma takiej strony 😿</TextField>
         <Link to="..">
           <Button label={"Wróć"} />
         </Link>
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
             path: "*", // Catch-all route for 404
             element: (
               <Box p={4}>
-                <Text mb={2}>Nie ma takiej strony 😿</Text>
+                <TextField sx={{ marginBottom: 2 }}>Nie ma takiej strony 😿</TextField>
                 <Link to="..">
                   <Button label={"Wróć"} />
                 </Link>
@@ -80,32 +81,10 @@ const router = createBrowserRouter([
 #D3D9D4
 */
 
-const theme = extendTheme({
-  colors: {
-    primary: {
-      100: "#212A31"
-    },
-    secondary: {
-      100: `#2E3944`
-    },
-    ternary: {
-      100: `#124E66`
-    },
-    fourth: {
-      100: `#748D92`
-    },
-    fifth: {
-      100: `#D3D9D4`
-    }
-  }
-});
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ChakraProvider theme={theme}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </ChakraProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
