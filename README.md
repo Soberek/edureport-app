@@ -39,9 +39,9 @@ This frontend application communicates with a dedicated backend service built wi
 
 ## Previews:
 
-<img src="https://imgur.com/XP8jpiH.png" alt="preview">
-<img src="https://imgur.com/V8JNYjH.png" alt="preview">
-<img src="https://imgur.com/HXXDyFR.png" alt="preview">
+<img src="https://imgur.com/GkKiN2s.png" alt="preview">
+<img src="https://imgur.com/dHM2BMz.png" alt="preview">
+<img src="https://imgur.com/3BaJoBt.png" alt="preview">
 
 ## License
 
