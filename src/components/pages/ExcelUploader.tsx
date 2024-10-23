@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Typography } from "@mui/material";
 import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
 import ExcelUploaderTable from "../organism/ExcelUploaderTable";
 import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
@@ -38,8 +38,8 @@ const ExcelUploader: React.FC = () => {
       }));
     }, [])
   );
-  const { raw_data, file_name, handleFileUpload } = useFileReader();
 
+  const { raw_data, file_name, handleFileUpload } = useFileReader();
   const { saveToExcelFile } = useFileSaver(agregated_data);
 
   const handleMonthSelect = useCallback((selected_month: number) => {
@@ -62,9 +62,9 @@ const ExcelUploader: React.FC = () => {
         const program_type = item["Typ programu"];
         const program_name = item["Nazwa programu"];
         const program_action = item["Działanie"];
-        const people_count = Number(item["Liczba ludzi"]); // Convert to Number
-        const action_count = Number(item["Liczba działań"]); // Convert to Number
-        const date = moment(item["Data"], "YYYY-MM-DD"); // Assume date format is YYYY-MM-DD
+        const people_count = Number(item["Liczba ludzi"]);
+        const action_count = Number(item["Liczba działań"]);
+        const date = moment(item["Data"], "YYYY-MM-DD");
         const month = date.month() + 1; // moment months are 0-indexed
         const selected_months = months.filter((month) => month.selected === true).map((month) => month.month_num);
 
@@ -115,26 +115,25 @@ const ExcelUploader: React.FC = () => {
       });
     } catch (error) {
       const errorMessage = (error as Error).message;
-      // You can also set an error state to display the error in the UI
       setError(errorMessage);
     }
   };
 
   return (
     <Box padding={4}>
-      <Text marginBottom={4} display={`flex`} alignItems={`center`} gap={4} borderBottom={`2px`} pb={2} fontSize={`1.5rem`} lineHeight={`2rem`}>
+      <Typography variant="h5" marginBottom={4} display="flex" alignItems="center" gap={4} borderBottom="2px solid" pb={2}>
         🧮 Miernik budżetowy
-      </Text>
+      </Typography>
 
       <MemoizedExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
       <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
-      <Box display={`flex`} gap={2} flexWrap={`wrap`} marginBottom={{ base: 2, md: 10 }}>
+      <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 10 }}>
         <Stat label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
         <Stat label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
 
-      {Object.keys(agregated_data).length > 0 && !error ? <MemoizedExcelUploaderTable {...agregated_data} /> : <Text>{error}</Text>}
+      {Object.keys(agregated_data).length > 0 && !error ? <MemoizedExcelUploaderTable {...agregated_data} /> : <Typography>{error}</Typography>}
     </Box>
   );
 };
