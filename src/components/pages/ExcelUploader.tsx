@@ -120,15 +120,15 @@ const ExcelUploader: React.FC = () => {
   };
 
   return (
-    <Box padding={4}>
-      <Typography variant="h5" marginBottom={4} display="flex" alignItems="center" gap={4} borderBottom="2px solid" pb={2}>
+    <Box paddingX={{ xs: 1, md: 4 }} sx={{ paddingY: 2 }}>
+      <Typography variant="h5" marginBottom={2} display="flex" alignItems="center" gap={4} borderBottom="2px solid" pb={2} fontWeight="2xl">
         🧮 Miernik budżetowy
       </Typography>
 
       <MemoizedExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
       <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
-      <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 10 }}>
+      <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 0 }}>
         <Stat label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
         <Stat label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
