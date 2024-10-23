@@ -1,14 +1,26 @@
-import { Box, VStack, Link as ChakraLink, useColorModeValue } from "@chakra-ui/react";
-import { Link as ReactRouterLink, useLocation } from "react-router-dom";
+import { Box, VStack, Link as ChakraLink, useColorModeValue, Text } from "@chakra-ui/react";
+import { Link as ReactRouterLink, useLocation, useNavigate } from "react-router-dom";
+import Button from "../atoms/Button";
+import { useContext } from "react";
+import { AuthContext } from "../../context/Auth";
 
 export default function SideNavbar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
 
   const links: { path: string; name: string }[] = [
     { path: "/", name: "Strona główna" },
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
     { path: "/miernik-app", name: "Miernik budżetowy" }
   ];
+
+  const handleLogout = async () => {
+    localStorage.removeItem("user");
+
+    setUser({ user: false });
+    navigate("/login", { replace: true });
+  };
   return (
     <Box
       as="nav"
@@ -25,6 +37,8 @@ export default function SideNavbar() {
         {links.map((link, idx) => (
           <StyledLink key={idx} path={link.path} pathname={pathname} name={link.name} />
         ))}
+
+        <Button marginTop={2} label="Wyloguj" onClick={handleLogout} />
       </VStack>
     </Box>
   );
