@@ -1,6 +1,25 @@
-# I hate my current job
+# EduReport 
+(Designed to streamline the work of the Polish Sanitary Inspection)
 
-I hate my current job so i automated it.
+Tired of wrestling with complex educational reports? Introducing EduReport Pro - your comprehensive solution for generating detailed educational activity reports at quarterly, monthly, and annual intervals.
+
+### Save Time & Reduce Errors:
+- **Cut report creation time by up to 500% or more**
+- Eliminate copy-paste errors and manual data entry
+- Ensure consistency across all reports
+- Free up yourself for more strategic tasks
+
+### Key Features:
+- Monthly Activity Tracking (12-month coverage)
+- Excel Integration & Export
+- Automated Metrics Calculation
+- Multi-Program Activity Monitoring
+- Monitor various activity types:
+    * Lectures and Presentations
+    * Media Publications
+    * Site Visits
+    * Distribution Activities
+    * Coordination Events
 
 ## Technologies
 
@@ -26,17 +45,6 @@ This frontend application communicates with a dedicated backend service built wi
 - Data processing
 - Database operations
 - Login system
-
-## Features
-
-- Excel data import functionality
-- Real-time report preview
-- Export reports to Excel format
-- RESTful API integration
-- Data persistence using MongoDB
-- Secure data handling
-- Login system
-
 
 ## Previews:
 
