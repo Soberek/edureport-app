@@ -30,7 +30,7 @@ export const Topbar = () => {
         }}
       >
         <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-          Generator sprawozdań
+          EduReport
         </Link>
       </Typography>
 
