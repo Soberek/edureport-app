@@ -10,6 +10,8 @@ interface ProgramNameI {
   name: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const MiernikApp = () => {
   const [formData, setFormData] = useState<{
     name: string;
