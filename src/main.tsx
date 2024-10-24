@@ -41,11 +41,11 @@ const router = createBrowserRouter([
     element: <ProtectedRoutesHOC />,
     children: [
       {
-        path: "/", // Main route
+        path: "/",
         element: <AppLayout />,
         children: [
           {
-            path: "miernik-excel", // Specific route
+            path: "miernik-excel",
             element: <ExcelUploader />
           },
           {
@@ -53,7 +53,8 @@ const router = createBrowserRouter([
             element: <MiernikApp />
           },
           {
-            path: "*", // Catch-all route for 404
+            // Catch-all route for 404
+            path: "*",
             element: (
               <Box p={4}>
                 <TextField sx={{ marginBottom: 2 }}>Nie ma takiej strony 😿</TextField>
