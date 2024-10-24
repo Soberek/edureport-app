@@ -5,6 +5,8 @@ import { AuthContext } from "../../context/Auth";
 import { useContext, useState } from "react";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const Login = () => {
   const { user, setUser } = useContext(AuthContext);
 
@@ -22,7 +24,7 @@ export const Login = () => {
   const fetchUser = async ({ username, password }: { username: string; password: string }) => {
     try {
       const response = await axios.post(
-        "https://i-hate-my-job-backend-1.onrender.com/api/login",
+        `${API_URL}/api/login`,
         { username, password },
         {
           withCredentials: true
