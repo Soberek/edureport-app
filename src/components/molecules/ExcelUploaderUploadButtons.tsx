@@ -29,7 +29,7 @@ const ExcelUploaderUploadButtons: React.FC<ExcelUploaderUploadButtonsProps> = ({
       <Box sx={{ display: "flex", gap: 4, mb: 1 }}>
         <Button startIcon={<MdOutlineUpload />} variant="contained" component="label">
           Wgraj plik excel
-          <input type="file" hidden onChange={handleFileUpload} />
+          <input type="file" accept=".xlsx, .xls" hidden onChange={handleFileUpload} />
         </Button>
         <Button startIcon={<MdOutlineDownload />} variant="contained" onClick={saveToExcelFile}>
           Zapisz miernik
