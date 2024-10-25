@@ -92,8 +92,8 @@ const ExcelUploader: React.FC = () => {
         }
 
         // Accumulate values
-        acc[program_type][program_name][program_action].action_number += people_count;
-        acc[program_type][program_name][program_action].people += action_count;
+        acc[program_type][program_name][program_action].action_number += action_count;
+        acc[program_type][program_name][program_action].people += people_count;
 
         all_people += people_count;
         all_actions += action_count;
