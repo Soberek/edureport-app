@@ -238,7 +238,7 @@ const MiernikApp = () => {
   }, []);
 
   return (
-    <Box p={4}>
+    <Box p={{ xs: 1, md: 4 }}>
       <Grid
         sx={{
           backgroundColor: "white",
@@ -254,15 +254,14 @@ const MiernikApp = () => {
         }}
         container
       >
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <TextField label="Nazwa" required variant="filled" name="name" value={formData.name} onChange={handleChange} />
         </Grid>
 
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <TextField variant="filled" required type="date" name="date" value={formData.date} onChange={handleDateChange} />
         </Grid>
 
-        <Grid size={6}>{program_names.length > 0 && <SelectProgramNames />}</Grid>
         <Grid size={{ xs: 12, md: 6 }}>
           {program_names.length > 0 && (
             <SelectDropdown
@@ -285,11 +284,11 @@ const MiernikApp = () => {
           )}
         </Grid>
 
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <TextField label="Liczba działań" required variant="filled" type="number" name="action_count" value={formData.action_count} onChange={handleChange} />
         </Grid>
 
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <TextField label="Liczba osób" required variant="filled" type="number" name="people_count" value={formData.people_count} onChange={handleChange} />
         </Grid>
 
