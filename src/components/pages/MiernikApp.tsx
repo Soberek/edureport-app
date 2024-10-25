@@ -84,9 +84,6 @@ const MiernikApp = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProgramNames();
-  }, []);
   const fetchProgramActions = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/program_actions`, {
@@ -152,7 +149,7 @@ const MiernikApp = () => {
         valid = false;
       }
 
-      if (!formData.program.name) {
+      if (!formData.program.name || !formData.program.id) {
         newErrors.program_name = "Wybierz nazwę programu";
         valid = false;
       }
@@ -178,12 +175,12 @@ const MiernikApp = () => {
 
     const is_valid = validateForm();
 
-    if (is_valid) {
-      console.log("Formularz jest poprawny:", formData);
-    } else {
+    if (!is_valid) {
       console.log("Formularz zawiera błędy:", errors);
+      return;
     }
 
+    console.log("Formularz jest poprawny:", formData);
     const new_miernik_item = {
       ...formData
       // TODO: owner will be get from httponly cookie
