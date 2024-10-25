@@ -20,12 +20,20 @@ const MiernikApp = () => {
       name: string;
       id: string;
     };
+    action: {
+      name: string;
+      id: string;
+    };
     people_count: number;
     action_count: number;
   }>({
     name: "",
     date: "",
     program: {
+      name: "",
+      id: ""
+    },
+    action: {
       name: "",
       id: ""
     },
@@ -47,15 +55,21 @@ const MiernikApp = () => {
     action_count: ""
   });
 
+  interface ActionI {
+    _id: string;
+    name: string;
+  }
+
   const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
+
+
+  const [actions, setActions] = useState<ActionI[] | []>([]);
 
   const fetchProgramNames = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/program_names`, {
         withCredentials: true
       });
-
-      console.log(response);
 
       if (response.status === 200) {
         const { data } = response.data as { data: ProgramNameI[] };
@@ -72,6 +86,11 @@ const MiernikApp = () => {
   useEffect(() => {
     fetchProgramNames();
   }, []);
+  const fetchProgramActions = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/program_actions`, {
+        withCredentials: true
+      });
 
       if (response.status === 200) {
         const data = response.data as ActionI[];
@@ -107,7 +126,6 @@ const MiernikApp = () => {
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = moment(new Date(e.target.value)).format("YYYY-MM-DD");
     setFormData({ ...formData, [e.target.name]: newDate });
-    console.log(newDate); // value picked from date picker
   };
 
   const handlePostMiernikItem = async () => {
@@ -119,7 +137,8 @@ const MiernikApp = () => {
         program_type: "",
         program_name: "",
         people_count: "",
-        action_count: ""
+        action_count: "",
+        action_id: ""
       };
 
       if (!formData.name) {
@@ -144,6 +163,11 @@ const MiernikApp = () => {
 
       if (formData.action_count <= 0) {
         newErrors.action_count = "Liczba działań musi być większa od 0";
+        valid = false;
+      }
+
+      if (!formData.action.id || !formData.action.name) {
+        newErrors.action_id = "Wybierz działanie";
         valid = false;
       }
 
@@ -174,6 +198,7 @@ const MiernikApp = () => {
           withCredentials: true
         }
       );
+
       console.log(response);
     } catch (err) {
       console.error(err);
