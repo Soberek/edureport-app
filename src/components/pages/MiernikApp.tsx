@@ -62,6 +62,7 @@ const MiernikApp = () => {
 
   const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
 
+  const [miernik_items, setMiernikItems] = useState<{ name: string; action_count: number; date: string; owner: string; program_id: string }[] | []>([]);
 
   const [actions, setActions] = useState<ActionI[] | []>([]);
 
@@ -204,6 +205,40 @@ const MiernikApp = () => {
       console.error(err);
     }
   };
+
+  const fetchMiernikItems = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/program_items`, {
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+
+        setMiernikItems(data);
+      }
+    } catch (err) {
+      console.error(`Error on fetching miernik items`, err);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        fetchProgramNames();
+        fetchProgramActions();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    fetchMiernikItems();
+  }, []);
 
   return (
     <Box p={4}>
