@@ -29,7 +29,7 @@ Tired of wrestling with complex educational reports? Introducing EduReport Pro -
 - [ReactRouter-v6.4+](https://reactrouter.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [MaterialUI](https://mui.com/) 
-- [Netlify](https://netlify.com/) (deployment)
+- [Render](https://render.com/) (deployment)
 
 ### Backend - (private for now)
 
