@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Box, Button as MUIButton, TextField } from "@mui/material";
+import { Box, Button as MUIButton, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import moment from "moment";
 import { SelectDropdown } from "../atoms/Select";
@@ -62,7 +62,10 @@ const MiernikApp = () => {
 
   const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
 
-  const [miernik_items, setMiernikItems] = useState<{ name: string; action_count: number; date: string; owner: string; program_id: string }[] | []>([]);
+  const [miernik_items, setMiernikItems] = useState<
+    | { name: string; action_count: number; date: string; owner: string; program_id: { name: string; type: string }; action_id: { name: string; id: string } }[]
+    | []
+  >([]);
 
   const [actions, setActions] = useState<ActionI[] | []>([]);
 
@@ -220,21 +223,16 @@ const MiernikApp = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        fetchProgramNames();
-        fetchProgramActions();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
+    fetchProgramActions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     fetchMiernikItems();
+  }, []);
+
+  useEffect(() => {
+    fetchProgramNames();
   }, []);
 
   return (
@@ -298,6 +296,15 @@ const MiernikApp = () => {
           </MUIButton>
         </Box>
       </Grid>
+
+      {miernik_items.length > 0 &&
+        miernik_items.map((item, index) => (
+          <Box key={index} sx={{ display: `flex`, gap: 2 }}>
+            <Typography>{item.name}</Typography>
+            <Typography>{item.program_id.name}</Typography>
+            <Typography>{item.action_id.name}</Typography>
+          </Box>
+        ))}
     </Box>
   );
 };
