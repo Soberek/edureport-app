@@ -2,6 +2,14 @@
 (Designed to streamline the work of the Polish Sanitary Inspection)
 
 Tired of wrestling with complex educational reports? Introducing EduReport Pro - your comprehensive solution for generating detailed educational activity reports at quarterly, monthly, and annual intervals.
+  <p align="center">
+    <a href="https://edureport.onrender.com/">View Demo</a>
+     ·
+    <a href="https://github.com/Soberek/edureport-app/issues">Report Bug</a>
+     ·
+    <a href="https://github.com/Soberek/edureport-app/issues">Request Feature</a>
+  </p>
+</div>
 
 ### Save Time & Reduce Errors:
 - **Cut report creation time by up to 500% or more**
@@ -51,6 +59,10 @@ This frontend application communicates with a dedicated backend service built wi
 <img src="https://imgur.com/GkKiN2s.png" alt="preview">
 <img src="https://imgur.com/kve88Wn.png" alt="preview">
 <img src="https://imgur.com/3BaJoBt.png" alt="preview">
+
+## Contact
+
+Krzysztof Palpuchowski - palpuchowski.k@gmail.com
 
 ## License
 
