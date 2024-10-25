@@ -203,10 +203,12 @@ const MiernikApp = () => {
       console.log(response);
     } catch (err) {
       console.error(err);
+    } finally {
+      fetchMiernikItems();
     }
   };
 
-  const fetchMiernikItems = async () => {
+  async function fetchMiernikItems() {
     try {
       const response = await axios.get(`${API_URL}/api/program_items`, {
         withCredentials: true
@@ -220,7 +222,7 @@ const MiernikApp = () => {
     } catch (err) {
       console.error(`Error on fetching miernik items`, err);
     }
-  };
+  }
 
   useEffect(() => {
     fetchProgramActions();
