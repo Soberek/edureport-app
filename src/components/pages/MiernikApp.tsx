@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-// import { Form } from "react-router-dom";
-import { Box, Button as MUIButton, MenuItem, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button as MUIButton, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import moment from "moment";
+import { SelectDropdown } from "../atoms/Select";
 
 interface ProgramNameI {
   _id: string;
@@ -73,31 +73,31 @@ const MiernikApp = () => {
     fetchProgramNames();
   }, []);
 
-  const SelectProgramNames = () => {
-    return (
-      <TextField
-        select
-        label="Nazwa programu"
-        value={formData.program.id}
-        onChange={(e) => {
-          const program_id = e.target.value;
-          const program = program_names.find((program) => program._id === program_id);
+      if (response.status === 200) {
+        const data = response.data as ActionI[];
 
-          // **here program was found, so no undefined returned from .find()
-          if (program) {
-            setFormData({ ...formData, program: { name: program.name, id: program._id } });
-          }
-        }}
-        variant="filled"
-        required
-      >
-        {program_names.map((program_name, index) => (
-          <MenuItem key={index} value={program_name._id}>
-            {program_name.name}
-          </MenuItem>
-        ))}
-      </TextField>
-    );
+        console.log(data);
+
+        if (data.length > 0) {
+          setActions(data);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSelectChange = <T extends { _id: string; name: string }>(
+    e: React.ChangeEvent<HTMLInputElement>,
+    elements: T[],
+    key_to_access_form_data_value: string
+  ) => {
+    const id = e.target.value;
+    const position = elements.find((element) => element._id === id);
+
+    if (position) {
+      setFormData({ ...formData, [key_to_access_form_data_value]: { name: position.name, id: position._id } });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -206,6 +206,27 @@ const MiernikApp = () => {
         </Grid>
 
         <Grid size={6}>{program_names.length > 0 && <SelectProgramNames />}</Grid>
+        <Grid size={{ xs: 12, md: 6 }}>
+          {program_names.length > 0 && (
+            <SelectDropdown
+              label="Nazwa programu"
+              value={formData.program.id}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleSelectChange(event, program_names, "program")}
+              options={program_names}
+            />
+          )}
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6 }}>
+          {actions.length > 0 && (
+            <SelectDropdown
+              label="Działanie"
+              value={formData.action.id}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleSelectChange(event, actions, "action")}
+              options={actions}
+            />
+          )}
+        </Grid>
 
         <Grid size={6}>
           <TextField label="Liczba działań" required variant="filled" type="number" name="action_count" value={formData.action_count} onChange={handleChange} />
