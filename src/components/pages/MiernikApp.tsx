@@ -73,7 +73,7 @@ const MiernikApp = () => {
       });
 
       if (response.status === 200) {
-        const { data } = response.data as { data: ProgramNameI[] };
+        const data = response.data as ProgramNameI[];
 
         if (data.length > 0) {
           setProgramNames(data);
