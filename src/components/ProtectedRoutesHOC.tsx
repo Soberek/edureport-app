@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/Auth";
 
 export const ProtectedRoutesHOC = () => {
-  const auth = useContext(AuthContext);
+  const { is_authenticated } = useContext(AuthContext);
 
-  return !auth.user ? <Navigate to={"/login"} replace /> : <Outlet />;
+  return !is_authenticated ? <Navigate to={"/login"} replace /> : <Outlet />;
 };

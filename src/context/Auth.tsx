@@ -1,24 +1,41 @@
-import { createContext, ReactElement, SetStateAction, useState } from "react";
+import { createContext, ReactElement, useState } from "react";
 
 interface AuthContextI {
-  user: boolean;
-  setUser: React.Dispatch<
-    SetStateAction<{
-      user: boolean;
-    }>
-  >;
+  is_authenticated: boolean;
+  login: (token: string) => void;
+  logout: () => void;
 }
 
-const user_id: string | null = localStorage.getItem("user");
+const getToken = (): string | null => localStorage.getItem("token");
 
-// for now always logged
-const default_auth_context: AuthContextI = { user: user_id ? true : false, setUser: () => {} };
+const default_auth_context: AuthContextI = {
+  is_authenticated: !!getToken(),
+  login: () => {},
+  logout: () => {}
+};
 
 const AuthContext = createContext(default_auth_context);
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
-  const [user, setUser] = useState({ user: default_auth_context.user });
-  return <AuthContext.Provider value={{ user: user.user, setUser }}>{children}</AuthContext.Provider>;
+  const [is_authenticated, setIsAuthenticated] = useState(!!getToken());
+
+  const login = (token: string) => {
+    localStorage.setItem("token", token); // Zapis tokena w `localStorage`
+    setIsAuthenticated(true); // Aktualizacja stanu autoryzacji
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token"); // Usunięcie tokena z `localStorage`
+    setIsAuthenticated(false); // Aktualizacja stanu autoryzacji
+  };
+
+  const contextValue: AuthContextI = {
+    is_authenticated,
+    login,
+    logout
+  };
+
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext };

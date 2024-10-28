@@ -8,7 +8,7 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const Login = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { login, is_authenticated } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
-  if (user) {
+  if (is_authenticated) {
     return <Navigate to="/miernik-excel" replace />;
   }
 
@@ -32,8 +32,8 @@ export const Login = () => {
       );
 
       if (response.status === 200) {
-        localStorage.setItem("user", response.data.userId);
-        setUser({ user: true });
+        const token: string = response.data.token;
+        login(token);
         navigate("/miernik-excel", { replace: true });
       } else {
         setError("Niewłaściwa nazwa użytkownika lub hasło 😢");

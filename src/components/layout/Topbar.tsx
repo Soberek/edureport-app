@@ -7,11 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Topbar = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
 
   const handleLogout = async () => {
-    localStorage.removeItem("user");
-    setUser({ user: false });
+    logout();
     navigate("/login", { replace: true });
   };
 
