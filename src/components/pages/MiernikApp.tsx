@@ -55,6 +55,8 @@ const MiernikApp = () => {
     action_count: ""
   });
 
+  const token = localStorage.getItem("token");
+
   interface ActionI {
     _id: string;
     name: string;
@@ -72,7 +74,10 @@ const MiernikApp = () => {
   const fetchProgramNames = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/program_names`, {
-        withCredentials: true
+        // withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       if (response.status === 200) {
@@ -90,13 +95,14 @@ const MiernikApp = () => {
   const fetchProgramActions = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/program_actions`, {
-        withCredentials: true
+        // withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       if (response.status === 200) {
         const data = response.data as ActionI[];
-
-        console.log(data);
 
         if (data.length > 0) {
           setActions(data);
@@ -183,7 +189,6 @@ const MiernikApp = () => {
       return;
     }
 
-    console.log("Formularz jest poprawny:", formData);
     const new_miernik_item = {
       ...formData
       // TODO: owner will be get from httponly cookie
@@ -196,7 +201,10 @@ const MiernikApp = () => {
           new_miernik_item
         },
         {
-          withCredentials: true
+          // withCredentials: true
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
       );
 
@@ -211,7 +219,10 @@ const MiernikApp = () => {
   async function fetchMiernikItems() {
     try {
       const response = await axios.get(`${API_URL}/api/program_items`, {
-        withCredentials: true
+        // withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
 
       if (response.status === 200) {
@@ -231,10 +242,12 @@ const MiernikApp = () => {
 
   useEffect(() => {
     fetchMiernikItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     fetchProgramNames();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
