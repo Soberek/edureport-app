@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import { LuLogOut } from "react-icons/lu";
+// import { LuLogOut } from "react-icons/lu";
 import { useContext } from "react";
 import { AuthContext } from "../../context/Auth";
 
@@ -39,7 +39,8 @@ export const Topbar = () => {
           ml: "auto",
           color: "primary.100",
           backgroundColor: "primary.700",
-
+          mr: 6,
+          // ml: 2,
           ":hover": {
             transform: `scale(1.1)`
           }
@@ -48,10 +49,10 @@ export const Topbar = () => {
       >
         Wyloguj
       </Button>
-      <Box
+      {/* <Box
         sx={{
           color: "primary.100",
-          mr: 6,
+          mr: 4,
           ml: 2,
           ":hover": {
             transform: `scale(1.1)`
@@ -59,7 +60,7 @@ export const Topbar = () => {
         }}
       >
         <LuLogOut size={`30`} />
-      </Box>
+      </Box> */}
     </Box>
   );
 };
