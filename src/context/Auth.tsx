@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   const [is_authenticated, setIsAuthenticated] = useState(!!getToken());
 
   const login = (token: string) => {
-    localStorage.setItem("token", token); // Zapis tokena w `localStorage`
-    setIsAuthenticated(true); // Aktualizacja stanu autoryzacji
+    localStorage.setItem("token", token);
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("token"); // Usunięcie tokena z `localStorage`
-    setIsAuthenticated(false); // Aktualizacja stanu autoryzacji
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
   };
 
   const contextValue: AuthContextI = {
@@ -38,4 +38,4 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
 };
 
-export { AuthContext };
+export default AuthContext;

@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 // import { LuLogOut } from "react-icons/lu";
 import { useContext } from "react";
-import { AuthContext } from "../../context/Auth";
+import AuthContext from "../../context/Auth";
 
 import { Link, useNavigate } from "react-router-dom";
 

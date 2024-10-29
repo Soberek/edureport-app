@@ -1,7 +1,7 @@
 import { Box, Typography, Button, Alert, TextField } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { Form, Navigate, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/Auth";
+import AuthContext from "../../context/Auth";
 import { useContext, useState } from "react";
 import axios from "axios";
 
