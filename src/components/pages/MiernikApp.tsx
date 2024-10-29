@@ -23,34 +23,38 @@ export interface MiernikItemI {
   action_id: { name: string; id: string };
 }
 
-const MiernikApp = () => {
-  const [formData, setFormData] = useState<{
+interface FormDataI {
+  name: string;
+  date: string;
+  program: {
     name: string;
-    date: string;
-    program: {
-      name: string;
-      id: string;
-    };
-    action: {
-      name: string;
-      id: string;
-    };
-    people_count: number;
-    action_count: number;
-  }>({
+    id: string;
+  };
+  action: {
+    name: string;
+    id: string;
+  };
+  people_count: number;
+  action_count: number;
+}
+
+const initial_form_data = {
+  name: "",
+  date: "",
+  program: {
     name: "",
-    date: "",
-    program: {
-      name: "",
-      id: ""
-    },
-    action: {
-      name: "",
-      id: ""
-    },
-    people_count: 0,
-    action_count: 0
-  });
+    id: ""
+  },
+  action: {
+    name: "",
+    id: ""
+  },
+  people_count: 0,
+  action_count: 0
+};
+
+const MiernikApp = () => {
+  const [formData, setFormData] = useState<FormDataI>(initial_form_data);
 
   const [errors, setErrors] = useState<{
     name: string;
