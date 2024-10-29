@@ -79,48 +79,6 @@ const MiernikApp = () => {
 
   const [actions, setActions] = useState<ActionI[] | []>([]);
 
-  const fetchProgramNames = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/program_names`, {
-        // withCredentials: true
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      if (response.status === 200) {
-        const data = response.data as ProgramNameI[];
-
-        if (data.length > 0) {
-          setProgramNames(data);
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const fetchProgramActions = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/program_actions`, {
-        // withCredentials: true
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      if (response.status === 200) {
-        const data = response.data as ActionI[];
-
-        if (data.length > 0) {
-          setActions(data);
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleSelectChange = <T extends { _id: string; name: string }>(
     e: React.ChangeEvent<HTMLInputElement>,
     elements: T[],
@@ -244,19 +202,23 @@ const MiernikApp = () => {
   }
 
   useEffect(() => {
-    fetchProgramActions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const fetchData = async () => {
+      try {
+        const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.all([
+          axios.get(`${API_URL}/api/program_names`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${API_URL}/api/program_actions`, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(`${API_URL}/api/program_items`, { headers: { Authorization: `Bearer ${token}` } })
+        ]);
 
-  useEffect(() => {
-    fetchMiernikItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    fetchProgramNames();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+        if (programNamesResponse.status === 200) setProgramNames(programNamesResponse.data);
+        if (actionsResponse.status === 200) setActions(actionsResponse.data);
+        if (miernikItemsResponse.status === 200) setMiernikItems(miernikItemsResponse.data);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+    fetchData();
+  }, [token]);
 
   return (
     <Box p={{ xs: 1, md: 4 }}>
