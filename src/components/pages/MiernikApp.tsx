@@ -267,11 +267,11 @@ const MiernikApp = () => {
           boxShadow: 2,
           "&>*>*": {
             boxSizing: "border-box",
-            p: 1.1,
+            p: 1,
             width: `100%`
           },
           rowGap: 1,
-          borderRadius: `10px`
+          borderRadius: `5px`
         }}
         container
       >
