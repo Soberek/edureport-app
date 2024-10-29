@@ -186,7 +186,6 @@ const MiernikApp = () => {
 
     const new_miernik_item = {
       ...formData
-      // TODO: owner will be get from httponly cookie
     };
 
     try {
