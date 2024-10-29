@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Box, Button as MUIButton, TextField, Typography } from "@mui/material";
+import { Box, Button as MUIButton, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import moment from "moment";
 import { SelectDropdown } from "../atoms/Select";
+import { BasicTable } from "../organism/MiernikAppTable";
 
 interface ProgramNameI {
   _id: string;
@@ -11,6 +12,16 @@ interface ProgramNameI {
 }
 
 const API_URL: string = import.meta.env.VITE_API_URL;
+
+export interface MiernikItemI {
+  name: string;
+  action_count: number;
+  people_count: number;
+  date: string;
+  owner: string;
+  program_id: { name: string; type: string };
+  action_id: { name: string; id: string };
+}
 
 const MiernikApp = () => {
   const [formData, setFormData] = useState<{
@@ -64,10 +75,7 @@ const MiernikApp = () => {
 
   const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
 
-  const [miernik_items, setMiernikItems] = useState<
-    | { name: string; action_count: number; date: string; owner: string; program_id: { name: string; type: string }; action_id: { name: string; id: string } }[]
-    | []
-  >([]);
+  const [miernik_items, setMiernikItems] = useState<MiernikItemI[] | []>([]);
 
   const [actions, setActions] = useState<ActionI[] | []>([]);
 
@@ -312,14 +320,7 @@ const MiernikApp = () => {
         </Box>
       </Grid>
 
-      {miernik_items.length > 0 &&
-        miernik_items.map((item, index) => (
-          <Box key={index} sx={{ display: `flex`, gap: 2 }}>
-            <Typography>{item.name}</Typography>
-            <Typography>{item.program_id.name}</Typography>
-            <Typography>{item.action_id.name}</Typography>
-          </Box>
-        ))}
+      <Box mt={4}>{miernik_items.length > 0 && <BasicTable data={miernik_items} />}</Box>
     </Box>
   );
 };
