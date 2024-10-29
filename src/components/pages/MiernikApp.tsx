@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Box, Button as MUIButton, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import moment from "moment";
@@ -83,29 +83,54 @@ const MiernikApp = () => {
 
   const [actions, setActions] = useState<ActionI[] | []>([]);
 
-  const handleSelectChange = <T extends { _id: string; name: string }>(
-    e: React.ChangeEvent<HTMLInputElement>,
-    elements: T[],
-    key_to_access_form_data_value: string
-  ) => {
-    const id = e.target.value;
-    const position = elements.find((element) => element._id === id);
+  const handleSelectChange = useCallback(
+    <T extends { _id: string; name: string }>(e: React.ChangeEvent<HTMLInputElement>, elements: T[], key_to_access_form_data_value: string) => {
+      const id = e.target.value;
+      const position = elements.find((element) => element._id === id);
 
-    if (position) {
-      setFormData({ ...formData, [key_to_access_form_data_value]: { name: position.name, id: position._id } });
-    }
-  };
+      if (position) {
+        setFormData((prevFormData) => {
+          return { ...prevFormData, [key_to_access_form_data_value]: { name: position.name, id: position._id } };
+        });
+      }
+    },
+    []
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevFormData) => {
+      return { ...prevFormData, [name]: value };
+    });
+  }, []);
+
+  const handleDateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newDate = moment(new Date(e.target.value)).format("YYYY-MM-DD");
-    setFormData({ ...formData, [e.target.name]: newDate });
-  };
+    setFormData((prevFormData) => {
+      return { ...prevFormData, [e.target.name]: newDate };
+    });
+  }, []);
 
-  const handlePostMiernikItem = async () => {
+  const fetchMiernikItems = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/program_items`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+
+        setMiernikItems(data);
+      }
+    } catch (err) {
+      console.error(`Error on fetching miernik items`, err);
+    }
+  }, [token]);
+
+  const handlePostMiernikItem = useCallback(async () => {
     const validateForm = () => {
       let valid = true;
       const newErrors = {
@@ -184,45 +209,27 @@ const MiernikApp = () => {
     } finally {
       fetchMiernikItems();
     }
-  };
+  }, [errors, fetchMiernikItems, formData, token]);
 
-  async function fetchMiernikItems() {
+  const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_URL}/api/program_items`, {
-        // withCredentials: true
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.all([
+        axios.get(`${API_URL}/api/program_names`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/program_actions`, { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get(`${API_URL}/api/program_items`, { headers: { Authorization: `Bearer ${token}` } })
+      ]);
 
-      if (response.status === 200) {
-        const data = response.data;
-
-        setMiernikItems(data);
-      }
+      if (programNamesResponse.status === 200) setProgramNames(programNamesResponse.data);
+      if (actionsResponse.status === 200) setActions(actionsResponse.data);
+      if (miernikItemsResponse.status === 200) setMiernikItems(miernikItemsResponse.data);
     } catch (err) {
-      console.error(`Error on fetching miernik items`, err);
+      console.error("Error fetching data:", err);
     }
-  }
+  }, [token]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.all([
-          axios.get(`${API_URL}/api/program_names`, { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get(`${API_URL}/api/program_actions`, { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get(`${API_URL}/api/program_items`, { headers: { Authorization: `Bearer ${token}` } })
-        ]);
-
-        if (programNamesResponse.status === 200) setProgramNames(programNamesResponse.data);
-        if (actionsResponse.status === 200) setActions(actionsResponse.data);
-        if (miernikItemsResponse.status === 200) setMiernikItems(miernikItemsResponse.data);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-      }
-    };
     fetchData();
-  }, [token]);
+  }, [fetchData]);
 
   return (
     <Box p={{ xs: 1, md: 4 }}>
