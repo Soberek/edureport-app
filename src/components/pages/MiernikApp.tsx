@@ -212,15 +212,15 @@ const MiernikApp = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.all([
+      const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.allSettled([
         axios.get(`${API_URL}/api/program_names`, { headers: { Authorization: `Bearer ${token}` } }),
         axios.get(`${API_URL}/api/program_actions`, { headers: { Authorization: `Bearer ${token}` } }),
         axios.get(`${API_URL}/api/program_items`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
 
-      if (programNamesResponse.status === 200) setProgramNames(programNamesResponse.data);
-      if (actionsResponse.status === 200) setActions(actionsResponse.data);
-      if (miernikItemsResponse.status === 200) setMiernikItems(miernikItemsResponse.data);
+      if (programNamesResponse.status === "fulfilled") setProgramNames(programNamesResponse.value.data);
+      if (actionsResponse.status === "fulfilled") setActions(actionsResponse.value.data);
+      if (miernikItemsResponse.status === "fulfilled") setMiernikItems(miernikItemsResponse.value.data);
     } catch (err) {
       console.error("Error fetching data:", err);
     }
