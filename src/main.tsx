@@ -90,6 +90,21 @@ import { ThemeOptions } from "@mui/material/styles";
 import IzrzGenerator from "./components/pages/IzrzGenerator.tsx";
 
 export const themeOptions: ThemeOptions = {
+  components: {
+    MuiTextField: {
+      defaultProps: {
+        variant: "filled",
+        fullWidth: true
+      },
+      styleOverrides: {
+        root: {
+          fontSize: "0.5rem",
+          padding: 0
+          // other shared styles for TextFields
+        }
+      }
+    }
+  },
   palette: {
     mode: "light",
     primary: {
