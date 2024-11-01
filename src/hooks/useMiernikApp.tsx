@@ -30,6 +30,7 @@ interface ProgramNameI {
 }
 
 export interface MiernikItemI {
+  _id: string;
   name: string;
   action_count: number;
   people_count: number;
@@ -113,12 +114,14 @@ const useMiernikAppFormik = () => {
       if (miernikItemsResponse.status === "fulfilled") setMiernikItems(miernikItemsResponse.value.data);
     } catch (err) {
       setError("Error fetching data: " + err);
+    } finally {
+      setLoading(false);
     }
   }, [token]);
 
   useEffect(() => {
     setLoading(true);
-    fetchData().then(() => setLoading(false));
+    fetchData();
   }, [fetchData]);
 
   return { handlePostMiernikItem, initial_form_data, validationSchema, program_names, actions, miernik_items, loading, error };
