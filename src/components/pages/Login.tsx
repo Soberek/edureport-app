@@ -33,7 +33,7 @@ export const Login = () => {
 
       if (response.status === 200) {
         const token: string = response.data.token;
-        login(token);
+        login(token, username);
         navigate("/miernik-excel", { replace: true });
       } else {
         setError("Niewłaściwa nazwa użytkownika lub hasło 😢");

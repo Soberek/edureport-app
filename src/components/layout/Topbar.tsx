@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Topbar = () => {
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout, username } = useContext(AuthContext);
 
   const handleLogout = async () => {
     logout();
@@ -33,10 +33,23 @@ export const Topbar = () => {
         </Link>
       </Typography>
 
+      <Typography
+        sx={{
+          ml: "auto",
+          mr: 2,
+          color: "primary.100",
+          fontSize: 15,
+          ":hover": {
+            fontWeight: "bold"
+          }
+        }}
+      >
+        Zalogowany jako: {username}
+      </Typography>
+
       <Button
         variant="outlined"
         sx={{
-          ml: "auto",
           color: "primary.100",
           backgroundColor: "primary.700",
           mr: 6,
