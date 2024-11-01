@@ -1,71 +1,98 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import React from "react";
 import { MiernikItemI } from "../../hooks/useMiernikApp";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useMediaQuery } from "@mui/material";
 
-export const BasicTable = React.memo(({ data }: { data: MiernikItemI[] }) => {
-  console.log(data);
+export const MiernikAppTable = React.memo(({ data }: { data: MiernikItemI[] }) => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
+  console.log(isMobile);
+
+  const columns: GridColDef[] = [
+    {
+      field: "programName",
+      headerName: "Nazwa programu",
+      // flex: 0.6
+      minWidth: 200
+    },
+    {
+      field: "programType",
+      headerName: "Typ programu",
+      // flex: 0.4
+      flex: 0.5
+    },
+    {
+      field: "date",
+      headerName: "Data",
+      type: "date",
+      flex: 0.38
+    },
+    {
+      field: "actionCount",
+      headerName: "Działania",
+      type: "number",
+      flex: 0.35
+    },
+    {
+      field: "peopleCount",
+      headerName: "Odbiorcy",
+      type: "number",
+      flex: 0.3
+    }
+  ];
+
+  const item_rows = data.map((item) => {
+    return {
+      id: item._id,
+      programName: item.program_id.name,
+      programType: item.program_id.type,
+      peopleCount: item.people_count,
+      actionCount: item.action_count,
+      date: new Date(item.date)
+    };
+  });
+
   return (
-    <TableContainer component={Paper}>
-      <Table
-        sx={{
-          minWidth: { xs: 200, md: 650 },
-          fontSize: { base: 5 }
+    <Box
+      sx={{
+        height: { xs: 300, md: 500 },
+        width: "100%",
+        boxShadow: 10,
+        backgroundColor: "white",
+        borderRadius: "5px"
+      }}
+    >
+      <DataGrid
+        rows={item_rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10
+            }
+          }
         }}
-        aria-label="Table"
-      >
-        <TableHead>
-          <TableRow
-            sx={{
-              "& *": {
-                py: 0.5
-              }
-            }}
-          >
-            <TableCell align="center">Nazwa</TableCell>
-            <TableCell align="center">Typ</TableCell>
-            <TableCell align="center" sx={{ display: { xs: "none" } }}>
-              Data
-            </TableCell>
-            <TableCell align="center">Nazwa programu</TableCell>
-            <TableCell align="center">Działanie</TableCell>
-            <TableCell align="center">Liczba działań</TableCell>
-            <TableCell align="center">Liczba odbiorców</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody style={{ overflowX: `scroll` }}>
-          {data.map((row, index) => (
-            <TableRow
-              key={index}
-              sx={{
-                "&:last-child td, &:last-child th": { border: 0 },
-                "& *": {
-                  fontSize: { xs: 8, sm: 12, md: 12 },
-                  py: 0.2,
-                  px: 0.5
-                }
-              }}
-            >
-              <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center" sx={{}}>
-                {row.program_id.type}
-              </TableCell>
-              <TableCell align="center" sx={{ display: { xs: "none" } }}>
-                {new Date(row.date).toLocaleDateString()}
-              </TableCell>
-              <TableCell align="center">{row.program_id.name}</TableCell>
-              <TableCell align="center">{row.action_id.name}</TableCell>
-              <TableCell align="center">{row.action_count}</TableCell>
-              <TableCell align="center">{row.people_count}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        columnVisibilityModel={{
+          // Hide program type in mobile view
+          programType: !isMobile
+        }}
+        pageSizeOptions={[10]}
+        checkboxSelection={window.innerWidth > 600}
+        disableRowSelectionOnClick
+        sx={{
+          "& *": {
+            fontSize: "0.9rem",
+            textWrap: "wrap",
+            p: 0,
+            m: 0,
+            alignContent: "start"
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            fontSize: "0.9rem" // Smaller header text
+          }
+        }}
+      />
+    </Box>
   );
 });

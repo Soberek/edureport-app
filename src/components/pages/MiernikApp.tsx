@@ -1,13 +1,13 @@
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { BasicTable } from "../organism/MiernikAppTable";
+import { MiernikAppTable } from "../organism/MiernikAppTable";
 import useMiernikAppFormik from "../../hooks/useMiernikApp";
 
 const MiernikApp = () => {
   const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } = useMiernikAppFormik();
 
-  if (loading) return <div style={{ padding: 10 }}>Loading... (best UI experience)</div>;
+  if (loading === true) return <div style={{ padding: 10 }}>Loading... (best UI experience)</div>;
 
   return (
     <Box p={{ xs: 1, md: 2 }}>
@@ -143,7 +143,7 @@ const MiernikApp = () => {
         )}
       </Formik>
 
-      <Box mt={4}>{miernik_items.length > 0 && <BasicTable data={miernik_items} />}</Box>
+      <Box mt={4}>{miernik_items.length > 0 && <MiernikAppTable data={miernik_items} />}</Box>
     </Box>
   );
 };
