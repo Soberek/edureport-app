@@ -7,8 +7,6 @@ import { useMediaQuery } from "@mui/material";
 export const MiernikAppTable = React.memo(({ data }: { data: MiernikItemI[] }) => {
   const isMobile = useMediaQuery("(max-width:600px)");
 
-  console.log(isMobile);
-
   const columns: GridColDef[] = [
     {
       field: "programName",
