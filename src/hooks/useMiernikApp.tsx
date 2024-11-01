@@ -101,7 +101,6 @@ const useMiernikAppFormik = () => {
   );
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     try {
       const [programNamesResponse, actionsResponse, miernikItemsResponse] = await Promise.allSettled([
         axios.get(`${API_URL}/api/program_names`, { headers: { Authorization: `Bearer ${token}` } }),
@@ -114,13 +113,12 @@ const useMiernikAppFormik = () => {
       if (miernikItemsResponse.status === "fulfilled") setMiernikItems(miernikItemsResponse.value.data);
     } catch (err) {
       setError("Error fetching data: " + err);
-    } finally {
-      setLoading(false);
     }
   }, [token]);
 
   useEffect(() => {
-    fetchData();
+    setLoading(true);
+    fetchData().then(() => setLoading(false));
   }, [fetchData]);
 
   return { handlePostMiernikItem, initial_form_data, validationSchema, program_names, actions, miernik_items, loading, error };
