@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React from "react";
-import { MiernikItemI } from "../pages/MiernikApp";
+import { MiernikItemI } from "../../hooks/useMiernikApp";
 
 export const BasicTable = React.memo(({ data }: { data: MiernikItemI[] }) => {
   console.log(data);
