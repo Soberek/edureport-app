@@ -53,6 +53,10 @@ const router = createBrowserRouter([
             element: <MiernikApp />
           },
           {
+            path: "izrz-generator",
+            element: <IzrzGenerator />
+          },
+          {
             // Catch-all route for 404
             path: "*",
             element: (
@@ -83,6 +87,7 @@ const router = createBrowserRouter([
 */
 
 import { ThemeOptions } from "@mui/material/styles";
+import IzrzGenerator from "./components/pages/IzrzGenerator.tsx";
 
 export const themeOptions: ThemeOptions = {
   palette: {

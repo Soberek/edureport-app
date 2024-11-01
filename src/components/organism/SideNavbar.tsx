@@ -8,7 +8,8 @@ export default function SideNavbar() {
 
   const links: { path: string; name: string }[] = [
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
-    { path: "/miernik-app", name: "Miernik budżetowy" }
+    { path: "/miernik-app", name: "Miernik budżetowy" },
+    { path: "/izrz-generator", name: "Generator IZRZ" }
   ];
 
   return (
