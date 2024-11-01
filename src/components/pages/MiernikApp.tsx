@@ -10,7 +10,7 @@ const MiernikApp = () => {
   if (loading) return <div style={{ padding: 10 }}>Loading... (best UI experience)</div>;
 
   return (
-    <Box p={{ xs: 1, md: 4 }}>
+    <Box p={{ xs: 1, md: 2 }}>
       <Formik
         initialValues={initial_form_data}
         validationSchema={validationSchema}

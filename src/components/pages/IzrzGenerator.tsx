@@ -7,7 +7,7 @@ const TaskForm: React.FC = () => {
   const { initial_form_data, validationSchema, handlePostMiernikItem } = useTaskFormik();
 
   return (
-    <Box p={{ xs: 1, md: 4 }}>
+    <Box p={{ xs: 1, md: 2 }}>
       <Formik
         initialValues={initial_form_data}
         onSubmit={(values) => {
@@ -37,7 +37,6 @@ const TaskForm: React.FC = () => {
                   size="small"
                   error={touched.izrz_title && Boolean(errors.izrz_title)}
                   helperText={touched.izrz_title && errors.izrz_title}
-                  margin="normal"
                 />
               </Grid>
 
@@ -51,7 +50,6 @@ const TaskForm: React.FC = () => {
                   InputLabelProps={{ shrink: true }} // Ensures the label is shrunk for date fields
                   error={touched.date && Boolean(errors.date)}
                   helperText={touched.date && errors.date}
-                  margin="normal"
                   size="small"
                 />
               </Grid>
@@ -64,7 +62,6 @@ const TaskForm: React.FC = () => {
                   size="small"
                   error={touched.action_name && Boolean(errors.action_name)}
                   helperText={touched.action_name && errors.action_name}
-                  margin="normal"
                 />
               </Grid>
 
@@ -76,7 +73,6 @@ const TaskForm: React.FC = () => {
                   size="small"
                   error={touched.address && Boolean(errors.address)}
                   helperText={touched.address && errors.address}
-                  margin="normal"
                 />
               </Grid>
 
@@ -91,7 +87,6 @@ const TaskForm: React.FC = () => {
                   rows={3}
                   error={touched.audience && Boolean(errors.audience)}
                   helperText={touched.audience && errors.audience}
-                  margin="normal"
                 />
               </Grid>
 
@@ -106,7 +101,6 @@ const TaskForm: React.FC = () => {
                   size="small"
                   error={touched.description && Boolean(errors.description)}
                   helperText={touched.description && errors.description}
-                  margin="normal"
                 />
               </Grid>
 
