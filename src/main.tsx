@@ -94,13 +94,17 @@ export const themeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         variant: "filled",
-        fullWidth: true
+        fullWidth: true,
+        size: "small",
+        margin: "none"
       },
       styleOverrides: {
         root: {
           fontSize: "0.5rem",
-          padding: 0
-          // other shared styles for TextFields
+          padding: 0,
+          "@media (min-width:900px)": {
+            fontSize: "1.5rem" // Increase the font size on larger screens
+          }
         }
       }
     }
