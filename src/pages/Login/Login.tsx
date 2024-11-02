@@ -48,7 +48,7 @@ export const Login = () => {
       </Typography>
 
       <Box>
-        <Typography textAlign="center">Test user: login: admin - password: admin</Typography>
+        <Typography textAlign="center">Test user: login: magda - password: 12345</Typography>
       </Box>
       <Formik initialValues={initial_login_values} validationSchema={validationSchema} onSubmit={(values) => fetchUser(values)}>
         {({ touched, errors }) => (
