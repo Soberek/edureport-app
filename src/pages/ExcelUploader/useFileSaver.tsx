@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
-import { ProgramsData } from "../pages/ExcelUploader/ExcelUploader";
 import { useCallback } from "react";
+import { ProgramsData } from "./useExcelUploader";
 
 const useFileSaver = (data: ProgramsData) => {
   const saveToExcelFile = useCallback(() => {
