@@ -11,7 +11,7 @@ export const Stat: React.FC<StatProps> = ({ label, value }) => (
     maxWidth={{ xs: "100%", md: "50%" }} // Adjusts based on screen size
     bgcolor="background.paper" // Optional: can set background color
     borderRadius={2} // Rounded corners
-    boxShadow={1} // Optional: add a shadow
+    boxShadow={10} // Optional: add a shadow
     p={2} // Padding
     display="flex"
     flexDirection="column"
@@ -19,7 +19,7 @@ export const Stat: React.FC<StatProps> = ({ label, value }) => (
     <Typography variant="subtitle1" fontWeight="bold">
       {label}:
     </Typography>
-    <Typography variant="h6" fontWeight="bold">
+    <Typography variant="h6" fontWeight="bold" textAlign={"right"}>
       {value || 0}
     </Typography>
   </Box>
