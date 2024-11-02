@@ -1,7 +1,8 @@
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid2";
-import { ProgramsData } from "../pages/ExcelUploader";
+
+import { ProgramsData } from "./useExcelUploader";
 
 const Item = styled(Paper)(({ theme }) => ({
   // backgroundColor: "#fff",
