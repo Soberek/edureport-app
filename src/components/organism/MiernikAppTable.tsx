@@ -12,31 +12,41 @@ export const MiernikAppTable = React.memo(({ data }: { data: MiernikItemI[] }) =
       field: "programName",
       headerName: "Nazwa programu",
       // flex: 0.6
-      minWidth: 200
+      minWidth: 200,
+      align: "center",
+      headerAlign: "center"
     },
     {
       field: "programType",
       headerName: "Typ programu",
       // flex: 0.4
-      flex: 0.5
+      flex: 0.5,
+      align: "center",
+      headerAlign: "center"
     },
     {
       field: "date",
       headerName: "Data",
       type: "date",
-      flex: 0.38
+      flex: 0.38,
+      align: "center",
+      headerAlign: "center"
     },
     {
       field: "actionCount",
       headerName: "Działania",
       type: "number",
-      flex: 0.35
+      flex: 0.35,
+      align: "center",
+      headerAlign: "center"
     },
     {
       field: "peopleCount",
       headerName: "Odbiorcy",
       type: "number",
-      flex: 0.3
+      flex: 0.4,
+      align: "center",
+      headerAlign: "center"
     }
   ];
 
