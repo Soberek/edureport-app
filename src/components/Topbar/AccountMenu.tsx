@@ -38,7 +38,7 @@ export default function AccountMenu() {
   return (
     <React.Fragment>
       <Box sx={{ ml: "auto", mr: 4, display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Typography sx={{ minWidth: 100 }}>{username}</Typography>
+        <Typography sx={{ minWidth: 100, color: "white" }}>{username}</Typography>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
