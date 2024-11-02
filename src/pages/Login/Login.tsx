@@ -46,10 +46,14 @@ export const Login = () => {
       <Typography textAlign="center" fontWeight="bold">
         Witaj 😃
       </Typography>
+
+      <Box>
+        <Typography textAlign="center">Test user: login: admin - password: admin</Typography>
+      </Box>
       <Formik initialValues={initial_login_values} validationSchema={validationSchema} onSubmit={(values) => fetchUser(values)}>
         {({ touched, errors }) => (
-          <Box sx={{ display: "flex", flexDirection: "column", rowGap: 2, alignItems: "center" }}>
-            <Form>
+          <Form>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>
               <Field
                 as={TextField}
                 id="username"
@@ -74,8 +78,8 @@ export const Login = () => {
               <Button variant="contained" sx={{ paddingY: 1 }} color="primary" type="submit">
                 Zaloguj się
               </Button>
-            </Form>
-          </Box>
+            </Box>
+          </Form>
         )}
       </Formik>
     </Box>
