@@ -1,11 +1,10 @@
 import { Box, Button, MenuItem, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { MiernikAppTable } from "../organism/MiernikAppTable";
-import useMiernikAppFormik from "../../hooks/useMiernikApp";
-import SitesContainer from "../atoms/SiteContainer";
-import SiteTitle from "../atoms/SiteTitle";
-
+import { MiernikAppTable } from "./MiernikAppTable";
+import useMiernikAppFormik from "./useMiernikApp";
+import SiteTitle from "../../components/SiteTitle/SiteTitle";
+import SitesContainer from "../../components/SiteContainer/SiteContainer";
 const MiernikApp = () => {
   const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } = useMiernikAppFormik();
 

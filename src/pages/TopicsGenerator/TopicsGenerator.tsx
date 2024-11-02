@@ -1,7 +1,7 @@
 import { Button, List, ListItem, Paper, Typography } from "@mui/material";
-import { useTopicsGenerator } from "../../hooks/useTopicsGenerator";
-import SiteTitle from "../atoms/SiteTitle";
-import SitesContainer from "../atoms/SiteContainer";
+import { useTopicsGenerator } from "./useTopicsGenerator";
+import SitesContainer from "../../components/SiteContainer/SiteContainer";
+import SiteTitle from "../../components/SiteTitle/SiteTitle";
 
 const TopicsGenerator = () => {
   const { topics, fetchTopics } = useTopicsGenerator();

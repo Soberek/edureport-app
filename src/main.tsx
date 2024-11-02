@@ -1,17 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import AppLayout from "./App.tsx";
-import ErrorPage from "./components/pages/ErrorPage.tsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage.tsx";
 import { createBrowserRouter, Link, RouterProvider } from "react-router-dom";
-import ExcelUploader from "./components/pages/ExcelUploader.tsx";
-import Home from "./components/pages/Home.tsx";
+import ExcelUploader from "./pages/ExcelUploader/ExcelUploader.tsx";
+import Home from "./pages/Home/Home.tsx";
 
-import Button from "./components/atoms/Button.tsx";
-import { Login } from "./components/pages/Login.tsx";
-import { ProtectedRoutesHOC } from "./components/ProtectedRoutesHOC.tsx";
+import Button from "./components/Button/Button.tsx";
+import { Login } from "./pages/Login/Login.tsx";
+import { ProtectedRoutesHOC } from "./HOC/ProtectedRoutesHOC.tsx";
 import { AuthProvider } from "./context/Auth.tsx";
-import MiernikApp from "./components/pages/MiernikApp.tsx";
-import { Box, createTheme, TextField, ThemeProvider } from "@mui/material";
+import MiernikApp from "./pages/MiernikApp/MiernikApp.tsx";
+import { Box, TextField, ThemeProvider } from "@mui/material";
+import TopicsGenerator from "./pages/TopicsGenerator/TopicsGenerator.tsx";
+import IzrzGenerator from "./pages/IzrzGenerator/IzrzGenerator.tsx";
 
 const router = createBrowserRouter([
   {

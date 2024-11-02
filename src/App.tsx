@@ -1,13 +1,13 @@
 // Layout.tsx
 import { Outlet } from "react-router-dom";
-import SideNavbar from "./components/organism/SideNavbar";
+import SideNavbar from "./components/SideNavbar/SideNavbar";
 import { Box } from "@mui/material";
 import "./index.css";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Topbar } from "./components/layout/Topbar";
+import { Topbar } from "./components/Topbar/Topbar";
 
 export default function AppLayout() {
   return (

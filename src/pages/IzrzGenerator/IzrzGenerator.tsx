@@ -1,9 +1,10 @@
 import React from "react";
 import { Grid2 as Grid, TextField, Button } from "@mui/material";
-import useTaskFormik from "../../hooks/useIzrzGenerator";
+import useTaskFormik from "./useIzrzGenerator";
 import { Field, Formik, Form } from "formik";
-import SiteTitle from "../atoms/SiteTitle";
-import SitesContainer from "../atoms/SiteContainer";
+
+import SitesContainer from "../../components/SiteContainer/SiteContainer";
+import SiteTitle from "../../components/SiteTitle/SiteTitle";
 
 const TaskForm: React.FC = () => {
   const { initial_form_data, validationSchema, handlePostMiernikItem } = useTaskFormik();

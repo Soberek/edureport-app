@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import moment from "moment";
 import { Box, Typography } from "@mui/material";
-import { ExcelUploaderMonths, Month } from "../molecules/ExcelUploaderMonths";
-import ExcelUploaderUploadButtons from "../molecules/ExcelUploaderUploadButtons";
-import { Stat } from "../atoms/Stats";
-
-import useFileReader, { ExcelRow } from "../../hooks/useFileReader";
-import useFileSaver from "../../hooks/useFileSaver";
-import ExcelTable from "../organism/ExcelTable";
-import SiteTitle from "../atoms/SiteTitle";
-import SiteContainer from "../atoms/SiteContainer";
+import { ExcelUploaderMonths, Month } from "./ExcelUploaderMonths";
+import ExcelUploaderUploadButtons from "./ExcelUploaderUploadButtons";
+import { Stat } from "../../components/Stat/Stats";
+import useFileReader, { ExcelRow } from "./useFileReader";
+import useFileSaver from "./useFileSaver";
+import ExcelTable from "./ExcelTable";
+import SiteTitle from "../../components/SiteTitle/SiteTitle";
+import SiteContainer from "../../components/SiteContainer/SiteContainer";
 
 const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
 const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);

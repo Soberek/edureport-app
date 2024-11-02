@@ -1,4 +1,4 @@
-import { MiernikItemI } from "../../hooks/useMiernikApp";
+import { MiernikItemI } from "./useMiernikApp";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
