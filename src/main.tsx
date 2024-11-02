@@ -57,6 +57,10 @@ const router = createBrowserRouter([
             element: <IzrzGenerator />
           },
           {
+            path: "topics-generator",
+            element: <TopicsGenerator />
+          },
+          {
             // Catch-all route for 404
             path: "*",
             element: (
@@ -88,6 +92,7 @@ const router = createBrowserRouter([
 
 import { ThemeOptions } from "@mui/material/styles";
 import IzrzGenerator from "./components/pages/IzrzGenerator.tsx";
+import TopicsGenerator from "./components/pages/TopicsGenerator.tsx";
 
 export const themeOptions: ThemeOptions = {
   components: {
