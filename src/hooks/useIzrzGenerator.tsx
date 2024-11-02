@@ -14,11 +14,11 @@ interface FormDataI {
 }
 
 const initial_form_data: FormDataI = {
-  action_name: "",
-  date: "",
+  action_name: "Prelekcja",
+  date: new Date().toISOString().split("T")[0],
   description: "",
   address: "",
-  audience: "",
+  audience: "Uczniowie kl. - \nOpiekunowie - ",
   izrz_title: ""
 };
 
