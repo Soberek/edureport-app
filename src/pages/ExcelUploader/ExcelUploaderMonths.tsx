@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../atoms/Button"; // Adjust the import path as necessary
+import Button from "../../components/Button/Button"; // Adjust the import path as necessary
 import { Box, Typography } from "@mui/material";
 
 export interface Month {
