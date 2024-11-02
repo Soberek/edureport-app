@@ -8,6 +8,8 @@ import { Stat } from "../atoms/Stats";
 import useFileReader, { ExcelRow } from "../../hooks/useFileReader";
 import useFileSaver from "../../hooks/useFileSaver";
 import ExcelTable from "../organism/ExcelTable";
+import SiteTitle from "../atoms/SiteTitle";
+import SiteContainer from "../atoms/SiteContainer";
 
 const MemoizedExcelUploaderMonths = React.memo(ExcelUploaderMonths);
 const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons);
@@ -120,21 +122,19 @@ const ExcelUploader: React.FC = () => {
   };
 
   return (
-    <Box paddingX={{ xs: 1, md: 2 }} sx={{ paddingY: 2 }}>
-      <Typography variant="h5" marginBottom={2} display="flex" alignItems="center" gap={4} borderBottom="2px solid" pb={2} fontWeight="2xl">
-        🧮 Miernik budżetowy
-      </Typography>
+    <SiteContainer>
+      <SiteTitle>🧮 Miernik budżetowy</SiteTitle>
 
       <MemoizedExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
       <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
 
-      <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 0 }}>
+      <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 0 }} paddingBottom={1}>
         <Stat label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
         <Stat label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
 
       {Object.keys(agregated_data).length > 0 && !error ? <MemoizedExcelUploaderTable {...agregated_data} /> : <Typography>{error}</Typography>}
-    </Box>
+    </SiteContainer>
   );
 };
 

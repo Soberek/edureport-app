@@ -1,13 +1,16 @@
 import React from "react";
-import { Grid2 as Grid, TextField, Button, Box } from "@mui/material";
+import { Grid2 as Grid, TextField, Button } from "@mui/material";
 import useTaskFormik from "../../hooks/useIzrzGenerator";
 import { Field, Formik, Form } from "formik";
+import SiteTitle from "../atoms/SiteTitle";
+import SitesContainer from "../atoms/SiteContainer";
 
 const TaskForm: React.FC = () => {
   const { initial_form_data, validationSchema, handlePostMiernikItem } = useTaskFormik();
 
   return (
-    <Box p={{ xs: 1, md: 2 }}>
+    <SitesContainer>
+      <SiteTitle>🧮 Generator informacji z realizacji zadania</SiteTitle>
       <Formik
         initialValues={initial_form_data}
         onSubmit={(values) => {
@@ -119,7 +122,7 @@ const TaskForm: React.FC = () => {
           </Form>
         )}
       </Formik>
-    </Box>
+    </SitesContainer>
   );
 };
 
