@@ -100,11 +100,8 @@ export const themeOptions: ThemeOptions = {
       },
       styleOverrides: {
         root: {
-          fontSize: "0.5rem",
           padding: 0,
-          "@media (min-width:900px)": {
-            fontSize: "1.5rem" // Increase the font size on larger screens
-          }
+          fontSize: 10
         }
       }
     }

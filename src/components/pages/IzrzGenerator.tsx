@@ -20,13 +20,19 @@ const TaskForm: React.FC = () => {
           <Form>
             <Grid
               container
-              spacing={2}
+              spacing={1}
               gap={1}
-              p={2}
+              p={1}
               sx={{
                 backgroundColor: "white",
                 boxShadow: 10,
-                borderRadius: `5px`
+                borderRadius: `5px`,
+                "& > div *": {
+                  fontSize: 12
+                },
+                maxWidth: {
+                  md: 800
+                }
               }}
             >
               <Grid size={{ xs: 12, sm: 6 }}>

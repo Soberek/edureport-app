@@ -2,21 +2,6 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { MdOutlineDownload, MdOutlineUpload } from "react-icons/md";
 
-// // Custom Button component since the original import isn't available
-// const Button: React.FC<ButtonProps> = ({ label, selected, Icon, onClick }) => {
-//   return (
-//     <button
-//       onClick={onClick}
-//       className={`flex items-center px-4 py-2 rounded font-bold transition-all duration-300 ${
-//         selected ? "bg-blue-600 text-white hover:bg-white hover:text-red-500" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-//       }`}
-//     >
-//       {Icon && <Icon size={23} />}
-//       {label}
-//     </button>
-//   );
-// };
-
 interface ExcelUploaderUploadButtonsProps {
   file_name: string;
   handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;

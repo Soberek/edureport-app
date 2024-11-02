@@ -20,7 +20,7 @@ export const ExcelUploaderMonths: React.FC<ExcelUploaderMonthsProps> = ({ months
       </Typography>
       <Box
         justifyContent="flex-start"
-        marginBottom={4}
+        marginBottom={2}
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
