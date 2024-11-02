@@ -17,12 +17,12 @@ export const Topbar = () => {
   return (
     <Box
       bgcolor={"primary.main"}
-      sx={{ display: "flex", minWidth: "100vw", alignItems: "center", position: "fixed", zIndex: 100, justifyItems: ``, minHeight: "50px", px: 2 }}
+      sx={{ display: "flex", minWidth: "100vw", alignItems: "center", position: "fixed", zIndex: 100, justifyItems: ``, minHeight: "40px", px: 2 }}
     >
       <Typography
         sx={{
           color: "primary.100",
-          fontSize: 20,
+          fontSize: 17,
           ":hover": {
             fontWeight: "bold"
           }
@@ -38,7 +38,7 @@ export const Topbar = () => {
           ml: "auto",
           mr: 2,
           color: "primary.100",
-          fontSize: 15,
+          fontSize: 13,
           ":hover": {
             fontWeight: "bold"
           }
@@ -54,6 +54,8 @@ export const Topbar = () => {
           backgroundColor: "primary.700",
           mr: 6,
           // ml: 2,
+          px: 1,
+          fontSize: 12,
           ":hover": {
             transform: `scale(1.1)`
           }
@@ -62,18 +64,6 @@ export const Topbar = () => {
       >
         Wyloguj
       </Button>
-      {/* <Box
-        sx={{
-          color: "primary.100",
-          mr: 4,
-          ml: 2,
-          ":hover": {
-            transform: `scale(1.1)`
-          }
-        }}
-      >
-        <LuLogOut size={`30`} />
-      </Box> */}
     </Box>
   );
 };
