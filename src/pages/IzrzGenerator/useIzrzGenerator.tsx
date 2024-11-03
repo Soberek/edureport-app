@@ -43,32 +43,29 @@ const useTaskFormik = () => {
     console.log("Posting data...");
     setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/api/generate_izrz`, values, {
+      const response = await axios.post<Blob>(`${API_URL}/api/generate_izrz`, values, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json" // Ensure correct content type
+          "Content-Type": "application/json"
         },
-        responseType: "blob" // Important: Expect a blob response
+        responseType: "blob"
       });
 
-      // Create a Blob from the response data
-      const blob = new Blob([response.data], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+      // get file name from disposition header
 
-      // Create a URL for the Blob
-      const url = window.URL.createObjectURL(blob);
+      const file_name = `${values.izrz_title}_${values.date}_${values.action_name}_${values.address}`;
 
-      // Create a link element to trigger the download
+      // create url for blob
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+
+      // create link to download
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "output.docx"); // Specify the filename for the download
-
-      // Append to the body (necessary for Firefox)
+      link.setAttribute("download", `${file_name || "output"}.docx`);
       document.body.appendChild(link);
-
-      // Trigger the download
       link.click();
 
-      // Clean up and remove the link
+      // clean up and remove the link
       link.parentNode?.removeChild(link);
       window.URL.revokeObjectURL(url); // Free up memory
 
