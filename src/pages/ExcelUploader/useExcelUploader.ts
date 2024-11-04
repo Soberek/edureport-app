@@ -111,9 +111,5 @@ export const useExcelUploader = () => {
     }
   };
 
-
-  console.log(months)
-  console.log(agregated_data)
-
   return { months, miernik_summary, handleMonthSelect, file_name, agregated_data, error, saveToExcelFile, handleFileUpload };
 };
