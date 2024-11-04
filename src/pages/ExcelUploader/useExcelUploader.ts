@@ -98,11 +98,6 @@ export const useExcelUploader = () => {
       });
 
       setAgregatedData(result);
-
-      setMiernikSummary({
-        people: all_people,
-        actions: all_actions
-      });
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError(errorMessage);
