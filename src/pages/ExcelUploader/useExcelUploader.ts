@@ -22,13 +22,11 @@ export const useExcelUploader = () => {
 
   const [error, setError] = useState("");
 
-  const [months, setMonths] = useState<Month[]>(
-    useCallback((): Month[] => {
-      return new Array(12).fill(0).map((_, index) => ({
-        month_num: index + 1,
-        selected: false
-      }));
-    }, [])
+  const [months, setMonths] = useState<Month[]>(() =>
+    new Array(12).fill(0).map((_, index) => ({
+      month_num: index + 1,
+      selected: false
+    }))
   );
 
   const { raw_data, file_name, handleFileUpload } = useFileReader();
