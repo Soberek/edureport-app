@@ -23,7 +23,6 @@ const TypeNameHeader = ({ program_type }: { program_type: string }) => {
 };
 
 export default function ExcelTable(data: ProgramsData) {
-  console.log(Object.entries(data).forEach(([x, y]) => console.log(x, y)));
 
   return (
     <Grid key={1} container>
