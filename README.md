@@ -36,7 +36,8 @@ Tired of wrestling with complex educational reports? Introducing EduReport Pro -
 - [React](https://reactjs.org/)
 - [ReactRouter-v6.4+](https://reactrouter.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [MaterialUI](https://mui.com/) 
+- [MaterialUI](https://mui.com/)
+- [Formik](https://formik.org/) with [Yup](https://www.npmjs.com/package/yup/v/1.0.0-alpha.3)
 - [Render](https://render.com/) (deployment)
 
 ### Backend - (private for now)
