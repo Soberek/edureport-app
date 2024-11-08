@@ -4,9 +4,11 @@ import SitesContainer from "../../components/SiteContainer/SiteContainer";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
 
 const TopicsGenerator = () => {
-  const { topics, fetchTopics } = useTopicsGenerator();
+  const { topics, loading, fetchTopics } = useTopicsGenerator();
 
   console.log(topics);
+
+  if (loading) return <div>Loading best experience...</div>;
 
   return (
     <SitesContainer>
