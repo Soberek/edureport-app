@@ -6,8 +6,6 @@ import SiteTitle from "../../components/SiteTitle/SiteTitle";
 const TopicsGenerator = () => {
   const { topics, loading, fetchTopics } = useTopicsGenerator();
 
-  console.log(topics);
-
   if (loading) return <div>Loading best experience...</div>;
 
   return (
