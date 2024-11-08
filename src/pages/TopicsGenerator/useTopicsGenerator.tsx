@@ -13,8 +13,10 @@ interface TopicI {
 export const useTopicsGenerator = () => {
   const [topics, setTopics] = useState<TopicI[]>([]);
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchTopics = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${API_URL}/api/generate_topics`, {
         headers: { Authorization: `Bearer ${token}` }
@@ -27,8 +29,9 @@ export const useTopicsGenerator = () => {
       console.log(err);
       // setError(`Error fetching miernik items: ${err}`);
     } finally {
+      setLoading(false);
     }
   }, [token]);
 
-  return { topics, fetchTopics };
+  return { topics, fetchTopics, loading };
 };
