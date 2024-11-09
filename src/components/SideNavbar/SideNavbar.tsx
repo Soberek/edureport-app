@@ -10,7 +10,8 @@ export default function SideNavbar() {
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
     { path: "/miernik-app", name: "Miernik budżetowy" },
     { path: "/izrz-generator", name: "Generator IZRZ" },
-    { path: "/topics-generator", name: "Generator tematów" }
+    { path: "/topics-generator", name: "Generator tematów" },
+    { path: "/image-generator", name: "Generator twitter" }
   ];
 
   return (
