@@ -12,7 +12,16 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <Box id="error-page" display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh" p={2} sx={{ textAlign: "center" }}>
+    <Box
+      id="error-page"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      p={2}
+      sx={{ textAlign: "center" }}
+    >
       <Typography variant="h4" component="h1">
         Oops!
       </Typography>

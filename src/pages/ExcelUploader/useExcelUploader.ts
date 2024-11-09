@@ -33,7 +33,9 @@ export const useExcelUploader = () => {
   const { saveToExcelFile } = useFileSaver(agregated_data);
 
   const handleMonthSelect = useCallback((selected_month: number) => {
-    setMonths((prev_months) => prev_months.map((month) => (month.month_num === selected_month ? { ...month, selected: !month.selected } : month)));
+    setMonths((prev_months) =>
+      prev_months.map((month) => (month.month_num === selected_month ? { ...month, selected: !month.selected } : month))
+    );
     setError("");
   }, []);
 
@@ -65,7 +67,9 @@ export const useExcelUploader = () => {
 
         // Check for NaN values
         if (isNaN(people_count) || isNaN(action_count)) {
-          throw new Error(`Napotkano na nieprawidłową liczbę, sprawdź swój plik excel: people_count = ${people_count}, action_count = ${action_count}`);
+          throw new Error(
+            `Napotkano na nieprawidłową liczbę, sprawdź swój plik excel: people_count = ${people_count}, action_count = ${action_count}`
+          );
         }
 
         // Initialize nested objects if they don't exist
@@ -104,5 +108,14 @@ export const useExcelUploader = () => {
     }
   };
 
-  return { months, miernik_summary, handleMonthSelect, file_name, agregated_data, error, saveToExcelFile, handleFileUpload };
+  return {
+    months,
+    miernik_summary,
+    handleMonthSelect,
+    file_name,
+    agregated_data,
+    error,
+    saveToExcelFile,
+    handleFileUpload
+  };
 };

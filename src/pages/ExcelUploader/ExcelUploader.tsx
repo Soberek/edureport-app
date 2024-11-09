@@ -14,20 +14,37 @@ const MemoizedExcelUploaderUploadButtons = React.memo(ExcelUploaderUploadButtons
 const MemoizedExcelUploaderTable = React.memo(ExcelTable);
 
 const ExcelUploader: React.FC = () => {
-  const { months, handleFileUpload, handleMonthSelect, saveToExcelFile, miernik_summary, file_name, agregated_data, error } = useExcelUploader();
+  const {
+    months,
+    handleFileUpload,
+    handleMonthSelect,
+    saveToExcelFile,
+    miernik_summary,
+    file_name,
+    agregated_data,
+    error
+  } = useExcelUploader();
   return (
     <SiteContainer>
       <SiteTitle>🧮 Miernik budżetowy</SiteTitle>
 
       <MemoizedExcelUploaderMonths months={months} handleMonthSelect={handleMonthSelect} />
-      <MemoizedExcelUploaderUploadButtons file_name={file_name} handleFileUpload={handleFileUpload} saveToExcelFile={saveToExcelFile} />
+      <MemoizedExcelUploaderUploadButtons
+        file_name={file_name}
+        handleFileUpload={handleFileUpload}
+        saveToExcelFile={saveToExcelFile}
+      />
 
       <Box display="flex" gap={2} flexWrap="wrap" marginBottom={{ base: 2, md: 0 }} paddingBottom={1}>
         <Stat label="👩‍🏫 Ogólna liczba działań" value={miernik_summary.actions} />
         <Stat label="👨‍👩‍👧‍👦 Ogólna liczba odbiorców" value={miernik_summary.people} />
       </Box>
 
-      {Object.keys(agregated_data).length > 0 && !error ? <MemoizedExcelUploaderTable {...agregated_data} /> : <Typography>{error}</Typography>}
+      {Object.keys(agregated_data).length > 0 && !error ? (
+        <MemoizedExcelUploaderTable {...agregated_data} />
+      ) : (
+        <Typography>{error}</Typography>
+      )}
     </SiteContainer>
   );
 };

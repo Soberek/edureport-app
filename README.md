@@ -1,7 +1,9 @@
-# EduReport 
+# EduReport
+
 (Designed to streamline the work of the Polish Sanitary Inspection)
 
 Tired of wrestling with complex educational reports? Introducing EduReport Pro - your comprehensive solution for generating detailed educational activity reports at quarterly, monthly, and annual intervals.
+
   <p align="center">
     <a href="https://edureport.onrender.com/">View Demo</a>
      ·
@@ -12,22 +14,24 @@ Tired of wrestling with complex educational reports? Introducing EduReport Pro -
 </div>
 
 ### Save Time & Reduce Errors:
+
 - **Cut report creation time by up to 500% or more**
 - Eliminate copy-paste errors and manual data entry
 - Ensure consistency across all reports
 - Free up yourself for more strategic tasks
 
 ### Key Features:
+
 - Monthly Activity Tracking (12-month coverage)
 - Excel Integration & Export
 - Automated Metrics Calculation
 - Multi-Program Activity Monitoring
 - Monitor various activity types:
-    * Lectures and Presentations
-    * Media Publications
-    * Site Visits
-    * Distribution Activities
-    * Coordination Events
+  - Lectures and Presentations
+  - Media Publications
+  - Site Visits
+  - Distribution Activities
+  - Coordination Events
 
 ## Technologies
 

@@ -12,7 +12,9 @@ const initial_login_values: LoginI = {
 
 export const useLogin = () => {
   const validationSchema = Yup.object<LoginI>({
-    username: Yup.string().min(5, "Nazwa użytkownika musi mieć przynajmniej 5 znaków.").required("Nazwa użytkownika nie może być pusta"),
+    username: Yup.string()
+      .min(5, "Nazwa użytkownika musi mieć przynajmniej 5 znaków.")
+      .required("Nazwa użytkownika nie może być pusta"),
     password: Yup.string().min(5, "Hasło musi mieć przynajmniej 5 znaków.").required("Hasło nie może być puste")
   });
 

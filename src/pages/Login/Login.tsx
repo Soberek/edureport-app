@@ -50,7 +50,11 @@ export const Login = () => {
       <Box>
         <Typography textAlign="center">Test user: login: magda - password: 12345</Typography>
       </Box>
-      <Formik initialValues={initial_login_values} validationSchema={validationSchema} onSubmit={(values) => fetchUser(values)}>
+      <Formik
+        initialValues={initial_login_values}
+        validationSchema={validationSchema}
+        onSubmit={(values) => fetchUser(values)}
+      >
         {({ touched, errors }) => (
           <Form>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, alignItems: "center" }}>

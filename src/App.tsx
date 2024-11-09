@@ -11,7 +11,10 @@ import { Topbar } from "./components/Topbar/Topbar";
 
 export default function AppLayout() {
   return (
-    <Box sx={{ margin: 0, padding: 0, color: "primary.main", minHeight: "100vh", paddingLeft: 0 }} className="site-background">
+    <Box
+      sx={{ margin: 0, padding: 0, color: "primary.main", minHeight: "100vh", paddingLeft: 0 }}
+      className="site-background"
+    >
       <Topbar />
       <Box display="flex">
         <SideNavbar />

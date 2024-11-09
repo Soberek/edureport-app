@@ -8,7 +8,11 @@ interface ExcelUploaderUploadButtonsProps {
   saveToExcelFile: () => void;
 }
 
-const ExcelUploaderUploadButtons: React.FC<ExcelUploaderUploadButtonsProps> = ({ file_name, handleFileUpload, saveToExcelFile }) => {
+const ExcelUploaderUploadButtons: React.FC<ExcelUploaderUploadButtonsProps> = ({
+  file_name,
+  handleFileUpload,
+  saveToExcelFile
+}) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", flexWrap: "wrap", mb: 2, gap: 2 }}>
       <Box sx={{ display: "flex", gap: 4, mb: 1 }}>

@@ -19,7 +19,8 @@ export default function Home() {
           <Stack spacing={4} textAlign="center">
             <Typography variant="h4">Twórz profesjonalne sprawozdania w mgnieniu oka</Typography>
             <Typography variant="h6">
-              Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej i Promocji Zdrowia.
+              Nasz generator sprawozdań pomoże Ci szybko i łatwo przygotować wysokiej jakości raporty Oświaty Zdrowotnej
+              i Promocji Zdrowia.
             </Typography>
             <Link to="miernik-excel" style={{ textDecoration: "none" }}>
               <Button variant="contained" color="primary">
@@ -31,7 +32,9 @@ export default function Home() {
       </Box>
 
       <Box component="footer" sx={{ backgroundColor: "grey.300", padding: 2, textAlign: "center" }}>
-        <Typography variant="body2">&copy; 2024 Generator Sprawozdań - Krzysztof Palpuchowski - Wszelkie prawa zastrzeżone.</Typography>
+        <Typography variant="body2">
+          &copy; 2024 Generator Sprawozdań - Krzysztof Palpuchowski - Wszelkie prawa zastrzeżone.
+        </Typography>
       </Box>
     </Box>
   );

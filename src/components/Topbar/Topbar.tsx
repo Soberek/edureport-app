@@ -9,7 +9,16 @@ export const Topbar = () => {
   return (
     <Box
       bgcolor={"primary.main"}
-      sx={{ display: "flex", minWidth: "100vw", alignItems: "center", position: "fixed", zIndex: 100, justifyItems: ``, minHeight: "40px", px: 2 }}
+      sx={{
+        display: "flex",
+        minWidth: "100vw",
+        alignItems: "center",
+        position: "fixed",
+        zIndex: 100,
+        justifyItems: ``,
+        minHeight: "40px",
+        px: 2
+      }}
     >
       <Typography
         sx={{

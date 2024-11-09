@@ -6,7 +6,8 @@ import useMiernikAppFormik from "./useMiernikApp";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
 const MiernikApp = () => {
-  const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } = useMiernikAppFormik();
+  const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } =
+    useMiernikAppFormik();
 
   if (loading === true) return <div style={{ padding: 10 }}>Loading... (best UI experience)</div>;
 
@@ -111,7 +112,9 @@ const MiernikApp = () => {
                       helperText={<ErrorMessage name="program_name" />}
                       onChange={(e: { target: { value: any } }) => {
                         const selected_program_name = e.target.value;
-                        const selected_program = program_names.find((program) => program.name === selected_program_name);
+                        const selected_program = program_names.find(
+                          (program) => program.name === selected_program_name
+                        );
                         setFieldValue("program_name", selected_program_name);
                         setFieldValue("program_id", selected_program ? selected_program._id : ""); // Set the corresponding ID
                       }}

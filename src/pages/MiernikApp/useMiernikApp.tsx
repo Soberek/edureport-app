@@ -49,7 +49,11 @@ const API_URL: string = import.meta.env.VITE_API_URL;
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
-  date: Yup.date().required("Required").min(new Date("1900-01-01"), "Przynajmniej 1900-01-01").max(new Date("2050-01-01"), "Max 2050-01-01").nullable(),
+  date: Yup.date()
+    .required("Required")
+    .min(new Date("1900-01-01"), "Przynajmniej 1900-01-01")
+    .max(new Date("2050-01-01"), "Max 2050-01-01")
+    .nullable(),
   program_name: Yup.string().required("Program name is required"),
   program_id: Yup.string().required("Program name is required"),
   action_name: Yup.string().required("Action id is required"),
@@ -78,7 +82,6 @@ const useMiernikAppFormik = () => {
     } catch (err) {
       console.log(err);
       setError(`Error fetching miernik items: ${err}`);
-    } finally {
     }
   }, [token]);
 
@@ -124,7 +127,16 @@ const useMiernikAppFormik = () => {
     fetchData();
   }, [fetchData]);
 
-  return { handlePostMiernikItem, initial_form_data, validationSchema, program_names, actions, miernik_items, loading, error };
+  return {
+    handlePostMiernikItem,
+    initial_form_data,
+    validationSchema,
+    program_names,
+    actions,
+    miernik_items,
+    loading,
+    error
+  };
 };
 
 export default useMiernikAppFormik;
