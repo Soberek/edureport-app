@@ -12,7 +12,7 @@ import { Box, TextField } from "@mui/material";
 import TopicsGenerator from "./../pages/TopicsGenerator/TopicsGenerator.tsx";
 
 import IzrzGenerator from "./../pages/IzrzGenerator/IzrzGenerator.tsx";
-import QuickCampaignGenerator from "../pages/ImageGenerator/ImageGenerator.tsx";
+import PostGenerator from "../pages/ImageGenerator/ImageGenerator.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -63,7 +63,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "image-generator",
-            element: <QuickCampaignGenerator />
+            element: <PostGenerator />
           },
           {
             // Catch-all route for 404
