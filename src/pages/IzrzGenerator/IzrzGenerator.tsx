@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid2 as Grid, TextField, Button } from "@mui/material";
+import { Grid2 as Grid, TextField, Button, Box } from "@mui/material";
 import useTaskFormik from "./useIzrzGenerator";
 import { Field, Formik, Form } from "formik";
 
@@ -15,7 +15,6 @@ const TaskForm: React.FC = () => {
       <Formik
         initialValues={initial_form_data}
         onSubmit={(values) => {
-          console.log(values);
           handlePostMiernikItem(values);
         }}
         validationSchema={validationSchema}
@@ -52,6 +51,17 @@ const TaskForm: React.FC = () => {
 
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Field
+                  name="program_name"
+                  as={TextField}
+                  label="Nazwa programu"
+                  size="small"
+                  error={touched.program_name && Boolean(errors.program_name)}
+                  helperText={touched.program_name && errors.program_name}
+                />
+              </Grid>
+
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <Field
                   name="date"
                   as={TextField}
                   label="Data"
@@ -60,6 +70,20 @@ const TaskForm: React.FC = () => {
                   InputLabelProps={{ shrink: true }} // Ensures the label is shrunk for date fields
                   error={touched.date && Boolean(errors.date)}
                   helperText={touched.date && errors.date}
+                  size="small"
+                />
+              </Grid>
+
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <Field
+                  name="people_count"
+                  as={TextField}
+                  label="Liczba uczestników"
+                  placeholder="Data wykonania zadania"
+                  type="number"
+                  InputLabelProps={{ shrink: true }} // Ensures the label is shrunk for date fields
+                  error={touched.people_count && Boolean(errors.people_count)}
+                  helperText={touched.people_count && errors.people_count}
                   size="small"
                 />
               </Grid>
