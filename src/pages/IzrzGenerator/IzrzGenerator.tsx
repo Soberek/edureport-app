@@ -5,6 +5,7 @@ import { Field, Formik, Form } from "formik";
 
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
+import Templates from "./Templates";
 
 const TaskForm: React.FC = () => {
   const { initial_form_data, validationSchema, handlePostMiernikItem } = useTaskFormik();
@@ -147,6 +148,10 @@ const TaskForm: React.FC = () => {
           </Form>
         )}
       </Formik>
+
+      <Box>
+        <Templates />
+      </Box>
     </SitesContainer>
   );
 };
