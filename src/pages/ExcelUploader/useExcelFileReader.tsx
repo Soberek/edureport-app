@@ -9,7 +9,7 @@ const useFileReader = () => {
   const [file_name, setFileName] = useState("");
   const [raw_data, setRawData] = useState<ExcelRow[]>([]);
 
-  const handleFileUpload = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const blob_xlsx_file = e.target.files?.[0];
 
     const isXlsx = blob_xlsx_file?.name.endsWith(".xlsx");
@@ -56,7 +56,7 @@ const useFileReader = () => {
     };
 
     reader.readAsArrayBuffer(blob_xlsx_file);
-  }, []);
+  };
 
   return { raw_data, file_name, handleFileUpload };
 };
