@@ -13,7 +13,6 @@ import { useContext } from "react";
 import AuthContext from "../../context/Auth";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
-
 import { deepOrange } from "@mui/material/colors";
 
 export default function AccountMenu() {
@@ -39,7 +38,7 @@ export default function AccountMenu() {
     <React.Fragment>
       <Box sx={{ ml: "auto", mr: 4, display: "flex", alignItems: "center", textAlign: "center" }}>
         <Typography sx={{ minWidth: 100, color: "white" }}>{username}</Typography>
-        <Tooltip title="Account settings">
+        <Tooltip title="Profil">
           <IconButton
             onClick={handleClick}
             size="small"
