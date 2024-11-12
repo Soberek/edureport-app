@@ -1,6 +1,6 @@
 // Layout.tsx
 import { Outlet } from "react-router-dom";
-import SideNavbar from "./components/SideNavbar/SideNavbar";
+// import SideNavbar from "./components/SideNavbar/SideNavbar";
 import { Box } from "@mui/material";
 import "./index.css";
 import "@fontsource/roboto/300.css";
@@ -17,8 +17,8 @@ export default function AppLayout() {
     >
       <Topbar />
       <Box display="flex">
-        <SideNavbar />
-        <Box sx={{ marginLeft: { xs: 0, md: "215px" }, marginTop: "50px", flex: 1, overflow: "hidden" }}>
+        {/* <SideNavbar /> */}
+        <Box sx={{ marginLeft: { xs: 0 }, marginTop: "50px", flex: 1, overflow: "hidden" }}>
           <Outlet />
         </Box>
       </Box>
