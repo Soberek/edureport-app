@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import * as XLSX from "xlsx";
 
 export interface ExcelRow {
