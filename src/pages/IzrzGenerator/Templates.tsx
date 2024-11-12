@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../api/api";
+import { Box, List, ListItem, styled, Typography } from "@mui/material";
+import { useTemplates } from "./useTemplates";
 
-interface TemplateI {
-  _id: string;
-  file: Blob;
-  name: string;
-}
+// Customize ListItem with styles
+const StyledListItem = styled(ListItem)({
+  padding: "10px 20px",
+  backgroundColor: "#f5f5f5",
+  borderRadius: "8px",
+  marginBottom: "8px",
+  "&:hover": {
+    backgroundColor: "#e0e0e0"
+  }
+  // Add other styles as needed
+});
 
-const Templates = () => {
-  const [templates, setTemplates] = useState<TemplateI[] | []>([]);
+const TemplateList = () => {
+  const { templates } = useTemplates();
 
-  useEffect(() => {
-    const getTemplates = async () => {
-      const data = await fetchData<TemplateI[]>("/api/templates");
-
-      if (data && data.length > 0) {
-        setTemplates(data);
-      }
-    };
-
-    getTemplates();
-  }, []);
-
-  return <div>{templates.length && templates.map((template) => <div>{template.name}</div>)}</div>;
+  return (
+    <Box sx={{ mt: 4 }}>
+      <Typography sx={{ fontSize: 20 }}>Lista szablonów</Typography>
+      <List>
+        {templates.map((template, index) => (
+          <StyledListItem key={index}>{template.name}</StyledListItem>
+        ))}
+      </List>
+    </Box>
+  );
 };
 
-export default Templates;
+export default TemplateList;
