@@ -10,8 +10,14 @@ export interface Topic {
 
 // generic fetch function
 export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
+  const token = localStorage.getItem("token");
+
   try {
-    const response = await axios.get<T>(`${API_URL}${endpoint}`);
+    const response = await axios.get<T>(`${API_URL}${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
 
     if (response.status === 200) {
       return response.data;
@@ -28,4 +34,14 @@ export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
 //  generic function for topics
 export const fetchTopics = async (): Promise<Topic[] | null> => {
   return fetchData<Topic[]>("/api/topics");
+};
+
+export interface ProgramNameI {
+  _id: string;
+  type: "PROGRAMOWE" | "NIEPROGRAMOWE";
+  name: string;
+}
+
+export const fetchProgramNames = async (): Promise<ProgramNameI[] | null> => {
+  return fetchData<ProgramNameI[]>("/api/program_names");
 };

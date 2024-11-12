@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid2 as Grid, TextField, Button, Box } from "@mui/material";
-import useTaskFormik from "./useIzrzGenerator";
+import { Grid2 as Grid, TextField, Button, Box, Autocomplete } from "@mui/material";
+import useIzrzGenerator from "./useIzrzGenerator";
 import { Field, Formik, Form } from "formik";
 
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
@@ -8,7 +8,7 @@ import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import Templates from "./Templates";
 
 const TaskForm: React.FC = () => {
-  const { initial_form_data, validationSchema, handlePostMiernikItem } = useTaskFormik();
+  const { initial_form_data, validationSchema, programNames, handlePostMiernikItem } = useIzrzGenerator();
 
   return (
     <SitesContainer>
@@ -20,7 +20,7 @@ const TaskForm: React.FC = () => {
         }}
         validationSchema={validationSchema}
       >
-        {({ touched, errors }) => (
+        {({ touched, errors, setFieldValue }) => (
           <Form>
             <Grid
               container
@@ -34,9 +34,7 @@ const TaskForm: React.FC = () => {
                 "& > div *": {
                   fontSize: 12
                 },
-                maxWidth: {
-                  md: 800
-                }
+                maxWidth: {}
               }}
             >
               <Grid size={{ xs: 12, sm: 6 }}>
@@ -51,13 +49,23 @@ const TaskForm: React.FC = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Field
-                  name="program_name"
-                  as={TextField}
-                  label="Nazwa programu"
-                  size="small"
-                  error={touched.program_name && Boolean(errors.program_name)}
-                  helperText={touched.program_name && errors.program_name}
+                <Autocomplete
+                  disablePortal
+                  options={programNames.map((programName) => programName.name)}
+                  onChange={(_, newValue) => {
+                    setFieldValue("program_name", newValue); // Update the form value
+                  }}
+                  renderInput={(params) => (
+                    <Field
+                      name="program_name"
+                      type="string"
+                      as={TextField}
+                      label="Nazwa programu"
+                      error={touched.program_name && Boolean(errors.program_name)}
+                      helperText={touched.program_name && errors.program_name}
+                      {...params}
+                    />
+                  )}
                 />
               </Grid>
 
@@ -119,7 +127,7 @@ const TaskForm: React.FC = () => {
                   type="text"
                   size="small"
                   multiline
-                  rows={3}
+                  rows={5}
                   error={touched.audience && Boolean(errors.audience)}
                   helperText={touched.audience && errors.audience}
                 />
@@ -132,7 +140,7 @@ const TaskForm: React.FC = () => {
                   label="Opis wykonanego zadania"
                   type="text"
                   multiline
-                  rows={3}
+                  rows={5}
                   size="small"
                   error={touched.description && Boolean(errors.description)}
                   helperText={touched.description && errors.description}
@@ -149,7 +157,7 @@ const TaskForm: React.FC = () => {
         )}
       </Formik>
 
-      <Box>
+      <Box sx={{ my: 2 }}>
         <Templates />
       </Box>
     </SitesContainer>

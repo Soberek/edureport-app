@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as Yup from "yup";
+import { fetchProgramNames, ProgramNameI } from "../../api/api";
 
 const API_URL: string = import.meta.env.VITE_API_URL;
 
@@ -26,10 +27,11 @@ const initial_form_data: FormDataI = {
   izrz_title: ""
 };
 
-const useTaskFormik = () => {
+const useIzrzGenerator = () => {
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [programNames, setProgramNames] = useState<ProgramNameI[] | []>([]);
 
   const validationSchema = Yup.object<FormDataI>({
     izrz_title: Yup.string().required("Tytuł zadania jest wymagany"),
@@ -50,9 +52,23 @@ const useTaskFormik = () => {
     description: Yup.string().required("Opis zadania jest wymagany")
   });
 
+  useEffect(() => {
+    const getProgramNamesFromAPI = async () => {
+      const data = await fetchProgramNames();
+
+      console.log(data);
+      if (data) {
+        setProgramNames(data);
+      }
+    };
+
+    getProgramNamesFromAPI();
+  }, []);
+
   const handlePostMiernikItem = useCallback(
     async (values: FormDataI) => {
       console.log("Posting data...");
+      console.log(values.program_name);
       setLoading(true);
       try {
         const response = await axios.post<Blob>(`${API_URL}/api/generate_izrz`, values, {
@@ -92,7 +108,7 @@ const useTaskFormik = () => {
     [token]
   );
 
-  return { handlePostMiernikItem, validationSchema, initial_form_data, loading, error };
+  return { handlePostMiernikItem, validationSchema, initial_form_data, loading, error, programNames };
 };
 
-export default useTaskFormik;
+export default useIzrzGenerator;
