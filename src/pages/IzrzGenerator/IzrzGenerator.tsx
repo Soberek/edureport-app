@@ -8,13 +8,13 @@ import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import Templates from "./Templates";
 
 const TaskForm: React.FC = () => {
-  const { initial_form_data, validationSchema, programNames, handlePostMiernikItem } = useIzrzGenerator();
+  const { initialFormData, validationSchema, programNames, handlePostMiernikItem } = useIzrzGenerator();
 
   return (
     <SitesContainer>
       <SiteTitle>🧮 Generator informacji z realizacji zadania</SiteTitle>
       <Formik
-        initialValues={initial_form_data}
+        initialValues={initialFormData}
         onSubmit={(values) => {
           handlePostMiernikItem(values);
         }}
@@ -43,8 +43,8 @@ const TaskForm: React.FC = () => {
                   as={TextField}
                   label="Tytuł zadania (np. 24/87)"
                   size="small"
-                  error={touched.izrz_title && Boolean(errors.izrz_title)}
-                  helperText={touched.izrz_title && errors.izrz_title}
+                  error={touched.izrzTitle && Boolean(errors.izrzTitle)}
+                  helperText={touched.izrzTitle && errors.izrzTitle}
                 />
               </Grid>
 
@@ -61,8 +61,8 @@ const TaskForm: React.FC = () => {
                       type="string"
                       as={TextField}
                       label="Nazwa programu"
-                      error={touched.program_name && Boolean(errors.program_name)}
-                      helperText={touched.program_name && errors.program_name}
+                      error={touched.programName && Boolean(errors.programName)}
+                      helperText={touched.programName && errors.programName}
                       {...params}
                     />
                   )}
@@ -91,8 +91,8 @@ const TaskForm: React.FC = () => {
                   placeholder="Data wykonania zadania"
                   type="number"
                   InputLabelProps={{ shrink: true }} // Ensures the label is shrunk for date fields
-                  error={touched.people_count && Boolean(errors.people_count)}
-                  helperText={touched.people_count && errors.people_count}
+                  error={touched.peopleCount && Boolean(errors.peopleCount)}
+                  helperText={touched.peopleCount && errors.peopleCount}
                   size="small"
                 />
               </Grid>
@@ -103,8 +103,8 @@ const TaskForm: React.FC = () => {
                   as={TextField}
                   label="Działanie np. prelekcja, wykład"
                   size="small"
-                  error={touched.action_name && Boolean(errors.action_name)}
-                  helperText={touched.action_name && errors.action_name}
+                  error={touched.actionName && Boolean(errors.actionName)}
+                  helperText={touched.actionName && errors.actionName}
                 />
               </Grid>
 

@@ -6,25 +6,25 @@ import { fetchProgramNames, ProgramNameI } from "../../api/api";
 const API_URL: string = import.meta.env.VITE_API_URL;
 
 interface FormDataI {
-  action_name: string;
-  program_name: string;
+  actionName: string;
+  programName: string;
   date: string;
-  people_count: number;
+  peopleCount: number;
   description: string;
   address: string;
   audience: string;
-  izrz_title: string;
+  izrzTitle: string;
 }
 
-const initial_form_data: FormDataI = {
-  action_name: "Prelekcja",
-  program_name: "",
+const initialFormData: FormDataI = {
+  actionName: "Prelekcja",
+  programName: "",
   date: new Date().toISOString().split("T")[0],
-  people_count: 0,
+  peopleCount: 0,
   description: "",
   address: "",
   audience: "Uczniowie kl. - \nOpiekunowie - ",
-  izrz_title: ""
+  izrzTitle: ""
 };
 
 const useIzrzGenerator = () => {
@@ -34,8 +34,8 @@ const useIzrzGenerator = () => {
   const [programNames, setProgramNames] = useState<ProgramNameI[] | []>([]);
 
   const validationSchema = Yup.object<FormDataI>({
-    izrz_title: Yup.string().required("Tytuł zadania jest wymagany"),
-    program_name: Yup.string().required("Nazwa programu jest wymagana"),
+    izrzTitle: Yup.string().required("Tytuł zadania jest wymagany"),
+    programName: Yup.string().required("Nazwa programu jest wymagana"),
     date: Yup.date()
       .transform((value, originalValue) => {
         return originalValue ? new Date(originalValue) : value;
@@ -43,10 +43,8 @@ const useIzrzGenerator = () => {
       .required("Data jest wymagana")
       .min(new Date("1900-01-01"), "Data nie może być mniejsza niż 01.01.1900")
       .max(new Date("2050-10-10"), "Data nie może być większa niż 30.12.2050"),
-    people_count: Yup.number()
-      .min(0, "Liczba nie może być mniejsza niż zero.")
-      .required("Liczba uczestników wymagana."),
-    action_name: Yup.string().required("Nazwa działania jest wymagana"),
+    peopleCount: Yup.number().min(0, "Liczba nie może być mniejsza niż zero.").required("Liczba uczestników wymagana."),
+    actionName: Yup.string().required("Nazwa działania jest wymagana"),
     address: Yup.string().required("Adres jest wymagany"),
     audience: Yup.string().required("Odbiorcy są wymagani"),
     description: Yup.string().required("Opis zadania jest wymagany")
@@ -56,8 +54,8 @@ const useIzrzGenerator = () => {
     const getProgramNamesFromAPI = async () => {
       const data = await fetchProgramNames();
 
-      console.log(data);
       if (data) {
+        console.log("Program names fetching success :D");
         setProgramNames(data);
       }
     };
@@ -68,7 +66,7 @@ const useIzrzGenerator = () => {
   const handlePostMiernikItem = useCallback(
     async (values: FormDataI) => {
       console.log("Posting data...");
-      console.log(values.program_name);
+      console.log(values.programName);
       setLoading(true);
       try {
         const response = await axios.post<Blob>(`${API_URL}/api/generate_izrz`, values, {
@@ -80,7 +78,7 @@ const useIzrzGenerator = () => {
         });
 
         // define file name based on user input
-        const file_name = `${values.izrz_title}_${values.date}_${values.action_name}_${values.address}`;
+        const file_name = `${values.izrzTitle}_${values.date}_${values.actionName}_${values.address}`;
 
         // create url for blob
         const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -108,7 +106,7 @@ const useIzrzGenerator = () => {
     [token]
   );
 
-  return { handlePostMiernikItem, validationSchema, initial_form_data, loading, error, programNames };
+  return { handlePostMiernikItem, validationSchema, initialFormData, loading, error, programNames };
 };
 
 export default useIzrzGenerator;
