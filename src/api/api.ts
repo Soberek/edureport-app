@@ -2,6 +2,13 @@ import axios from "axios";
 
 const API_URL: string = import.meta.env.VITE_API_URL;
 
+const apiClient = axios.create({
+  baseURL: API_URL,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("token") || ""}`
+  }
+});
+
 export interface Topic {
   _id: string;
   id: number;
@@ -13,11 +20,7 @@ export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.get<T>(`${API_URL}${endpoint}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const response = await apiClient.get<T>(`${API_URL}${endpoint}`);
 
     if (response.status === 200) {
       return response.data;
