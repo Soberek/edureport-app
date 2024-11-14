@@ -34,7 +34,6 @@ export const Login = () => {
         const token: string = response.data.token;
         login(token, username);
         navigate("/miernik-excel", { replace: true });
-      } else {
       }
     } catch (err) {
       console.log(err);
