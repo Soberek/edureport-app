@@ -72,6 +72,34 @@ export interface ProgramNameI {
   type: "PROGRAMOWE" | "NIEPROGRAMOWE";
   name: string;
 }
+// PROGRAM NAMES
 export const fetchProgramNames = async (): Promise<ProgramNameI[] | null> => {
   return fetchData<ProgramNameI[]>("/api/program_names");
+};
+
+interface ActionResponse {
+  _id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+// ACTIONS
+
+import { initialActionFormValuesI } from "../pages/Institutions/Actions";
+
+export const postAction = async (values: initialActionFormValuesI): Promise<ActionResponse | null> => {
+  try {
+    const response = await postData("/api/actions", values);
+
+    if (response) {
+      console.log("Action successfully submitted:", response);
+      return response;
+    } else {
+      console.error("Action submission failed.");
+      return null;
+    }
+  } catch (err) {
+    console.error("Error submitting action:", err);
+    return null;
+  }
 };
