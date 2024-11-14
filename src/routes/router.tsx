@@ -13,6 +13,7 @@ import TopicsGenerator from "./../pages/TopicsGenerator/TopicsGenerator.tsx";
 
 import IzrzGenerator from "./../pages/IzrzGenerator/IzrzGenerator.tsx";
 import PostGenerator from "../pages/ImageGenerator/ImageGenerator.tsx";
+import { Actions } from "../pages/Institutions/Actions.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
           {
             path: "image-generator",
             element: <PostGenerator />
+          },
+          {
+            path: "actions",
+            element: <Actions />
           },
           {
             // Catch-all route for 404

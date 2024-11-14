@@ -23,7 +23,8 @@ export default function SideBarDrawer({
     { path: "/miernik-app", name: "Miernik budżetowy" },
     { path: "/izrz-generator", name: "Generator IZRZ" },
     { path: "/topics-generator", name: "Generator tematów" },
-    { path: "/image-generator", name: "Generator twitter" }
+    { path: "/image-generator", name: "Generator twitter" },
+    { path: "/actions", name: "Akcje" }
   ];
 
   const { pathname } = useLocation();
