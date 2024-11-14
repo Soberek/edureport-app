@@ -34,7 +34,30 @@ export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
   }
 };
 
-//  generic function for topics
+export const postData = async <T>(endpoint: string, data: T) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    console.error("No token found, authorization failed.");
+    return null;
+  }
+
+  try {
+    const response = await apiClient.post(`${API_URL}${endpoint}`, data);
+
+    if (response.status === 200 || response.status === 201) {
+      return response.data;
+    } else {
+      console.error(`Failed to post data from ${endpoint}: `, response.status);
+      return null;
+    }
+  } catch (err) {
+    console.error(`Error posting data to ${endpoint}:`, err);
+    return null;
+  }
+};
+
+//  TOPICS
 export const fetchTopics = async (): Promise<Topic[] | null> => {
   return fetchData<Topic[]>("/api/topics");
 };
