@@ -19,6 +19,11 @@ export interface Topic {
 export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
   const token = localStorage.getItem("token");
 
+  if (!token) {
+    console.error("No token found, authorization failed.");
+    return null;
+  }
+
   try {
     const response = await apiClient.get<T>(`${API_URL}${endpoint}`);
 
@@ -67,7 +72,6 @@ export interface ProgramNameI {
   type: "PROGRAMOWE" | "NIEPROGRAMOWE";
   name: string;
 }
-
 export const fetchProgramNames = async (): Promise<ProgramNameI[] | null> => {
   return fetchData<ProgramNameI[]>("/api/program_names");
 };
