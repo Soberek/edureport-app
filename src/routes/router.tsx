@@ -13,7 +13,7 @@ import TopicsGenerator from "./../pages/TopicsGenerator/TopicsGenerator.tsx";
 
 import IzrzGenerator from "./../pages/IzrzGenerator/IzrzGenerator.tsx";
 import PostGenerator from "../pages/ImageGenerator/ImageGenerator.tsx";
-import { Actions } from "../pages/Institutions/Actions.tsx";
+import { Actions } from "../pages/Actions/Actions.tsx";
 
 export const router = createBrowserRouter([
   {

@@ -6,10 +6,8 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import { postAction } from "../../api/api";
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
-
-export interface initialActionFormValuesI {
-  name: string;
-}
+import { ActionsTable } from "./ActionsTable";
+import { ActionI, initialActionFormValuesI } from "../../types/Action";
 
 const initialActionFormValues: initialActionFormValuesI = {
   name: ""
@@ -21,6 +19,8 @@ export const Actions = () => {
     name: yup.string().required("Nazwa akcji jest wymagana.")
   });
 
+  const [actions, setActions] = useState<ActionI[] | []>([]);
+
   const handleSubmit = async (
     values: initialActionFormValuesI,
     { setSubmitting }: FormikHelpers<initialActionFormValuesI>
@@ -28,6 +28,7 @@ export const Actions = () => {
     try {
       const response = await postAction(values);
       if (response) {
+        setActions(response);
       } else {
         setError("Wystąpił błąd poczas dodawania akcji.");
       }
@@ -80,6 +81,8 @@ export const Actions = () => {
           {error}
         </Typography>
       ) : null}
+
+      {actions.length > 0 && <ActionsTable data={actions} />}
     </SitesContainer>
   );
 };
