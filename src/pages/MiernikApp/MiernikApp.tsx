@@ -7,10 +7,10 @@ import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
 import { FormDataI } from "../../types/MiernikApp";
 const MiernikApp = () => {
-  const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } =
+  const { handlePostMiernikItem, initialFormData, validationSchema, miernikItems, actions, programNames, loading } =
     useMiernikAppFormik();
 
-  if (loading === true) return <div style={{ padding: 10 }}>Loading... (best UI experience)</div>;
+  if (loading === true) return <SitesContainer>Loading... (best UI experience)</SitesContainer>;
 
   return (
     <SitesContainer>
