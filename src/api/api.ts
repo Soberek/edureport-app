@@ -1,5 +1,9 @@
 import axios from "axios";
 
+import { ActionI, initialActionFormValuesI } from "../types/Action";
+import { ProgramNameI } from "../types/ProgramName";
+import { Topic } from "../types/Topic";
+
 const API_URL: string = import.meta.env.VITE_API_URL;
 
 const apiClient = axios.create({
@@ -8,12 +12,6 @@ const apiClient = axios.create({
     Authorization: `Bearer ${localStorage.getItem("token") || ""}`
   }
 });
-
-export interface Topic {
-  _id: string;
-  id: number;
-  content: string;
-}
 
 // generic fetch function
 export const fetchData = async <T>(endpoint: string): Promise<T | null> => {
@@ -67,27 +65,14 @@ export const fetchTopics = async (): Promise<Topic[] | null> => {
   return fetchData<Topic[]>("/api/topics");
 };
 
-export interface ProgramNameI {
-  _id: string;
-  type: "PROGRAMOWE" | "NIEPROGRAMOWE";
-  name: string;
-}
 // PROGRAM NAMES
 export const fetchProgramNames = async (): Promise<ProgramNameI[] | null> => {
   return fetchData<ProgramNameI[]>("/api/program_names");
 };
 
-interface ActionResponse {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
 // ACTIONS
 
-import { initialActionFormValuesI } from "../pages/Institutions/Actions";
-
-export const postAction = async (values: initialActionFormValuesI): Promise<ActionResponse | null> => {
+export const postAction = async (values: initialActionFormValuesI): Promise<ActionI[] | null> => {
   try {
     const response = await postData("/api/actions", values);
 

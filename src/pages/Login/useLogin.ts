@@ -1,9 +1,5 @@
 import * as Yup from "yup";
-
-interface LoginI {
-  username: string;
-  password: string;
-}
+import { LoginI } from "../../types/Auth";
 
 const initial_login_values: LoginI = {
   username: "",

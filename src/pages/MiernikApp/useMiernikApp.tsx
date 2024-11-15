@@ -1,17 +1,10 @@
 import axios, { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
 import * as Yup from "yup";
-
-interface FormDataI {
-  name: string;
-  date: string;
-  program_name: string;
-  program_id: string;
-  action_name: string;
-  action_id: string;
-  people_count: number;
-  action_count: number;
-}
+import { FormDataI } from "../../types/MiernikApp";
+import { ProgramNameI } from "../../types/ProgramName";
+import { MiernikItemI } from "../../types/MiernikItem";
+import { ActionI } from "../../types/Action";
 
 const initial_form_data: FormDataI = {
   name: "",
@@ -23,27 +16,6 @@ const initial_form_data: FormDataI = {
   people_count: 0,
   action_count: 0
 };
-
-interface ProgramNameI {
-  _id: string;
-  name: string;
-}
-
-export interface MiernikItemI {
-  _id: string;
-  name: string;
-  action_count: number;
-  people_count: number;
-  date: string;
-  owner: string;
-  program_id: { name: string; type: string };
-  action_id: { name: string; id: string };
-}
-
-interface ActionI {
-  _id: string;
-  name: string;
-}
 
 const API_URL: string = import.meta.env.VITE_API_URL;
 

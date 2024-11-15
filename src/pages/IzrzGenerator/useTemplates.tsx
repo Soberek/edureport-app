@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchData } from "../../api/api";
-
-interface TemplateI {
-  _id: string;
-  file: Blob;
-  name: string;
-}
+import { TemplateI } from "../../types/Template";
 
 export const useTemplates = () => {
   const [templates, setTemplates] = useState<TemplateI[] | []>([]);

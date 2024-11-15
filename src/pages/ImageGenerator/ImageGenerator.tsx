@@ -13,7 +13,7 @@ const PostGenerator: React.FC = () => {
     },
     {
       id: 49,
-      content: "Jebanko na plazy"
+      content: "Tak"
     }
   ];
   const [imageFile, setImageFile] = useState<File | null>(null);
