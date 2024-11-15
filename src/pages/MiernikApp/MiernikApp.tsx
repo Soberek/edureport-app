@@ -5,6 +5,7 @@ import { MiernikAppTable } from "./MiernikAppTable";
 import useMiernikAppFormik from "./useMiernikApp";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
+import { FormDataI } from "../../types/MiernikApp";
 const MiernikApp = () => {
   const { handlePostMiernikItem, initial_form_data, validationSchema, miernik_items, actions, program_names, loading } =
     useMiernikAppFormik();
@@ -16,7 +17,7 @@ const MiernikApp = () => {
       <SiteTitle>🧮 Miernik Budżetowy (wersja mongodb)</SiteTitle>
       <Box>
         <Formik
-          initialValues={initial_form_data}
+          initialValues={initialFormData}
           validationSchema={validationSchema}
           onSubmit={(values) => {
             handlePostMiernikItem(values);
@@ -80,10 +81,10 @@ const MiernikApp = () => {
                   <Field
                     as={TextField}
                     fullWidth
-                    name="people_count"
+                    name="peopleCount"
                     label="People Count"
                     type="number"
-                    error={touched.people_count && values.people_count < 0}
+                    error={touched.peopleCount && values.peopleCount < 0}
                     helperText={<ErrorMessage name="people_count" />}
                     size="small"
                   />
@@ -92,35 +93,34 @@ const MiernikApp = () => {
                   <Field
                     as={TextField}
                     fullWidth
-                    name="action_count"
+                    name="actionCount"
                     label="Action Count"
                     type="number"
-                    error={touched.action_count && values.action_count < 0}
+                    error={touched.actionCount && values.actionCount < 0}
                     helperText={<ErrorMessage name="action_count" />}
                     size="small"
                   />
                 </Grid>
 
                 {/* Program name */}
-                {program_names.length > 0 && (
+                {programNames.length > 0 && (
                   <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       select
+                      defaultValue={""}
                       label="Nazwa programu"
-                      name="program_name"
-                      error={touched.program_name && Boolean(errors.program_name)}
+                      name="programName"
+                      error={touched.programName && Boolean(errors.programName)}
                       helperText={<ErrorMessage name="program_name" />}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        const selected_program_name = e.target.value;
-                        const selected_program = program_names.find(
-                          (program) => program.name === selected_program_name
-                        );
-                        setFieldValue("program_name", selected_program_name);
-                        setFieldValue("program_id", selected_program ? selected_program._id : ""); // Set the corresponding ID
+                        const selectedProgramName = e.target.value;
+                        const selectedProgram = programNames.find((program) => program.name === selectedProgramName);
+                        setFieldValue("programName", selectedProgramName);
+                        setFieldValue("programId", selectedProgram ? selectedProgram._id : ""); // Set the corresponding ID
                       }}
                       // size="small"
                     >
-                      {program_names.map((program) => (
+                      {programNames.map((program) => (
                         <MenuItem key={program._id} value={program.name}>
                           {program.name}
                         </MenuItem>
@@ -135,14 +135,14 @@ const MiernikApp = () => {
                       as={TextField}
                       select
                       label="Typ działania"
-                      name="action_name"
-                      error={touched.action_name && Boolean(errors.action_name)}
+                      name="actionName"
+                      error={touched.actionName && Boolean(errors.actionName)}
                       helperText={<ErrorMessage name="action_name" />}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        const selected_action_name = e.target.value;
-                        const selected_action = actions.find((action) => action.name === selected_action_name);
-                        setFieldValue("action_name", selected_action_name);
-                        setFieldValue("action_id", selected_action ? selected_action._id : ""); // Set the corresponding ID
+                        const selectedActionName = e.target.value;
+                        const selectedAction = actions.find((action) => action.name === selectedActionName);
+                        setFieldValue("actionName", selectedActionName);
+                        setFieldValue("actionId", selectedAction ? selectedAction._id : ""); // Set the corresponding ID
                       }}
                     >
                       {actions.map((action) => (
@@ -164,7 +164,7 @@ const MiernikApp = () => {
           )}
         </Formik>
 
-        <Box mt={4}>{miernik_items.length > 0 && <MiernikAppTable data={miernik_items} />}</Box>
+        <Box mt={4}>{miernikItems.length > 0 && <MiernikAppTable data={miernikItems} />}</Box>
       </Box>
     </SitesContainer>
   );

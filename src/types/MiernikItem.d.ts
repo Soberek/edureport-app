@@ -1,10 +1,10 @@
 export interface MiernikItemI {
   _id: string;
   name: string;
-  action_count: number;
-  people_count: number;
+  actionCount: number;
+  peopleCount: number;
   date: string;
   owner: string;
-  program_id: { name: string; type: string };
-  action_id: { name: string; id: string };
+  programId: { name: string; type: string };
+  actionId: { name: string; id: string };
 }

@@ -50,13 +50,13 @@ export const MiernikAppTable = React.memo(({ data }: { data: MiernikItemI[] }) =
     }
   ];
 
-  const item_rows = data.map((item) => {
+  const itemRows = data.map((item) => {
     return {
       id: item._id,
-      programName: item.program_id.name,
-      programType: item.program_id.type,
-      peopleCount: item.people_count,
-      actionCount: item.action_count,
+      programName: item.programId.name,
+      programType: item.programId.type,
+      peopleCount: item.peopleCount,
+      actionCount: item.actionCount,
       date: new Date(item.date)
     };
   });
@@ -72,7 +72,7 @@ export const MiernikAppTable = React.memo(({ data }: { data: MiernikItemI[] }) =
       }}
     >
       <DataGrid
-        rows={item_rows}
+        rows={itemRows}
         columns={columns}
         initialState={{
           pagination: {

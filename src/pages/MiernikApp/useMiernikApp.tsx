@@ -6,40 +6,40 @@ import { ProgramNameI } from "../../types/ProgramName";
 import { MiernikItemI } from "../../types/MiernikItem";
 import { ActionI } from "../../types/Action";
 
-const initial_form_data: FormDataI = {
+const initialFormData: FormDataI = {
   name: "",
-  date: "",
-  program_name: "",
-  program_id: "",
-  action_name: "",
-  action_id: "",
-  people_count: 0,
-  action_count: 0
+  date: new Date().toISOString().split("T")[0],
+  programName: "",
+  programId: "",
+  actionName: "",
+  actionId: "",
+  peopleCount: 0,
+  actionCount: 0
 };
 
 const API_URL: string = import.meta.env.VITE_API_URL;
 
-const validationSchema = Yup.object({
+const validationSchema = Yup.object<FormDataI>({
   name: Yup.string().required("Required"),
   date: Yup.date()
     .required("Required")
     .min(new Date("1900-01-01"), "Przynajmniej 1900-01-01")
     .max(new Date("2050-01-01"), "Max 2050-01-01")
     .nullable(),
-  program_name: Yup.string().required("Program name is required"),
-  program_id: Yup.string().required("Program name is required"),
-  action_name: Yup.string().required("Action id is required"),
-  action_id: Yup.string().required("Action id is required"),
-  people_count: Yup.number().min(0, "0 albo więcej").required("Pole wymagane"),
-  action_count: Yup.number().min(1, "1 albo więcej").required("Pole wymagane")
+  programName: Yup.string().required("Nazwa programu jest wymagana."),
+  programId: Yup.string().required("Program name is required"),
+  actionName: Yup.string().required("Nazwa akcji jest wymagana"),
+  actionId: Yup.string().required("Action id is required"),
+  peopleCount: Yup.number().min(0, "0 albo więcej").required("Pole wymagane"),
+  actionCount: Yup.number().min(1, "1 albo więcej").required("Pole wymagane")
 });
 
 const useMiernikAppFormik = () => {
   const token = localStorage.getItem("token");
 
-  const [program_names, setProgramNames] = useState<ProgramNameI[]>([]);
+  const [programNames, setProgramNames] = useState<ProgramNameI[]>([]);
   const [actions, setActions] = useState<ActionI[]>([]);
-  const [miernik_items, setMiernikItems] = useState<MiernikItemI[]>([]);
+  const [miernikItems, setMiernikItems] = useState<MiernikItemI[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -101,11 +101,11 @@ const useMiernikAppFormik = () => {
 
   return {
     handlePostMiernikItem,
-    initial_form_data,
+    initialFormData,
     validationSchema,
-    program_names,
+    programNames,
     actions,
-    miernik_items,
+    miernikItems,
     loading,
     error
   };
