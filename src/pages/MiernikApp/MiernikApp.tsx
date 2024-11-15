@@ -110,7 +110,7 @@ const MiernikApp = () => {
                       name="program_name"
                       error={touched.program_name && Boolean(errors.program_name)}
                       helperText={<ErrorMessage name="program_name" />}
-                      onChange={(e: { target: { value: any } }) => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         const selected_program_name = e.target.value;
                         const selected_program = program_names.find(
                           (program) => program.name === selected_program_name
@@ -138,7 +138,7 @@ const MiernikApp = () => {
                       name="action_name"
                       error={touched.action_name && Boolean(errors.action_name)}
                       helperText={<ErrorMessage name="action_name" />}
-                      onChange={(e: { target: { value: any } }) => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         const selected_action_name = e.target.value;
                         const selected_action = actions.find((action) => action.name === selected_action_name);
                         setFieldValue("action_name", selected_action_name);
