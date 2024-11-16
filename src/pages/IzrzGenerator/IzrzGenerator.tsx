@@ -39,7 +39,7 @@ const TaskForm: React.FC = () => {
             >
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Field
-                  name="izrz_title"
+                  name="izrzTitle"
                   as={TextField}
                   label="Tytuł zadania (np. 24/87)"
                   size="small"
@@ -53,11 +53,11 @@ const TaskForm: React.FC = () => {
                   disablePortal
                   options={programNames.map((programName) => programName.name)}
                   onChange={(_, newValue) => {
-                    setFieldValue("program_name", newValue); // Update the form value
+                    setFieldValue("programName", newValue); // Update the form value
                   }}
                   renderInput={(params) => (
                     <Field
-                      name="program_name"
+                      name="programName"
                       type="string"
                       as={TextField}
                       label="Nazwa programu"
@@ -85,7 +85,7 @@ const TaskForm: React.FC = () => {
 
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Field
-                  name="people_count"
+                  name="peopleCount"
                   as={TextField}
                   label="Liczba uczestników"
                   placeholder="Data wykonania zadania"
@@ -99,7 +99,7 @@ const TaskForm: React.FC = () => {
 
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Field
-                  name="action_name"
+                  name="actionName"
                   as={TextField}
                   label="Działanie np. prelekcja, wykład"
                   size="small"
