@@ -5,10 +5,12 @@ import { Field, Formik, Form } from "formik";
 
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
-import Templates from "./Templates";
+import Templates from "./TemplatesList";
+import { useTemplates } from "./useTemplatesList";
 
 const TaskForm: React.FC = () => {
   const { initialFormData, validationSchema, programNames, handlePostMiernikItem } = useIzrzGenerator();
+  const { templates, chosenTemplate, handleTemplateSelect } = useTemplates();
 
   return (
     <SitesContainer>
@@ -158,7 +160,7 @@ const TaskForm: React.FC = () => {
       </Formik>
 
       <Box sx={{ my: 2 }}>
-        <Templates />
+        <Templates templates={templates} chosenTemplate={chosenTemplate} handleTemplateSelect={handleTemplateSelect} />
       </Box>
     </SitesContainer>
   );
