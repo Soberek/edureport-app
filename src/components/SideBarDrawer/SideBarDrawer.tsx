@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
@@ -30,7 +29,7 @@ export default function SideBarDrawer({
   const { pathname } = useLocation();
 
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={() => toggleDrawer(false)}>
+    <Box sx={{ minWidth: 250 }} role="presentation" onClick={() => toggleDrawer(false)}>
       <List>
         {links.map((link, index) => (
           <ListItem key={index} disablePadding>
@@ -56,11 +55,8 @@ export default function SideBarDrawer({
   );
 
   return (
-    <div>
-      <Button onClick={() => toggleDrawer(true)}>Open drawer</Button>
-      <Drawer open={open} onClose={() => toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
-    </div>
+    <Drawer open={open} onClose={() => toggleDrawer(false)}>
+      {DrawerList}
+    </Drawer>
   );
 }

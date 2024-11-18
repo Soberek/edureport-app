@@ -53,9 +53,8 @@ export const Topbar = () => {
         </Typography>
       </Box>
 
-      <AccountMenu />
-
       <SideBarDrawer open={open} toggleDrawer={toggleDrawer} />
+      <AccountMenu />
     </Box>
   );
 };
