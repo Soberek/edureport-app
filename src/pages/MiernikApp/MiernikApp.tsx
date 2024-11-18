@@ -5,7 +5,6 @@ import { MiernikAppTable } from "./MiernikAppTable";
 import useMiernikAppFormik from "./useMiernikApp";
 import SiteTitle from "../../components/SiteTitle/SiteTitle";
 import SitesContainer from "../../components/SiteContainer/SiteContainer";
-import { FormDataI } from "../../types/MiernikApp";
 const MiernikApp = () => {
   const { handlePostMiernikItem, initialFormData, validationSchema, miernikItems, actions, programNames, loading } =
     useMiernikAppFormik();
