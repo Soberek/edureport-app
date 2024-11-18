@@ -13,13 +13,28 @@ const initialActionFormValues: initialActionFormValuesI = {
   name: ""
 };
 
+const testActionsData = [
+  {
+    _id: "1",
+    name: "Prelekcja",
+    createdAt: new Date(),
+    updatedAt: new Date().toISOString().split("T")[0]
+  },
+  {
+    _id: "2",
+    name: "Wykład",
+    createdAt: new Date(),
+    updatedAt: new Date().toISOString().split("T")[0]
+  }
+];
+
 export const Actions = () => {
   const [error, setError] = useState<null | string>(null);
   const actionValidationSchema = yup.object({
     name: yup.string().required("Nazwa akcji jest wymagana.")
   });
 
-  const [actions, setActions] = useState<ActionI[] | []>([]);
+  const [_, setActions] = useState<ActionI[] | []>([]);
 
   const handleSubmit = async (
     values: initialActionFormValuesI,
@@ -82,7 +97,7 @@ export const Actions = () => {
         </Typography>
       ) : null}
 
-      {actions.length > 0 && <ActionsTable data={actions} />}
+      {testActionsData.length > 0 && <ActionsTable data={testActionsData} />}
     </SitesContainer>
   );
 };

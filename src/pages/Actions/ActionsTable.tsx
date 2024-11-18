@@ -5,6 +5,12 @@ import { ActionI } from "../../types/Action";
 export const ActionsTable = ({ data }: { data: ActionI[] | [] }) => {
   const columns: GridColDef[] = [
     {
+      field: "actionId",
+      headerName: "Id",
+      align: "center",
+      headerAlign: "center"
+    },
+    {
       field: "actionName",
       headerName: "Nazwa akcji",
       // flex: 0.6
@@ -14,9 +20,11 @@ export const ActionsTable = ({ data }: { data: ActionI[] | [] }) => {
     }
   ];
 
-  const item_rows = data.map((item) => {
+  const item_rows = data.map((item, index) => {
     return {
-      id: item.name
+      id: index,
+      actionId: item._id,
+      actionName: item.name
     };
   });
 
