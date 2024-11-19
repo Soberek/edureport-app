@@ -36,30 +36,38 @@ const TemplateList = ({ templates, chosenTemplate, handleTemplateSelect }: Templ
       </Button>
 
       <BasicModal open={isModalOpen} handleClose={handleModalClose}>
-        Dodaj szablon
-        <input
-          type="file"
-          alt="Dodaj plik"
-          accept=".docx"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const singleFile = e.target?.files?.[0];
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Typography>Dodaj szablon</Typography>
+          <input
+            type="file"
+            alt="Dodaj plik"
+            accept=".docx"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              const singleFile = e.target?.files?.[0];
 
-            if (!singleFile) return;
-            if (singleFile.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-              console.log(singleFile);
-              return;
-            }
+              if (!singleFile) return;
+              if (singleFile.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+                console.log(singleFile);
+                return;
+              }
 
-            if (singleFile.size > 5 * 1024 * 1024) {
-              alert("Plik jest za duży! Maksymalny rozmiar to 5 MB.");
-              return;
-            }
+              if (singleFile.size > 5 * 1024 * 1024) {
+                alert("Plik jest za duży! Maksymalny rozmiar to 5 MB.");
+                return;
+              }
 
-            console.log(singleFile);
+              const fileReader = new FileReader();
 
-            // TODO: post template logic
-          }}
-        />
+              fileReader.readAsDataURL(singleFile);
+
+              fileReader.onload = (e: ProgressEvent<FileReader>) => {
+                console.log(e.target?.result);
+              };
+
+              // TODO: post template logic
+            }}
+          />
+        </Box>
       </BasicModal>
 
       {chosenTemplate && <Box>Wybrany template: {chosenTemplate?.name}</Box>}
