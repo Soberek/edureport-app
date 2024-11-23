@@ -23,7 +23,7 @@ interface BasicModalPropsI {
 
 export default function BasicModal({ children, handleClose, open }: BasicModalPropsI) {
   return (
-    <div>
+    <Box>
       <Modal
         open={open}
         onClose={handleClose}
@@ -32,6 +32,6 @@ export default function BasicModal({ children, handleClose, open }: BasicModalPr
       >
         <Box sx={style}>{children}</Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
