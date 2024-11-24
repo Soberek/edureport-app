@@ -60,7 +60,9 @@ export const DocumentGenerator = () => {
     }
   ];
 
-  const handleIzrzDownload = (values: FormDataI) => {};
+  const handleIzrzDownload = async (values: FormDataI) => {
+    const izrzTemplate = await fetch("../assets/");
+  };
 
   return (
     <SitesContainer>
@@ -210,6 +212,8 @@ export const DocumentGenerator = () => {
           </Form>
         )}
       </Formik>
+
+      <Button>Izrz generator </Button>
     </SitesContainer>
   );
 };
