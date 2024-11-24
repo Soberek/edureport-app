@@ -69,6 +69,19 @@ export const DocumentGenerator = () => {
     console.log(templateData);
   };
 
+  const checkFilePath = async (filePath: string) => {
+    try {
+      const response = await fetch(filePath, { method: "HEAD" });
+      if (response.ok) {
+        console.log("File exists at", filePath);
+      } else {
+        console.log("File not found at", filePath);
+      }
+    } catch (error) {
+      console.log("Error checking file:", error);
+    }
+  };
+
   return (
     <SitesContainer>
       <SiteTitle>DocumentGenerator</SiteTitle>
