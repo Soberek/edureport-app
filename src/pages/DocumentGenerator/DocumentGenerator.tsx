@@ -62,6 +62,10 @@ export const DocumentGenerator = () => {
 
   const handleIzrzDownload = async (values: FormDataI) => {
     const izrzTemplate = await fetch("../assets/");
+
+    console.log(izrzTemplate);
+
+    console.log(values);
   };
 
   return (
@@ -204,7 +208,7 @@ export const DocumentGenerator = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Button color="primary" variant="contained" type="submit">
+                <Button color="primary" variant="contained" onClick={() => handleIzrzDownload(values)}>
                   Wygeneruj informację z realizacji zadania
                 </Button>
               </Grid>
@@ -216,7 +220,7 @@ export const DocumentGenerator = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Button color="primary" variant="contained" type="submit">
+                <Button color="primary" variant="contained">
                   Wygeneruj rozdzielnik
                 </Button>
               </Grid>
