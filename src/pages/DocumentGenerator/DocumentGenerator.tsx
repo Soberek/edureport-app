@@ -78,7 +78,7 @@ export const DocumentGenerator = () => {
   };
 
   const handleIzrzDownload = async (_: FormDataI) => {
-    const filePathCheck = checkFilePath("../../assets/templates/izrz_template.docx");
+    const filePathCheck = await checkFilePath("../../assets/templates/izrz_template.docx");
 
     console.log(filePathCheck);
   };
@@ -111,7 +111,7 @@ export const DocumentGenerator = () => {
                 maxWidth: {}
               }}
             >
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="izrzTitle"
                   as={TextField}
@@ -122,7 +122,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Autocomplete
                   disablePortal
                   options={programNames.map((programName) => programName.name)}
@@ -143,7 +143,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="date"
                   as={TextField}
@@ -157,7 +157,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="peopleCount"
                   as={TextField}
@@ -171,7 +171,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="actionName"
                   as={TextField}
@@ -182,7 +182,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="address"
                   as={TextField}
@@ -193,7 +193,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="audience"
                   as={TextField}
@@ -207,7 +207,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }}>
                 <Field
                   name="description"
                   as={TextField}
@@ -221,7 +221,7 @@ export const DocumentGenerator = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, sm: 6 }}>
+              <Grid size={{ xs: 12 }} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <Button
                   color="primary"
                   variant="contained"
@@ -235,15 +235,9 @@ export const DocumentGenerator = () => {
                 >
                   Wygeneruj informację z realizacji zadania - tu
                 </Button>
-              </Grid>
-
-              <Grid size={{ xs: 12, sm: 6 }}>
                 <Button color="primary" variant="contained" type="submit">
                   Wygeneruj liste obecności - krótka
                 </Button>
-              </Grid>
-
-              <Grid size={{ xs: 12, sm: 6 }}>
                 <Button color="primary" variant="contained">
                   Wygeneruj rozdzielnik
                 </Button>
