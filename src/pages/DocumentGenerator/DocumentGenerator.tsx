@@ -61,7 +61,7 @@ export const DocumentGenerator = () => {
   ];
 
   const handleIzrzDownload = async (values: FormDataI) => {
-    const izrzTemplate = await fetch("../assets/");
+    const izrzTemplate = await fetch("../assets/templates/izrz_template.docx");
 
     console.log(izrzTemplate);
 
