@@ -89,7 +89,7 @@ export const DocumentGenerator = () => {
 
       <Formik
         initialValues={initialFormData}
-        onSubmit={(values) => {
+        onSubmit={(_) => {
           //   handlePostMiernikItem(values);
         }}
         validationSchema={validationSchema}
