@@ -228,7 +228,7 @@ export const DocumentGenerator = () => {
                   type="submit"
                   onClick={() => {
                     console.log(errors);
-                    if (Object.keys(errors).length) return;
+                    if (Object.keys(errors).length !== 0) return;
 
                     handleIzrzDownload(values);
                   }}
