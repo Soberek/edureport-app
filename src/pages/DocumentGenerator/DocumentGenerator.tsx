@@ -63,17 +63,21 @@ export const DocumentGenerator = () => {
   const checkFilePath = async (filePath: string) => {
     try {
       const response = await fetch(filePath, { method: "HEAD" });
+
+      console.log(response);
       if (response.ok) {
         console.log("File exists at", filePath);
+        return response;
       } else {
         console.log("File not found at", filePath);
+        return "File not found.";
       }
     } catch (error) {
       console.log("Error checking file:", error);
     }
   };
 
-  const handleIzrzDownload = async (values: FormDataI) => {
+  const handleIzrzDownload = async (_: FormDataI) => {
     const filePathCheck = checkFilePath("../../assets/templates/izrz_template.docx");
 
     console.log(filePathCheck);
@@ -87,7 +91,6 @@ export const DocumentGenerator = () => {
         initialValues={initialFormData}
         onSubmit={(values) => {
           //   handlePostMiernikItem(values);
-          console.log(values);
         }}
         validationSchema={validationSchema}
       >
@@ -224,11 +227,13 @@ export const DocumentGenerator = () => {
                   variant="contained"
                   type="submit"
                   onClick={() => {
+                    console.log(errors);
                     if (errors) return;
+
                     handleIzrzDownload(values);
                   }}
                 >
-                  Wygeneruj informację z realizacji zadania
+                  Wygeneruj informację z realizacji zadania - tu
                 </Button>
               </Grid>
 
