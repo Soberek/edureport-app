@@ -61,11 +61,12 @@ export const DocumentGenerator = () => {
   ];
 
   const handleIzrzDownload = async (values: FormDataI) => {
-    const izrzTemplate = await fetch("../assets/templates/izrz_template.docx");
+    const response = await fetch("../assets/templates/izrz_template.docx");
+    const templateData = await response.arrayBuffer();
 
-    console.log(izrzTemplate);
+    const fileReader = new FileReader();
 
-    console.log(values);
+    console.log(templateData);
   };
 
   return (
@@ -208,7 +209,15 @@ export const DocumentGenerator = () => {
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Button color="primary" variant="contained" onClick={() => handleIzrzDownload(values)}>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                  onClick={() => {
+                    if (errors) return;
+                    handleIzrzDownload(values);
+                  }}
+                >
                   Wygeneruj informację z realizacji zadania
                 </Button>
               </Grid>
@@ -228,8 +237,6 @@ export const DocumentGenerator = () => {
           </Form>
         )}
       </Formik>
-
-      <Button onClick={() => handleIzrzDownload}>Izrz generator</Button>
     </SitesContainer>
   );
 };
