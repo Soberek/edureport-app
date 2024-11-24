@@ -70,17 +70,21 @@ export const DocumentGenerator = () => {
         return response;
       } else {
         console.log("File not found at", filePath);
-        return "File not found.";
+        return undefined;
       }
     } catch (error) {
       console.log("Error checking file:", error);
     }
   };
 
-  const handleIzrzDownload = async (_: FormDataI) => {
-    const filePathCheck = await checkFilePath("../../assets/templates/izrz_template.docx");
+  const handleTemplateRead = async (templateUrl: string) => {
+    const filePathCheck = await checkFilePath(templateUrl);
 
-    console.log(filePathCheck);
+    if (!filePathCheck) return;
+  };
+
+  const handleIzrzDownload = async (_: FormDataI) => {
+    const template = handleTemplateRead("../../assets/templates/izrz_template.docx");
   };
 
   return (
