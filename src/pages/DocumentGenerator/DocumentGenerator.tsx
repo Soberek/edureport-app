@@ -60,15 +60,6 @@ export const DocumentGenerator = () => {
     }
   ];
 
-  const handleIzrzDownload = async (values: FormDataI) => {
-    const response = await fetch("../../assets/templates/izrz_template.docx");
-    const templateData = await response.arrayBuffer();
-
-    const fileReader = new FileReader();
-
-    console.log(templateData);
-  };
-
   const checkFilePath = async (filePath: string) => {
     try {
       const response = await fetch(filePath, { method: "HEAD" });
@@ -80,6 +71,12 @@ export const DocumentGenerator = () => {
     } catch (error) {
       console.log("Error checking file:", error);
     }
+  };
+
+  const handleIzrzDownload = async (values: FormDataI) => {
+    const filePathCheck = checkFilePath("../../assets/templates/izrz_template.docx");
+
+    console.log(filePathCheck);
   };
 
   return (
