@@ -60,6 +60,8 @@ export const DocumentGenerator = () => {
     }
   ];
 
+  const handleIzrzDownload = (values: FormDataI) => {};
+
   return (
     <SitesContainer>
       <SiteTitle>DocumentGenerator</SiteTitle>
