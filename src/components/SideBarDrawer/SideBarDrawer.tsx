@@ -21,9 +21,10 @@ export default function SideBarDrawer({
     { path: "/miernik-excel", name: "Miernik budżetowy (excel)" },
     { path: "/miernik-app", name: "Miernik budżetowy" },
     { path: "/izrz-generator", name: "Generator IZRZ" },
-    { path: "/topics-generator", name: "Generator tematów" },
-    { path: "/image-generator", name: "Generator twitter" },
-    { path: "/actions", name: "Akcje" }
+    // { path: "/topics-generator", name: "Generator tematów" },
+    // { path: "/image-generator", name: "Generator twitter" },
+    { path: "/actions", name: "Akcje" },
+    { path: "/document-generator", name: "Generator dokumentów" }
   ];
 
   const { pathname } = useLocation();
