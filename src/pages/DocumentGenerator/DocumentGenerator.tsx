@@ -76,7 +76,7 @@ export const DocumentGenerator = () => {
         }}
         validationSchema={validationSchema}
       >
-        {({ touched, errors, setFieldValue }) => (
+        {({ touched, errors, setFieldValue, values }) => (
           <Form>
             <Grid
               container
@@ -208,12 +208,24 @@ export const DocumentGenerator = () => {
                   Wygeneruj informację z realizacji zadania
                 </Button>
               </Grid>
+
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <Button color="primary" variant="contained" type="submit">
+                  Wygeneruj liste obecności - krótka
+                </Button>
+              </Grid>
+
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <Button color="primary" variant="contained" type="submit">
+                  Wygeneruj rozdzielnik
+                </Button>
+              </Grid>
             </Grid>
           </Form>
         )}
       </Formik>
 
-      <Button>Izrz generator </Button>
+      <Button onClick={() => handleIzrzDownload}>Izrz generator</Button>
     </SitesContainer>
   );
 };
