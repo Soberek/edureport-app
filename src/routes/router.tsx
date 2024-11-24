@@ -14,6 +14,7 @@ import TopicsGenerator from "./../pages/TopicsGenerator/TopicsGenerator.tsx";
 import IzrzGenerator from "./../pages/IzrzGenerator/IzrzGenerator.tsx";
 import PostGenerator from "../pages/ImageGenerator/ImageGenerator.tsx";
 import { Actions } from "../pages/Actions/Actions.tsx";
+import { DocumentGenerator } from "../pages/DocumentGenerator/DocumentGenerator.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
           {
             path: "actions",
             element: <Actions />
+          },
+          {
+            path: "document-generator",
+            element: <DocumentGenerator />
           },
           {
             // Catch-all route for 404
