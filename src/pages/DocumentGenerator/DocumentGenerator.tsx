@@ -84,7 +84,13 @@ export const DocumentGenerator = () => {
   };
 
   const handleIzrzDownload = async (_: FormDataI) => {
-    const template = handleTemplateRead("../../assets/templates/izrz_template.docx");
+    const template = await handleTemplateRead("../../assets/templates/izrz_template.docx");
+
+    const reader = new FileReader();
+
+    reader.onload = () => {};
+
+    // reader.readAsArrayBuffer(template)
   };
 
   return (
