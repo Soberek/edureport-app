@@ -20,7 +20,7 @@ interface FormDataI {
 const initialFormData: FormDataI = {
   actionName: "Prelekcja",
   programName: "",
-  date: new Date().toISOString().split("T")[0],
+  date: "",
   peopleCount: 0,
   description: "",
   address: "",
