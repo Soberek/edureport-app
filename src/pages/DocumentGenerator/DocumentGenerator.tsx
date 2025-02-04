@@ -85,6 +85,7 @@ export const DocumentGenerator = () => {
 
   const handleIzrzDownload = async (_: FormDataI) => {
     const template = await handleTemplateRead("../../assets/templates/izrz_template.docx");
+    console.log(template, _);
 
     const reader = new FileReader();
 
@@ -101,6 +102,7 @@ export const DocumentGenerator = () => {
         initialValues={initialFormData}
         onSubmit={(_) => {
           //   handlePostMiernikItem(values);
+          console.log(_);
         }}
         validationSchema={validationSchema}
       >
