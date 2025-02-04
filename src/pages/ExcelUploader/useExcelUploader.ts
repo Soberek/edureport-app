@@ -67,6 +67,7 @@ export const useExcelUploader = () => {
 
         // Check for NaN values
         if (isNaN(people_count) || isNaN(action_count)) {
+          console.log(item);
           throw new Error(
             `Napotkano na nieprawidłową liczbę, sprawdź swój plik excel: people_count = ${people_count}, action_count = ${action_count}`
           );
